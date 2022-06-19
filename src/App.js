@@ -1,23 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Navbar from "./Componentes/Share/Navbar/Navbar";
+import { createContext, useEffect, useState } from "react";
+import TopNavbar from "./Componentes/Share/Navbar/TopNavbar";
+import { Route, Routes } from "react-router-dom";
+import Home from "./Componentes/Pages/Home/Home/Home";
+import { publicRoutes } from "./Componentes/Routes/PublicRoutes";
+export const ToggleSideBarContext = createContext("sideBar");
+export const ThemesApi = createContext("themes");
 
 function App() {
+  const [toggleSideBar, setToggleSideBar] = useState(false);
+  const [dark, setDark] = useState(false);
+  const [themes, setThemes] = useState("");
+
+  const theme = localStorage.getItem("themes");
+
+  useEffect(() => {
+    setThemes(theme);
+  }, [theme]);
+
+  const handleOpen = () => {
+    if (toggleSideBar) {
+      setToggleSideBar(!toggleSideBar);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="bg-white" data-theme={theme == "dark" ? "dark" : "light"}>
+      <ThemesApi.Provider value={themes}>
+        <ToggleSideBarContext.Provider
+          value={[toggleSideBar, setToggleSideBar, dark, setDark, handleOpen]}
         >
-          Learn React
-        </a>
-      </header>
+          <div>
+            <Routes>
+              {publicRoutes.map(({ path, Component }, index) => (
+                <Route key={index} path={path} element={<Component></Component>}></Route>
+              ))}
+            </Routes>
+          </div>
+        </ToggleSideBarContext.Provider>
+      </ThemesApi.Provider>
     </div>
   );
 }
