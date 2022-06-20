@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import CountDown from "./CountDown";
 
 const TImer = () => {
   const [timerDays, setTimerDays] = useState("00");

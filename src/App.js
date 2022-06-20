@@ -5,6 +5,7 @@ import TopNavbar from "./Componentes/Share/Navbar/TopNavbar";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Componentes/Pages/Home/Home/Home";
 import { publicRoutes } from "./Componentes/Routes/PublicRoutes";
+import AOS from "aos";
 export const ToggleSideBarContext = createContext("sideBar");
 export const ThemesApi = createContext("themes");
 
@@ -18,6 +19,10 @@ function App() {
   useEffect(() => {
     setThemes(theme);
   }, [theme]);
+
+  useEffect(() => {
+    AOS.init();
+  }, []);
 
   const handleOpen = () => {
     if (toggleSideBar) {

@@ -7,8 +7,9 @@ const BestSellersBanner = () => {
     <div className="lg:max-h-[208px] ">
       <div className="grid md:grid-cols-2 grid-cols-1 justify-center gap-10">
         <div
+          data-aos="zoom-in"
           style={{ backgroundImage: `url(${banner1})` }}
-          className="border h-[208px] mx-auto w-full max-w-[468px] bg-no-repeat bg-cover shadow border-gray-200"
+          className="border h-[208px]  mx-auto w-full max-w-[468px] bg-no-repeat bg-cover shadow border-gray-200"
         >
           <div className="flex flex-col  justify-center pl-8 h-full gap-2">
             <span className="text-primary uppercase text-xs">weekend discount</span>
