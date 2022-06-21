@@ -5,7 +5,8 @@ import TopNavbar from "./Componentes/Share/Navbar/TopNavbar";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Componentes/Pages/Home/Home/Home";
 import { publicRoutes } from "./Componentes/Routes/PublicRoutes";
-import AOS from "aos";
+import { Toaster } from "react-hot-toast";
+// import Aos from "aos";
 export const ToggleSideBarContext = createContext("sideBar");
 export const ThemesApi = createContext("themes");
 
@@ -20,9 +21,9 @@ function App() {
     setThemes(theme);
   }, [theme]);
 
-  useEffect(() => {
-    AOS.init();
-  }, []);
+  // useEffect(() => {
+  //   Aos.init();
+  // }, []);
 
   const handleOpen = () => {
     if (toggleSideBar) {
@@ -32,6 +33,7 @@ function App() {
 
   return (
     <div className="bg-white" data-theme={theme == "dark" ? "dark" : "light"}>
+      <Toaster />
       <ThemesApi.Provider value={themes}>
         <ToggleSideBarContext.Provider
           value={[toggleSideBar, setToggleSideBar, dark, setDark, handleOpen]}

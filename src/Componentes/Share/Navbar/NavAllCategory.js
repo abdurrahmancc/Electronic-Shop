@@ -5,13 +5,13 @@ const NavAllCategory = ({ categoryDown }) => {
   return (
     <>
       <ul
-        class={`menu bg-base-100   w-full shadow-lg border-primary relative border-[2px]  ease-in-out duration-500 border-t-0  rounded-b-xl ${
+        class={`menu bg-base-100 w-full shadow-lg border-primary relative border-[2px]  ease-in-out duration-500 border-t-0 rounded-b-xl ${
           categoryDown ? "top-0" : "hidden"
         }`}
       >
         <li tabindex="0" className="">
           <div className="flex justify-between hover:bg-primary border-b hover:text-neutral border-gray-300">
-            <span>Computer - Laptop</span>
+            <span className="py-1">Computer - Laptop</span>
             <FaAngleRight />
           </div>
           <ul class=" bg-base-100 shadow border border-gray-300 ">
@@ -24,11 +24,11 @@ const NavAllCategory = ({ categoryDown }) => {
           </ul>
         </li>
         <li tabindex="0" className="">
-          <div className="flex justify-between border-b hover:bg-primary  hover:text-neutral border-gray-300">
+          <div className="flex justify-between border-b hover:bg-primary  hover:text-neutral border-gray-200">
             <span>Electronic</span>
             <FaAngleRight />
           </div>
-          <ul class=" bg-base-100 shadow border border-gray-300 ">
+          <ul class=" bg-base-100 shadow border border-gray-200 ">
             <li className="hover:bg-primary  hover:text-neutral ">
               <a>Electronic</a>
             </li>
@@ -42,7 +42,7 @@ const NavAllCategory = ({ categoryDown }) => {
             <span>Toys & Hobbies</span>
             <FaAngleRight />
           </div>
-          <ul class=" bg-base-100 shadow border border-gray-300 ">
+          <ul class=" bg-base-100 shadow border border-gray-200 ">
             <li className="hover:bg-primary  hover:text-neutral ">
               <a>Submenu 1</a>
             </li>
@@ -51,29 +51,32 @@ const NavAllCategory = ({ categoryDown }) => {
             </li>
           </ul>
         </li>
-        <li className=" hover:bg-primary  hover:text-neutral ">
+        <li className=" hover:bg-primary border-b border-gray-200  hover:text-neutral ">
           <a>Sports & Outdoors</a>
         </li>
-        <li className=" hover:bg-primary  hover:text-neutral ">
+        <li className=" hover:bg-primary border-b border-gray-200 hover:text-neutral ">
           <a>Smarphone & Tablets</a>
         </li>
-        <li className=" hover:bg-primary  hover:text-neutral ">
+        <li className=" hover:bg-primary border-b border-gray-200 hover:text-neutral ">
           <a>Health & Beauty</a>
         </li>
-        <li className="hover:bg-primary  hover:text-neutral ">
+        <li className="hover:bg-primary border-b border-gray-200 hover:text-neutral ">
           <a>Computers & Networking</a>
         </li>
-        <li className="hover:bg-primary  hover:text-neutral ">
+        <li className="hover:bg-primary border-b border-gray-200 hover:text-neutral ">
           <a>Accessories</a>
         </li>
-        <li className="hover:bg-primary  hover:text-neutral ">
+        <li className="hover:bg-primary border-b border-gray-200 hover:text-neutral ">
           <a>Jewelry & Watches</a>
         </li>
-        <li className="hover:bg-primary  hover:text-neutral ">
+        <li className="hover:bg-primary border-b border-gray-200 hover:text-neutral ">
+          <a>fridge</a>
+        </li>
+        <li className="hover:bg-primary border-b border-gray-200 hover:text-neutral ">
           <a>Flashlights & Lamps</a>
         </li>
-        <li className="hover:bg-primary  hover:text-neutral ">
-          <a>More Category</a>
+        <li className="hover:bg-primary border-b border-gray-200 hover:text-neutral ">
+          <a className="">More Category</a>
         </li>
       </ul>
     </>

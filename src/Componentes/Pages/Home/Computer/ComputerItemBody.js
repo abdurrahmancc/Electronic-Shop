@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AiFillEye } from "react-icons/ai";
 import { BiRefresh } from "react-icons/bi";
+import toast from "react-hot-toast";
 import { MdAddShoppingCart } from "react-icons/md";
 import HartIcon from "../../../Share/HartIcon";
 import Rating from "../../../Share/Rating/Rating";
@@ -107,13 +108,16 @@ const ComputerItemBody = () => {
     },
   ];
 
+  const handleToast = (id) => {
+    toast(id);
+  };
   return (
     <div className="my-10 mx-4">
       <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-x-0 gap-y-10 gap-8">
         {computerItems.map((item, index) => (
           <div
-            //   onMouseEnter={showCartHandler}
-            //   onMouseLeave={hideCartHandler}
+            // onMouseEnter={showCartHandler}
+            // onMouseLeave={hideCartHandler}
             key={index}
             class="card max-w-[260px] hover:z-10 w-full mx-auto bg-base-100 hover:shadow-xl hover:border hover:border-gray-300 scale-100 hover:scale-110 ease-in duration-200"
           >
@@ -153,7 +157,7 @@ const ComputerItemBody = () => {
                   </span>
                 </div>
               </div>
-              <h2 class="card-title text-primary text-lg">{item.title}</h2>
+              <h2 class="card-title text-primary text-sm">{item.title}</h2>
               <div className="flex items-center gap-2 justify-start">
                 <Rating />
                 <span>{item?.review}</span>
@@ -164,7 +168,10 @@ const ComputerItemBody = () => {
                   <span className="text-gray-500 line-through text-sm">${item?.previousPrice}</span>
                 </div>
                 <div>
-                  <span className="rounded-full px-2 py-2  hover:bg-primary hover:text-neutral inline-block bg-gray-300">
+                  <span
+                    onClick={() => handleToast(item.id)}
+                    className="rounded-full px-2 py-2  hover:bg-primary hover:text-neutral inline-block bg-gray-300"
+                  >
                     <MdAddShoppingCart />
                   </span>
                 </div>

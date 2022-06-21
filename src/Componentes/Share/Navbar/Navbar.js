@@ -104,7 +104,7 @@ const Navbar = () => {
             <div
               onClick={() => setCategoryDown(!categoryDown)}
               className={`max-w-[292.5px] lg:max-w-[250.5px] xl:max-w-[292.5px] w-screen  h-16 hidden lg:block ${
-                themes == "light" ? "bg-[#1e73be]" : "bg-base-300"
+                themes == "dark" ? "bg-base-300" : "bg-[#1e73be]"
               }`}
             >
               <div className="flex items-center h-full relative z-20 gap-5 px-4 ">

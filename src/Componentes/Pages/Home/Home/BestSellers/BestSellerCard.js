@@ -128,7 +128,7 @@ const BestSellerCard = () => {
                     </span>
                   </div>
                 </div>
-                <h2 class="card-title text-primary text-lg">{item.title}</h2>
+                <h2 class="card-title text-primary text-sm">{item.title}</h2>
                 <div className="flex items-center gap-2 justify-start">
                   <Rating />
                   <span>{item?.review}</span>

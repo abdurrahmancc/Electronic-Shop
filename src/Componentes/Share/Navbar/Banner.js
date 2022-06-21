@@ -38,8 +38,8 @@ const Banner = () => {
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
       >
-        {bgItems.map((bgItem) => (
-          <SwiperSlide>
+        {bgItems.map((bgItem, index) => (
+          <SwiperSlide key={index}>
             <div className="w-full">
               <img className="w-full h-auto" src={bgItem} alt="" />
             </div>
