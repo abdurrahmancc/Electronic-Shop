@@ -12,6 +12,7 @@ import brandLogo8 from "../../../../../assets/brandLogo-8.jpg";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper";
+
 const BrandLogo = () => {
   const brandLogoItems = [
     brandLogo1,
@@ -23,6 +24,7 @@ const BrandLogo = () => {
     brandLogo7,
     brandLogo8,
   ];
+
   return (
     <section className="container mx-auto">
       <Swiper

@@ -5,7 +5,7 @@ import { ToggleSideBarContext } from "../../../App";
 const Themes = () => {
   const getToggleSiteBar = useContext(ToggleSideBarContext);
   const [themes, setThemes] = useState("");
-  console.log(themes);
+  // console.log(themes);
 
   const getThemes = localStorage.getItem("themes");
   useEffect(() => {

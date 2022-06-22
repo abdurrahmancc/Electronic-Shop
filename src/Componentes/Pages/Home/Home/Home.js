@@ -5,6 +5,7 @@ import Navbar from "../../../Share/Navbar/Navbar";
 import TopNavbar from "../../../Share/Navbar/TopNavbar";
 import Computer from "../Computer/Computer";
 import BestSellers from "./BestSellers/BestSellers";
+import BlogAndHappyClients from "./BlogAndHappyClients/BlogAndHappyClients";
 import BrandLogo from "./BrandLogo/BrandLogo";
 import CheckBox from "./CheckBox";
 import Electronic from "./Electronic/Electronic";
@@ -36,6 +37,7 @@ const Home = () => {
         <Computer />
         <Phone />
         <BrandLogo />
+        <BlogAndHappyClients />
         <Newsletters />
       </main>
       <Footer />
