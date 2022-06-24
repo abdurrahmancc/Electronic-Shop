@@ -5,11 +5,14 @@ import logo from "../../../assets/logo.png";
 import NavAllCategory from "./NavAllCategory";
 import Themes from "./Themes";
 import { HiXCircle } from "react-icons/hi";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../Firebase/Firebase";
 
 const Navbar = () => {
   const getToggleSiteBar = useContext(ToggleSideBarContext);
   const [categoryDown, setCategoryDown] = useState(true);
   const [themes, setThemes] = useState("");
+  const [user, loading, error] = useAuthState(auth);
 
   const getThemes = localStorage.getItem("themes");
   useEffect(() => {

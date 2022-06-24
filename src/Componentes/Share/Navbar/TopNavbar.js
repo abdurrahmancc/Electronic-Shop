@@ -3,8 +3,18 @@ import logo from "../../../assets/logo.png";
 import Themes from "./Themes";
 import { FaUserAlt, FaShoppingCart } from "react-icons/fa";
 import hart from "../../../assets/heart.svg";
+import { MdLocationOn } from "react-icons/md";
+import { BiNotepad, BiHeart } from "react-icons/bi";
+import { AiFillSetting } from "react-icons/ai";
+import { FiLogIn, FiLogOut } from "react-icons/fi";
+import { NavLink } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../Firebase/Firebase";
+import { signOut } from "firebase/auth";
 
 const TopNavbar = () => {
+  const [user, loading, error] = useAuthState(auth);
+  console.log(user);
   return (
     <div className="hidden lg:block z-20 relative ">
       <div class="navbar  py-4">
@@ -116,7 +126,72 @@ const TopNavbar = () => {
                 />
               </svg>
             </span>
-            <FaUserAlt className="text-2xl " />
+
+            <div class="dropdown dropdown-hover dropdown-end">
+              <label tabindex="0" class="btn m-1">
+                <FaUserAlt className="text-2xl " />
+              </label>
+              <ul
+                tabindex="0"
+                class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <li className="hover:text-primary">
+                  <a>
+                    <FaUserAlt className="text-sm " />
+                    <span> My Account</span>
+                  </a>
+                </li>
+                <li className="hover:text-primary">
+                  <a>
+                    <span className="text-sm ">
+                      <MdLocationOn />
+                    </span>
+                    <span>Order Tracking</span>
+                  </a>
+                </li>
+                <li className="hover:text-primary">
+                  <a>
+                    <span className="text-sm ">
+                      <BiNotepad />
+                    </span>{" "}
+                    <span>My Voucher</span>
+                  </a>
+                </li>
+                <li className="hover:text-primary">
+                  <a>
+                    <span className="text-sm  ">
+                      <BiHeart />
+                    </span>{" "}
+                    <span>My Wishlist</span>
+                  </a>
+                </li>
+                <li className="hover:text-primary">
+                  <a>
+                    <span className="text-sm  ">
+                      <AiFillSetting />
+                    </span>{" "}
+                    <span>Setting</span>
+                  </a>
+                </li>
+                <li className="hover:text-primary">
+                  {user ? (
+                    <span onClick={() => signOut(auth)}>
+                      <span className="text-sm  ">
+                        <FiLogOut />
+                      </span>{" "}
+                      <span>Sign out</span>
+                    </span>
+                  ) : (
+                    <NavLink to={"/login"}>
+                      <span className="text-sm  ">
+                        <FiLogIn />
+                      </span>{" "}
+                      <span>Sign In</span>
+                    </NavLink>
+                  )}
+                </li>
+              </ul>
+            </div>
             <Themes></Themes>
           </div>
         </div>

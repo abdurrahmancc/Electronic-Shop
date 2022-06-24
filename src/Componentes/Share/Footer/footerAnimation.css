@@ -1,0 +1,16 @@
+
+.animate {
+    transition: all 3s ease-in-out;
+  }
+  .animate:hover {
+   animation: swing 3s ease;
+   animation-iteration-count: 1;
+  }
+  
+  @keyframes swing {
+    15% {
+      -webkit-transform: translateX(10px);
+      transform: translateX(10px);
+    }
+    
+  }

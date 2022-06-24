@@ -12,7 +12,7 @@ const Newsletters = () => {
               <input
                 type="text"
                 placeholder="Enter you email"
-                class="input rounded-none max-w-sm w-full  "
+                class="input rounded-none max-w-sm w-full text-accent bg-neutral"
               />
               <button className="text-white btn hover:bg-[#090a27c3] border-none rounded-none bg-[#090A27] font-bold  py-[14px] lg:px-10">
                 Subscribe
