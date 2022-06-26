@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import Navbar from "../../Share/Navbar/Navbar";
-import TopNavbar from "../../Share/Navbar/TopNavbar";
+import Navbar from "../../../Share/Navbar/Navbar";
+import TopNavbar from "../../../Share/Navbar/TopNavbar";
 
 const UserDashboard = () => {
   return (

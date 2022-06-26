@@ -1,6 +1,4 @@
 import React from "react";
-import Navbar from "../../Share/Navbar/Navbar";
-import TopNavbar from "../../Share/Navbar/TopNavbar";
 
 const MyAccount = () => {
   return (

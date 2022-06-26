@@ -8,6 +8,7 @@ import Register from "../Pages/Login/Register";
 import Mega_menu from "../Pages/Mega_menu/Mega_menu";
 import Shop from "../Pages/Shop/Shop";
 import Loading from "../Share/Loading/Loading";
+import Sidebar from "../Sidebar/Sidebar";
 
 export const publicRoutes = [
   { path: "/", Component: Home },
@@ -18,6 +19,7 @@ export const publicRoutes = [
   { path: "/blog", Component: Blog },
   { path: "/mega-menu", Component: Mega_menu },
   { path: "/login", Component: Login },
+  { path: "/sidebar", Component: Sidebar },
   { path: "/register", Component: Register },
   // { path: "/loading", Component: Loading },
   { path: "*", Component: NotFound },

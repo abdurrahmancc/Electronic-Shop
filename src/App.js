@@ -4,9 +4,14 @@ import { Route, Routes } from "react-router-dom";
 import { publicRoutes } from "./Components/Routes/PublicRoutes";
 import { Toaster } from "react-hot-toast";
 import RequireAuth from "./Components/Share/RequireAuth/RequireAuth";
-import MyAccount from "./Components/Dashboard/MyAccount/MyAccount";
-import MyOrder from "./Components/Dashboard/MyOrder/MyOrder";
-import UserDashboard from "./Components/Dashboard/UserDashboard/UserDashboard";
+import UserDashboard from "./Components/Dashboard/UserDashboard/UserDashboard/UserDashboard";
+import MyAccount from "./Components/Dashboard/UserDashboard/MyAccount/MyAccount";
+import MyOrder from "./Components/Dashboard/UserDashboard/MyOrder/MyOrder";
+import AdminDashboard from "./Components/Dashboard/AdminDashboard/AdminDashboard";
+import AllAdmin from "./Components/Dashboard/AdminDashboard/AllAdmin/AllAdmin";
+import AllUsers from "./Components/Dashboard/AdminDashboard/AllUsers/AllUsers";
+import AllOrder from "./Components/Dashboard/AdminDashboard/AllOrder/AllOrder";
+
 // import Aos from "aos";
 export const ToggleSideBarContext = createContext("sideBar");
 export const ThemesApi = createContext("themes");
@@ -54,6 +59,14 @@ function App() {
                   <Route index element={<MyAccount />} />
                   <Route path="my-account" element={<MyAccount />} />
                   <Route path="my-order" element={<MyOrder />} />
+                </Route>
+              </Route>
+              <Route element={<RequireAuth />}>
+                <Route path="/admin-dashboard" element={<AdminDashboard />}>
+                  <Route index element={<AllUsers />} />
+                  <Route path="all-user" element={<AllUsers />} />
+                  <Route path="all-admin" element={<AllAdmin />} />
+                  <Route path="all-order" element={<AllOrder />} />
                 </Route>
               </Route>
             </Routes>

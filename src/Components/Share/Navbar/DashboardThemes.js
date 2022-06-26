@@ -1,24 +1,23 @@
-import React, { useContext, useState } from "react";
-import { useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ToggleSideBarContext } from "../../../App";
 
-const Themes = () => {
+const DashboardThemes = ({ toggleSideBar, setToggleSideBar }) => {
   const getToggleSiteBar = useContext(ToggleSideBarContext);
   const [themes, setThemes] = useState("");
   // console.log(themes);
 
-  const getThemes = localStorage.getItem("themes");
+  const getThemes = localStorage.getItem("themesDashboard");
   useEffect(() => {
-    const getStorageThemes = localStorage.getItem("themes");
+    const getStorageThemes = localStorage.getItem("themesDashboard");
     setThemes(getStorageThemes);
   }, [getThemes]);
 
   const handleGetToggleSiteBar = () => {
-    getToggleSiteBar[3](!getToggleSiteBar[2]);
+    setToggleSideBar(!toggleSideBar);
     if (themes === "dark") {
-      localStorage.setItem("themes", "light");
+      localStorage.setItem("themesDashboard", "light");
     } else {
-      localStorage.setItem("themes", "dark");
+      localStorage.setItem("themesDashboard", "dark");
     }
   };
   return (
@@ -54,4 +53,4 @@ const Themes = () => {
   );
 };
 
-export default Themes;
+export default DashboardThemes;

@@ -12,7 +12,6 @@ import {
   useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { async } from "@firebase/util";
 import Loading from "../../Share/Loading/Loading";
 import useToken from "../../Hooks/useToken";
 

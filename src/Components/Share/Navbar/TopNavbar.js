@@ -1,8 +1,7 @@
 import React from "react";
 import logo from "../../../assets/logo.png";
 import Themes from "./Themes";
-import { FaUserAlt, FaShoppingCart } from "react-icons/fa";
-import hart from "../../../assets/heart.svg";
+import { FaUserAlt } from "react-icons/fa";
 import { MdLocationOn } from "react-icons/md";
 import { BiNotepad, BiHeart } from "react-icons/bi";
 import { AiFillSetting } from "react-icons/ai";
@@ -176,6 +175,14 @@ const TopNavbar = () => {
                     </span>{" "}
                     <span>Setting</span>
                   </a>
+                </li>
+                <li className="hover:text-primary">
+                  <NavLink to={"/admin-dashboard"}>
+                    <span className="text-sm  ">
+                      <AiFillSetting />
+                    </span>{" "}
+                    <span>Dashboard</span>
+                  </NavLink>
                 </li>
                 <li className="hover:text-primary">
                   {user ? (
