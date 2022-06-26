@@ -6,18 +6,26 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import { useState } from "react";
 import auth from "../../Share/Firebase/Firebase";
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
+import {
+  useAuthState,
+  useSignInWithEmailAndPassword,
+  useSignInWithGoogle,
+} from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { async } from "@firebase/util";
 import Loading from "../../Share/Loading/Loading";
+import useToken from "../../Hooks/useToken";
 
 const Login = () => {
   const [showPass, setShowPass] = useState(false);
-  const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+  const [user, loading, error] = useAuthState(auth);
+  const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
   const [signInWithEmailAndPassword, eUser, eLoading, eError] = useSignInWithEmailAndPassword(auth);
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
+  const [token] = useToken(user || gUser || eUser);
+
   const {
     register,
     handleSubmit,
@@ -25,24 +33,26 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  if (loading || eLoading) {
+  if (loading || eLoading || gLoading) {
     return <Loading />;
   }
   const onSubmit = async (data) => {
     const email = data.email;
     const password = data.password;
-    console.log(data);
+    // console.log(data);
     await signInWithEmailAndPassword(email, password);
   };
 
-  if (user || eUser) {
+  if (token) {
     navigate(from, { replace: true });
   }
+
+  // console.log(token)
 
   return (
     <div class="hero min-h-screen bg-[#58448F]">
       <div class="hero-content w-full flex-col">
-        <div className="absolute top-5 left-10">
+        <div className="absolute top-5 lg:left-10 left-4">
           <span
             onClick={() => window.history.back()}
             className="text-white text-lg hover:cursor-pointer  flex justify-center items-center"
@@ -51,7 +61,7 @@ const Login = () => {
             <span>Back</span>
           </span>
         </div>
-        <div className=" pb-12">
+        <div className="lg:pb-12">
           <Link to={"/"} className={"flex justify-center"}>
             {" "}
             <img className="w-4/12" src={logo} alt="" />

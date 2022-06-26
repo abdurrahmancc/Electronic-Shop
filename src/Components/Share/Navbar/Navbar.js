@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { ToggleSideBarContext } from "../../../App";
 import logo from "../../../assets/logo.png";
 import NavAllCategory from "./NavAllCategory";
@@ -10,9 +10,19 @@ import auth from "../Firebase/Firebase";
 
 const Navbar = () => {
   const getToggleSiteBar = useContext(ToggleSideBarContext);
-  const [categoryDown, setCategoryDown] = useState(true);
   const [themes, setThemes] = useState("");
   const [user, loading, error] = useAuthState(auth);
+  const { pathname } = useLocation();
+
+  let categories;
+
+  if (pathname.includes("dashboard")) {
+    categories = false;
+  } else if (!pathname.includes("dashboard")) {
+    categories = true;
+  }
+
+  const [categoryDown, setCategoryDown] = useState(categories);
 
   const getThemes = localStorage.getItem("themes");
   useEffect(() => {
@@ -40,8 +50,11 @@ const Navbar = () => {
       <NavLink to={"/pages"} className="text-lg text-secondary">
         Pages
       </NavLink>
+      <NavLink to={"/user-dashboard"} className="text-lg text-secondary lg:hidden">
+        Account
+      </NavLink>
       <li className="text-lg lg:hidden text-secondary flex flex-row justify-start">
-        <span className="pl-0 text-lg "> Darkmode</span>{" "}
+        <span className="pl-0 text-lg "> Darkmode</span>
         <span>
           <Themes></Themes>
         </span>

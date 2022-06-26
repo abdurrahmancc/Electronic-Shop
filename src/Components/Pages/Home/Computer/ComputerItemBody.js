@@ -141,7 +141,7 @@ const ComputerItemBody = () => {
             </figure>
 
             <div class="card-body p-4 pt-6 gap-0 relative">
-              <div className={`absolute z-10 top-[-20px] left-16 ${hoveredCart}`}>
+              <div className={`absolute z-10 top-[-20px] right-1 w-full ${hoveredCart}`}>
                 <div className="flex justify-center items-center ">
                   <span
                     //   onClick={setShowModal}

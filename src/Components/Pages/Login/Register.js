@@ -8,6 +8,7 @@ import { useState } from "react";
 import auth from "../../Share/Firebase/Firebase";
 import toast from "react-hot-toast";
 import {
+  useAuthState,
   useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
   useUpdateProfile,
@@ -16,20 +17,22 @@ import { useForm } from "react-hook-form";
 import { async } from "@firebase/util";
 import Loading from "../../Share/Loading/Loading";
 import { sendEmailVerification } from "firebase/auth";
+import useToken from "../../Hooks/useToken";
 
 const Register = () => {
   const [showPass, setShowPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
   const [matchingPass, setMatchingPass] = useState("");
-  const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(
-    auth,
-    { sendEmailVerification: true }
-  );
+  const [user, loading] = useAuthState(auth);
+  const [createUserWithEmailAndPassword, cUser, cLoading, error] =
+    useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
   const [updateProfile, updating, updatingError] = useUpdateProfile(auth);
   const [checkBoxToggle, setCheckBoxToggle] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
+  const [token] = useToken(user || cUser);
+
   const {
     register,
     handleSubmit,
@@ -48,19 +51,19 @@ const Register = () => {
     }
     await createUserWithEmailAndPassword(email, password);
     await updateProfile({ displayName });
-    toast("check email and please verify");
+    toast.success("check email and please verify");
   };
-  if (updating || loading) {
+  if (updating || loading || cLoading) {
     return <Loading />;
   }
 
-  if (user) {
+  if (token) {
     navigate(from, { replace: true });
   }
   return (
     <div class="hero min-h-screen bg-[#58448F]">
       <div class="hero-content w-full flex-col">
-        <div className="absolute top-5 left-10">
+        <div className="absolute top-5 lg:left-10 left-4">
           <span
             onClick={() => window.history.back()}
             className="text-white text-lg hover:cursor-pointer  flex justify-center items-center"
@@ -69,7 +72,7 @@ const Register = () => {
             <span>Back</span>
           </span>
         </div>
-        <div className=" pb-12">
+        <div className="lg:pb-12">
           <Link to={"/"} className={"flex justify-center"}>
             {" "}
             <img className="w-4/12" src={logo} alt="" />
@@ -77,7 +80,7 @@ const Register = () => {
         </div>
         <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-neutral">
           <div class="card-body text-accent">
-            <h3 className="text-center text-lg font-bold text-accent">Login to your account</h3>
+            <h3 className="text-center text-lg font-bold text-accent">Create your an account</h3>
             <form onSubmit={handleSubmit(onSubmit)}>
               <div class="form-control mt-2">
                 <label class="label relative pb-0">

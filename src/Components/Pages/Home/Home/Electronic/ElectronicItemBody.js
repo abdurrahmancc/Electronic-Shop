@@ -4,16 +4,16 @@ import { BiRefresh } from "react-icons/bi";
 import { MdAddShoppingCart } from "react-icons/md";
 import HartIcon from "../../../../Share/HartIcon";
 import Rating from "../../../../Share/Rating/Rating";
-import img1 from "../../../../../assets/phone-1.jpg";
-import img2 from "../../../../../assets/phone-2.jpg";
-import img3 from "../../../../../assets/phone-3.jpg";
-import img4 from "../../../../../assets/phone-4.jpg";
-import img5 from "../../../../../assets/phone-5.jpg";
-import img6 from "../../../../../assets/phone-6.jpg";
-import img7 from "../../../../../assets/phone-7.jpg";
-import img8 from "../../../../../assets/phone-8.jpg";
+import img1 from "../../../../../assets/watch-1.jpg";
+import img2 from "../../../../../assets/watch-2.jpg";
+import img3 from "../../../../../assets/watch-3.jpg";
+import img4 from "../../../../../assets/watch-4.jpg";
+import img5 from "../../../../../assets/watch-5.jpg";
+import img6 from "../../../../../assets/watch-6.jpg";
+import img7 from "../../../../../assets/watch-7.jpg";
+import img8 from "../../../../../assets/watch-8.jpg";
 
-const PhoneItemBody = () => {
+const ElectronicItemBody = () => {
   const [hoveredCart, setHoveredCart] = useState("");
   const [showModal, setShowModal] = useState("");
 
@@ -24,9 +24,8 @@ const PhoneItemBody = () => {
   const hideCartHandler = () => {
     setHoveredCart("hidden");
   };
-  const computerItems = [
+  const watchItems = [
     {
-      id: "1",
       img: img1,
       title: "Headphone",
       currentPrice: "30",
@@ -36,7 +35,6 @@ const PhoneItemBody = () => {
       offer: "",
     },
     {
-      id: "2",
       img: img2,
       title: "Headphone",
       currentPrice: "30",
@@ -46,7 +44,6 @@ const PhoneItemBody = () => {
       offer: "21",
     },
     {
-      id: "3",
       img: img3,
       title: "Headphone",
       currentPrice: "30",
@@ -56,7 +53,6 @@ const PhoneItemBody = () => {
       offer: "",
     },
     {
-      id: "4",
       img: img4,
       title: "Headphone",
       currentPrice: "30",
@@ -66,7 +62,6 @@ const PhoneItemBody = () => {
       offer: "32",
     },
     {
-      id: "5",
       img: img5,
       title: "Headphone",
       currentPrice: "30",
@@ -76,7 +71,6 @@ const PhoneItemBody = () => {
       offer: "32",
     },
     {
-      id: "6",
       img: img6,
       title: "Headphone",
       currentPrice: "30",
@@ -86,7 +80,6 @@ const PhoneItemBody = () => {
       offer: "23",
     },
     {
-      id: "7",
       img: img7,
       title: "Headphone",
       currentPrice: "30",
@@ -96,23 +89,24 @@ const PhoneItemBody = () => {
       offer: "",
     },
     {
-      id: "8",
       img: img8,
       title: "Headphone",
       currentPrice: "30",
       previousPrice: "340",
       review: "4",
-      badge: "",
-      offer: "",
+      badge: "new",
+      offer: "5",
     },
   ];
+
+  watchItems.length = 8;
   return (
     <div className="my-10 mx-4">
       <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-x-0 gap-y-10 gap-8">
-        {computerItems.map((item, index) => (
+        {watchItems.map((item, index) => (
           <div
-            // onMouseEnter={showCartHandler}
-            // onMouseLeave={hideCartHandler}
+            //   onMouseEnter={showCartHandler}
+            //   onMouseLeave={hideCartHandler}
             key={index}
             class="card max-w-[260px] hover:z-10 w-full mx-auto bg-base-100 hover:shadow-xl hover:border hover:border-gray-300 scale-100 hover:scale-110 ease-in duration-200"
           >
@@ -136,7 +130,7 @@ const PhoneItemBody = () => {
             </figure>
 
             <div class="card-body p-4 pt-6 gap-0 relative">
-              <div className={`absolute z-10 top-[-20px] left-16 ${hoveredCart}`}>
+              <div className={`absolute z-10 top-[-20px] right-1 w-full ${hoveredCart}`}>
                 <div className="flex justify-center items-center ">
                   <span
                     //   onClick={setShowModal}
@@ -176,4 +170,4 @@ const PhoneItemBody = () => {
   );
 };
 
-export default PhoneItemBody;
+export default ElectronicItemBody;

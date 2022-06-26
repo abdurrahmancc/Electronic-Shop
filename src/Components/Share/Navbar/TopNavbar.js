@@ -7,13 +7,17 @@ import { MdLocationOn } from "react-icons/md";
 import { BiNotepad, BiHeart } from "react-icons/bi";
 import { AiFillSetting } from "react-icons/ai";
 import { FiLogIn, FiLogOut } from "react-icons/fi";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../Firebase/Firebase";
 import { signOut } from "firebase/auth";
 
 const TopNavbar = () => {
   const [user, loading, error] = useAuthState(auth);
+  const handleSignOut = () => {
+    signOut(auth);
+    localStorage.removeItem("accessToken");
+  };
   console.log(user);
   return (
     <div className="hidden lg:block z-20 relative ">
@@ -136,10 +140,10 @@ const TopNavbar = () => {
                 class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
               >
                 <li className="hover:text-primary">
-                  <a>
+                  <Link to={"/user-dashboard/my-account"}>
                     <FaUserAlt className="text-sm " />
                     <span> My Account</span>
-                  </a>
+                  </Link>
                 </li>
                 <li className="hover:text-primary">
                   <a>
@@ -175,7 +179,7 @@ const TopNavbar = () => {
                 </li>
                 <li className="hover:text-primary">
                   {user ? (
-                    <span onClick={() => signOut(auth)}>
+                    <span onClick={() => handleSignOut()}>
                       <span className="text-sm  ">
                         <FiLogOut />
                       </span>{" "}
