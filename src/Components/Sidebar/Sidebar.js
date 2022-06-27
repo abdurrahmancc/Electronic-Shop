@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import "./Sidebar.css";
 import { FaAngleDown, FaBars, FaFile, FaHome, FaUser } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
-import { MdMessage } from "react-icons/md";
+import { MdMessage, MdStorefront } from "react-icons/md";
 import { BiAnalyse, BiSearch } from "react-icons/bi";
 import { AiFillHeart, AiTwotoneFileExclamation } from "react-icons/ai";
 import { BsCartCheck } from "react-icons/bs";
@@ -29,6 +29,21 @@ const Sidebar = () => {
       icon: <FaHome />,
     },
     {
+      path: "add-product",
+      name: "ecommerce",
+      icon: <MdStorefront />,
+      subItems: [
+        {
+          path: "add-product",
+          name: "addProduct",
+        },
+        {
+          path: "product-details",
+          name: "productDetails",
+        },
+      ],
+    },
+    {
       path: "all-admin",
       name: "About",
       icon: <FaUser />,
@@ -36,22 +51,19 @@ const Sidebar = () => {
     {
       path: "all-order",
       name: "order",
-      icon: <FaFile />,
+      icon: <MdStorefront />,
       subItems: [
         {
-          path: "all-order/orders",
+          path: "add-product",
           name: "Orders",
-          icon: <FaFile />,
         },
         {
           path: "all-order/pending",
           name: "Pending",
-          icon: <FaFile />,
         },
         {
           path: "all-order/paid",
           name: "Paid",
-          icon: <FaFile />,
         },
       ],
     },
@@ -87,24 +99,6 @@ const Sidebar = () => {
     },
   ];
 
-  const inputAnimation = {
-    hidden: {
-      width: 0,
-      padding: 0,
-      opacity: 0,
-      transition: {
-        duration: 0.2,
-      },
-    },
-    show: {
-      width: "140px",
-      padding: "5px 15px",
-      opacity: 1,
-      transition: {
-        duration: 0.2,
-      },
-    },
-  };
   const showAnimation = {
     hidden: {
       width: "auth",
@@ -156,7 +150,7 @@ const Sidebar = () => {
 
         <section className="routes ">
           {routes.map((route, index) => {
-            if (route.subItems) {
+            if (route?.subItems) {
               return (
                 <SidebarMenu
                   key={index}
@@ -166,14 +160,15 @@ const Sidebar = () => {
                 />
               );
             }
+
             return (
               <NavLink
                 to={route.path}
                 key={index}
                 activeClassName="bg-[rgb(45,51,89)]"
-                className={`link hover:link hover:bg-[rgb(45,51,89)] hover:border-r-2 border-white  flex  text-white gap-3 py-2 px-3 no-underline hover:no-underline text-lg`}
+                className={`link hover:bg-[rgb(45,51,89)] hover:border-r-4 border-white  flex  text-white gap-3 py-2 px-3 no-underline hover:no-underline text-lg`}
               >
-                <div className="icon">{route.icon}</div>
+                <div className="icon mt-1">{route.icon}</div>
                 <AnimatePresence>
                   {isOpen && (
                     <motion.div

@@ -12,6 +12,9 @@ import AllAdmin from "./Components/Dashboard/AdminDashboard/AllAdmin/AllAdmin";
 import AllUsers from "./Components/Dashboard/AdminDashboard/AllUsers/AllUsers";
 import AllOrder from "./Components/Dashboard/AdminDashboard/AllOrder/AllOrder";
 import Sidebar from "./Components/Sidebar/Sidebar";
+import Ecommerce from "./Components/Dashboard/AdminDashboard/Ecommerce/Ecommerce";
+import AddProduct from "./Components/Dashboard/AdminDashboard/Ecommerce/AddProduct/AddProduct";
+import ProductDetails from "./Components/Dashboard/AdminDashboard/Ecommerce/ProductDetails/ProductDetails";
 
 // import Aos from "aos";
 export const ToggleSideBarContext = createContext("sideBar");
@@ -73,6 +76,9 @@ function App() {
               <Route element={<RequireAuth />}>
                 <Route path="/sidebar" element={<Sidebar />}>
                   <Route index element={<AllUsers />} />
+                  <Route path="ecommerce" element={<Ecommerce />} />
+                  <Route path="add-product" element={<AddProduct />} />
+                  <Route path="product-details" element={<ProductDetails />} />
                   <Route path="all-user" element={<AllUsers />} />
                   <Route path="all-admin" element={<AllAdmin />} />
                   <Route path="all-order" element={<AllOrder />} />
