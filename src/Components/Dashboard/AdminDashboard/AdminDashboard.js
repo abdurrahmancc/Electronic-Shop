@@ -51,20 +51,51 @@ const AdminDashboard = () => {
                   <li>
                     <Ecommerce />
                   </li>
-                  <li>
-                    <Ecommerce />
-                  </li>
-                  <li>
-                    <Ecommerce />
-                  </li>
-                  <li>
-                    <Ecommerce />
-                  </li>
-                  <li>
-                    <Ecommerce />
-                  </li>
                 </ul>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="grid grid-rows-1 ">
+        <div className="">
+          <div class="drawer drawer-mobile">
+            <input id="sidebar-2" type="checkbox" class="drawer-toggle" />
+            <div class="drawer-content flex flex-col items-center">
+              {/* <!-- Page content here --> */}
+              <div className="w-full">
+                <AdminDashboardNavbar
+                  toggleSideBar={toggleSideBar}
+                  setToggleSideBar={setToggleSideBar}
+                  hiddenDrawer={hiddenDrawer}
+                  setHiddenDrawer={setHiddenDrawer}
+                />
+              </div>
+              <Outlet />
+              <label for="sidebar-2" class=" drawer-button">
+                <BsArrowLeft className="text-2xl font-bold" />
+              </label>
+            </div>
+            <div class="drawer-side">
+              <label for="sidebar-2" class="drawer-overlay"></label>
+              <ul class="menu p-4 overflow-y-auto w-60 bg-base-100 text-base-content">
+                {/* <!-- Sidebar content here --> */}
+                <div className="flex items-center gap-10 pb-6 ">
+                  <label for="sidebar-2" class=" drawer-button">
+                    <BsArrowLeft className="text-2xl font-bold" />
+                  </label>
+                  <img className="w-20" src={logo} alt="" />
+                </div>
+                <h1 className="my-4 text-xs">MENU</h1>
+                <li>
+                  <NavLink to={"/admin-dashboard/all-user"}>
+                    <AiFillHome className="text-lg" /> Dashboard
+                  </NavLink>
+                </li>
+                <li>
+                  <Ecommerce />
+                </li>
+              </ul>
             </div>
           </div>
         </div>

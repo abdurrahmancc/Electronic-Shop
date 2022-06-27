@@ -19,7 +19,7 @@ export const publicRoutes = [
   { path: "/blog", Component: Blog },
   { path: "/mega-menu", Component: Mega_menu },
   { path: "/login", Component: Login },
-  { path: "/sidebar", Component: Sidebar },
+  // { path: "/sidebar", Component: Sidebar },
   { path: "/register", Component: Register },
   // { path: "/loading", Component: Loading },
   { path: "*", Component: NotFound },

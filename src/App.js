@@ -11,6 +11,7 @@ import AdminDashboard from "./Components/Dashboard/AdminDashboard/AdminDashboard
 import AllAdmin from "./Components/Dashboard/AdminDashboard/AllAdmin/AllAdmin";
 import AllUsers from "./Components/Dashboard/AdminDashboard/AllUsers/AllUsers";
 import AllOrder from "./Components/Dashboard/AdminDashboard/AllOrder/AllOrder";
+import Sidebar from "./Components/Sidebar/Sidebar";
 
 // import Aos from "aos";
 export const ToggleSideBarContext = createContext("sideBar");
@@ -63,6 +64,14 @@ function App() {
               </Route>
               <Route element={<RequireAuth />}>
                 <Route path="/admin-dashboard" element={<AdminDashboard />}>
+                  <Route index element={<AllUsers />} />
+                  <Route path="all-user" element={<AllUsers />} />
+                  <Route path="all-admin" element={<AllAdmin />} />
+                  <Route path="all-order" element={<AllOrder />} />
+                </Route>
+              </Route>
+              <Route element={<RequireAuth />}>
+                <Route path="/sidebar" element={<Sidebar />}>
                   <Route index element={<AllUsers />} />
                   <Route path="all-user" element={<AllUsers />} />
                   <Route path="all-admin" element={<AllAdmin />} />
