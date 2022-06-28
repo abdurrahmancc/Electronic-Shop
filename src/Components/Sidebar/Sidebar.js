@@ -11,6 +11,9 @@ import { useState } from "react";
 import SideNavbar from "./SideNavbar";
 import Ecommerce from "../Dashboard/AdminDashboard/Ecommerce/Ecommerce";
 import SidebarMenu from "./SidebarMenu";
+import DashboardFooter from "../Dashboard/DashboardFooter/DashboardFooter";
+import { routes } from "./SidebarRoutes";
+import "./Scrollbar.css";
 
 const Sidebar = () => {
   const [toggleSideBar, setToggleSideBar] = useState(false);
@@ -21,83 +24,6 @@ const Sidebar = () => {
   const toggle = () => {
     setIsOpen(!isOpen);
   };
-
-  const routes = [
-    {
-      path: "all-user",
-      name: "Home",
-      icon: <FaHome />,
-    },
-    {
-      path: "add-product",
-      name: "ecommerce",
-      icon: <MdStorefront />,
-      subItems: [
-        {
-          path: "add-product",
-          name: "addProduct",
-        },
-        {
-          path: "product-details",
-          name: "productDetails",
-        },
-      ],
-    },
-    {
-      path: "all-admin",
-      name: "About",
-      icon: <FaUser />,
-    },
-    {
-      path: "all-order",
-      name: "order",
-      icon: <MdStorefront />,
-      subItems: [
-        {
-          path: "add-product",
-          name: "Orders",
-        },
-        {
-          path: "all-order/pending",
-          name: "Pending",
-        },
-        {
-          path: "all-order/paid",
-          name: "Paid",
-        },
-      ],
-    },
-    {
-      path: "/shop",
-      name: "User",
-      icon: <FaUser />,
-    },
-    {
-      path: "/blog",
-      name: "message",
-      icon: <MdMessage />,
-    },
-    {
-      path: "/mega-menu",
-      name: "Analytics",
-      icon: <BiAnalyse />,
-    },
-    {
-      path: "/",
-      name: "File Manager",
-      icon: <AiTwotoneFileExclamation />,
-    },
-    {
-      path: "/",
-      name: "order",
-      icon: <BsCartCheck />,
-    },
-    {
-      path: "/",
-      name: "Saved",
-      icon: <AiFillHeart />,
-    },
-  ];
 
   const showAnimation = {
     hidden: {
@@ -127,11 +53,11 @@ const Sidebar = () => {
             damping: 9,
           },
         }}
-        className={`sidebar z-10 bg-[rgb(0,7,61)] text-white h-screen ${
+        className={`sidebar fixed overflow-y-scroll left-0 z-10 bg-base-100  h-screen ${
           !isOpen && "left-[-50px] hidden lg:block  lg:0"
         }`}
       >
-        <div className="top-section w-full py-4 px-3 flex items-center justify-between">
+        <div className="top-section  w-full py-4 px-3 flex items-center justify-between">
           {isOpen && (
             <motion.h1
               variants={showAnimation}
@@ -148,7 +74,7 @@ const Sidebar = () => {
           </div>
         </div>
 
-        <section className="routes ">
+        <section className="routes">
           {routes.map((route, index) => {
             if (route?.subItems) {
               return (
@@ -165,8 +91,8 @@ const Sidebar = () => {
               <NavLink
                 to={route.path}
                 key={index}
-                activeClassName="bg-[rgb(45,51,89)]"
-                className={`link hover:bg-[rgb(45,51,89)] hover:border-r-4 border-white  flex  text-white gap-3 py-2 px-3 no-underline hover:no-underline text-lg`}
+                activeClassName="bg-[rgb(45,51,89)] text-white "
+                className={`link  flex hover:text-white hover:font-bold gap-3 py-2 px-3 no-underline hover:no-underline text-lg`}
               >
                 <div className="icon mt-1">{route.icon}</div>
                 <AnimatePresence>
@@ -187,8 +113,8 @@ const Sidebar = () => {
           })}
         </section>
       </motion.div>
-      <div className="w-full">
-        <header>
+      <div className={`w-full bg-base-300 min-h-screen`}>
+        <header className={` ease-in-out duration-500 ${!isOpen ? "lg:ml-10 " : "ml-[200px]"}`}>
           <SideNavbar
             toggle={toggle}
             setIsOpen={setIsOpen}
@@ -197,7 +123,20 @@ const Sidebar = () => {
             setToggleSideBar={setToggleSideBar}
           ></SideNavbar>
         </header>
-        <main className="z-0">{<Outlet />}</main>
+        <main
+          className={`min-h-[calc(100vh-125px)] ease-in-out duration-500 ${
+            !isOpen ? "lg:ml-10" : "ml-[200px]"
+          }`}
+        >
+          {<Outlet />}
+        </main>
+        <footer
+          className={` bg-base-200 ease-in-out duration-500  ${
+            !isOpen ? "lg:ml-10 " : "ml-[200px]"
+          }`}
+        >
+          <DashboardFooter />
+        </footer>
       </div>
     </div>
   );

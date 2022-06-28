@@ -9,14 +9,15 @@ import MyAccount from "./Components/Dashboard/UserDashboard/MyAccount/MyAccount"
 import MyOrder from "./Components/Dashboard/UserDashboard/MyOrder/MyOrder";
 import AdminDashboard from "./Components/Dashboard/AdminDashboard/AdminDashboard";
 import AllAdmin from "./Components/Dashboard/AdminDashboard/AllAdmin/AllAdmin";
-import AllUsers from "./Components/Dashboard/AdminDashboard/AllUsers/AllUsers";
+import AllUsers from "./Components/Dashboard/AdminDashboard/AllUsers/Users/AllUsers";
 import AllOrder from "./Components/Dashboard/AdminDashboard/AllOrder/AllOrder";
 import Sidebar from "./Components/Sidebar/Sidebar";
 import Ecommerce from "./Components/Dashboard/AdminDashboard/Ecommerce/Ecommerce";
 import AddProduct from "./Components/Dashboard/AdminDashboard/Ecommerce/AddProduct/AddProduct";
 import ProductDetails from "./Components/Dashboard/AdminDashboard/Ecommerce/ProductDetails/ProductDetails";
-
-// import Aos from "aos";
+import Customer from "./Components/Dashboard/AdminDashboard/AllUsers/Customer/Customer";
+import PendingOrder from "./Components/Dashboard/AdminDashboard/AllOrder/PendingOrder/PendingOrder";
+import PaidOrder from "./Components/Dashboard/AdminDashboard/AllOrder/PaidOrder/PaidOrder";
 export const ToggleSideBarContext = createContext("sideBar");
 export const ThemesApi = createContext("themes");
 
@@ -65,23 +66,26 @@ function App() {
                   <Route path="my-order" element={<MyOrder />} />
                 </Route>
               </Route>
-              <Route element={<RequireAuth />}>
+              {/* <Route element={<RequireAuth />}>
                 <Route path="/admin-dashboard" element={<AdminDashboard />}>
                   <Route index element={<AllUsers />} />
                   <Route path="all-user" element={<AllUsers />} />
                   <Route path="all-admin" element={<AllAdmin />} />
                   <Route path="all-order" element={<AllOrder />} />
                 </Route>
-              </Route>
+              </Route> */}
               <Route element={<RequireAuth />}>
-                <Route path="/sidebar" element={<Sidebar />}>
+                <Route path="/admin-dashboard" element={<Sidebar />}>
                   <Route index element={<AllUsers />} />
                   <Route path="ecommerce" element={<Ecommerce />} />
                   <Route path="add-product" element={<AddProduct />} />
                   <Route path="product-details" element={<ProductDetails />} />
                   <Route path="all-user" element={<AllUsers />} />
-                  <Route path="all-admin" element={<AllAdmin />} />
+                  <Route path="customer" element={<Customer />} />
+                  <Route path="admin" element={<AllAdmin />} />
                   <Route path="all-order" element={<AllOrder />} />
+                  <Route path="order-pending" element={<PendingOrder />} />
+                  <Route path="order-paid" element={<PaidOrder />} />
                 </Route>
               </Route>
             </Routes>

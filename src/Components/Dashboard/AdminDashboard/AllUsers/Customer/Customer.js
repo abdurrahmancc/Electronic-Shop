@@ -1,20 +1,19 @@
 import React from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import { HiOutlinePlus } from "react-icons/hi";
-import Pagination from "../../Pagination/Pagination";
-import Breadcrumb from "../../Breadcrumb/Breadcrumb";
-import UsersTable from "../AllUsers/Users/UsersTable";
-import AdminTable from "./AdminTable";
+import Breadcrumb from "../../../Breadcrumb/Breadcrumb";
+import Pagination from "../../../Pagination/Pagination";
+import CustomerTable from "./CustomerTable";
 
-const AllAdmin = () => {
+const Customer = () => {
   const crumbs = [
     { path: "admin-dashboard", name: "admin-dashboard" },
-    { path: "admin-dashboard/admin", name: "admin" },
+    { path: "admin-dashboard/customer", name: "customer" },
   ];
   return (
     <div className="p-10 w-full">
       <div className="flex justify-between pb-4">
-        <h4 className="uppercase text-[1.4vw]   text-neutral font-bold">all Admin</h4>
+        <h4 className="uppercase text-[1.4vw]   text-neutral font-bold">customers</h4>
         <div>
           <div class="text-sm breadcrumbs">
             <Breadcrumb crumbs={crumbs} />
@@ -45,11 +44,11 @@ const AllAdmin = () => {
           </div>
           <div>
             <button className="btn btn-sm capitalize font-normal  text-neutral rounded-full btn-success">
-              <HiOutlinePlus className="" /> New Admin
+              <HiOutlinePlus className="" /> New customers
             </button>
           </div>
         </div>
-        <AdminTable />
+        <CustomerTable />
         <div className="flex justify-center w-full relative top-[-40px]">
           <Pagination />
         </div>
@@ -58,4 +57,4 @@ const AllAdmin = () => {
   );
 };
 
-export default AllAdmin;
+export default Customer;

@@ -4,7 +4,7 @@ import { MdOutlineMessage } from "react-icons/md";
 import { CgLogOff } from "react-icons/cg";
 import DashboardThemes from "../Share/Navbar/DashboardThemes";
 import { FaBars } from "react-icons/fa";
-import { BiSearch } from "react-icons/bi";
+import { BiSearch, BiSearchAlt } from "react-icons/bi";
 
 const SideNavbar = ({ toggle, toggleSideBar, setToggleSideBar, setIsOpen, isOpen }) => {
   const [openSearch, setOpenSearch] = useState(false);
@@ -23,10 +23,10 @@ const SideNavbar = ({ toggle, toggleSideBar, setToggleSideBar, setIsOpen, isOpen
               type="submit"
               class="absolute inset-y-0 right-2 rounded pr-1  flex items-center pl-2"
             >
-              <BiSearch className="text-2xl text-gray-400" />
+              <BiSearchAlt className="text-2xl text-gray-400" />
             </button>
             <input
-              class="placeholder:italic placeholder:text-slate-400 block bg-neutral w-full  py-2 pl-6  pr-9 shadow-sm focus:outline-none focus:border-0 rounded-full  focus:ring-0 sm:text-sm"
+              class="placeholder:italic placeholder:text-slate-400 block bg-base-100 w-full  py-2 pl-6  pr-9 shadow-sm focus:outline-none focus:border-0 rounded-full  focus:ring-0 sm:text-sm"
               placeholder="Search..."
               type="text"
               name="search"
