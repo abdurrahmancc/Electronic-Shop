@@ -2,7 +2,7 @@ import React, { Children } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import "./Sidebar.css";
 import { FaAngleDown, FaBars, FaFile, FaHome, FaUser } from "react-icons/fa";
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { MdMessage, MdStorefront } from "react-icons/md";
 import { BiAnalyse, BiSearch } from "react-icons/bi";
 import { AiFillHeart, AiTwotoneFileExclamation } from "react-icons/ai";
@@ -53,8 +53,9 @@ const Sidebar = () => {
             damping: 9,
           },
         }}
-        className={`sidebar fixed overflow-y-scroll left-0 z-10 bg-base-100  h-screen ${
-          !isOpen && "left-[-50px] hidden lg:block  lg:0"
+        style={{ position: "fixed" }}
+        className={`sidebar top-0 overflow-y-scroll left-0 z-10 bg-base-100  h-screen ${
+          !isOpen && "left-[-50px] lg:left-0  hidden lg:block"
         }`}
       >
         <div className="top-section  w-full py-4 px-3 flex items-center justify-between">
@@ -66,7 +67,7 @@ const Sidebar = () => {
               exit="hidden"
               className="logo pl-0 text-lg"
             >
-              AWS
+              <Link to="/"> AWS</Link>
             </motion.h1>
           )}
           <div className="bars">

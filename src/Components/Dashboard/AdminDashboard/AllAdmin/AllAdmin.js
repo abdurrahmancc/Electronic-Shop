@@ -3,7 +3,6 @@ import { BiSearchAlt } from "react-icons/bi";
 import { HiOutlinePlus } from "react-icons/hi";
 import Pagination from "../../Pagination/Pagination";
 import Breadcrumb from "../../Breadcrumb/Breadcrumb";
-import UsersTable from "../AllUsers/Users/UsersTable";
 import AdminTable from "./AdminTable";
 
 const AllAdmin = () => {

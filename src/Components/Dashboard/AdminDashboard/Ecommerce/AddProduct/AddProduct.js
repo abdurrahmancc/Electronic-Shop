@@ -1,175 +1,211 @@
 import React, { useState } from "react";
-import { IoMdCloudUpload } from "react-icons/io";
-import { useLocation } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { multipleImgUpload } from "../../../../API/Api";
 import Breadcrumb from "../../../Breadcrumb/Breadcrumb";
-import DashboardFooter from "../../../DashboardFooter/DashboardFooter";
+import Computer from "./Computer";
+import axiosPrivet from "../../../../Hooks/axiosPrivet";
+import ProductImage from "./ProductImage";
+import BasicInformation from "./BasicInformation";
+import toast from "react-hot-toast";
+import ScrollBtn from "../../../../Share/ScrollBtn/ScrollBtn";
 
 const AddProduct = () => {
+  const [uploadAImage, setUploadAImage] = useState(true);
+  const [imageUrl, setImageUrl] = useState(false);
+  const [multipleImageUrl, setMultipleImageUrl] = useState(false);
   const crumbs = [
     { path: "admin-dashboard", name: "admin-dashboard" },
     { path: "admin-dashboard/add-product", name: "add-product" },
   ];
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    setError,
+    formState: { errors },
+  } = useForm();
 
+  const onSubmit = async (data) => {
+    let images;
+    if (uploadAImage) {
+      const inputImages = data.inputImage[0];
+      const formData = new FormData();
+      // for (let i = 0; i < inputImages.length; i++) {
+      //   formData.append("image", inputImages[i]);
+      // }
+      formData.append("image", inputImages);
+      const image = await multipleImgUpload(formData);
+      images = { ImageURL1: image.data.url };
+    } else if (imageUrl) {
+      images = { ImageURL1: data.anImageURL };
+    } else {
+      images = {
+        ImageURL1: data.firstImageURL,
+        ImageURL2: data.secondImageURL,
+        ImageURL3: data.thirdImageURL,
+        ImageURL4: data.fourthImageURL,
+      };
+    }
+    if (images) {
+    }
+    const features = {
+      processor: data.Processor,
+      MPN: data.MPN,
+      model: data.model,
+      memory: data.memory,
+      storage: data.storage,
+      graphics: data.graphics,
+      chipset: data.Chipset,
+      operating: data.operating,
+      color: data.color,
+      display: data.display,
+      adapter: data.adapter,
+      audio: data.audio,
+      specialFeature: data.specialFeature,
+      keyboard: data.keyboard,
+      webCam: data.webCam,
+      cardReader: data.cardReader,
+      warranty: data.warranty,
+      lanWiFi: data.lanWiFi,
+    };
+    const metaInfo = {
+      metaTitle: data.MetaTitle,
+      metaKeywords: data.MetaKeywords,
+      metaDescription: data.MetaDescription,
+    };
+
+    const info = {
+      productName: data.productName,
+      manufacturerName: data.manufacturerName,
+      price: data.Price,
+      productCode: data.productCode,
+      quantity: data.Quantity,
+      category: data.Category,
+      manufacturerBrand: data.ManufacturerBrand,
+      productDescription: data.ProductDescription,
+      metaInfo,
+      features,
+      images,
+    };
+    console.log(info);
+    const { data: result } = await axiosPrivet.post("/add-product", info);
+    if (result.acknowledged) {
+      toast.success("success", { id: "success-add" });
+      reset();
+    }
+
+    console.log(result);
+  };
+
+  const handleUploadAImage = () => {
+    setUploadAImage(true);
+    setImageUrl(false);
+    setMultipleImageUrl(false);
+  };
+  const handleImageUrl = () => {
+    setUploadAImage(false);
+    setImageUrl(true);
+    setMultipleImageUrl(false);
+  };
+  const handleMultipleImage = () => {
+    setUploadAImage(false);
+    setImageUrl(false);
+    setMultipleImageUrl(true);
+  };
+
+  const info = {
+    handleUploadAImage,
+    uploadAImage,
+    handleImageUrl,
+    imageUrl,
+    handleMultipleImage,
+    multipleImageUrl,
+    register,
+    errors,
+    watch,
+    reset,
+  };
   return (
     <>
       <div className="p-10 w-full">
         <div className="flex justify-between pb-4">
-          <h4 className="uppercase text-[1.4vw]  text-neutral font-bold">add product</h4>
+          <h4 className="uppercase text-[1.4vw]   font-bold">add product</h4>
           <div>
             <div class="text-sm breadcrumbs">
               <Breadcrumb crumbs={crumbs} />
             </div>
           </div>
         </div>
+        {/* basic information */}
         <div>
-          <form action="">
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="bg-base-100 p-5 rounded-md">
               <div className="pb-6">
-                <h4 className="capitalize text-lg text-neutral">basic information</h4>
+                <h4 className="capitalize text-xl font-bold ">basic information</h4>
                 <span className="text-xs ">Fill all information below</span>
               </div>
-              <div className="grid sm:grid-cols-2 grid-cols-1 gap-10">
-                <div>
-                  <div class="form-control pb-4">
-                    <label htmlFor="productName" class="label">
-                      <span class="label-text">Product Name</span>
-                    </label>
-                    <input
-                      id="productName"
-                      type="text"
-                      placeholder="Product Name"
-                      class="input input-bordered"
-                    />
-                  </div>
-                  <div class="form-control pb-4">
-                    <label htmlFor="ManufacturerName" class="label">
-                      <span class="label-text">Manufacturer Name</span>
-                    </label>
-                    <input
-                      id="ManufacturerName"
-                      type="text"
-                      placeholder="Manufacturer Name"
-                      class="input input-bordered"
-                    />
-                  </div>
-                  <div class="form-control pb-4">
-                    <label htmlFor="ManufacturerBrand" class="label">
-                      <span class="label-text">Manufacturer Brand</span>
-                    </label>
-                    <input
-                      id="ManufacturerBrand"
-                      type="text"
-                      placeholder="ManufacturerBrand"
-                      class="input input-bordered"
-                    />
-                  </div>
-                  <div class="form-control pb-4">
-                    <label htmlFor="Price" class="label">
-                      <span class="label-text">Price</span>
-                    </label>
-                    <input
-                      id="productName"
-                      type="text"
-                      placeholder="Price"
-                      class="input input-bordered"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <div class="form-control pb-4 ">
-                    <label htmlFor="Category" class="label">
-                      <span class="label-text">Category</span>
-                    </label>
-                    <select id="Category" class="select select-bordered w-full ">
-                      <option disabled selected>
-                        Who shot first?
-                      </option>
-                      <option>Han Solo</option>
-                      <option>Greedo</option>
-                    </select>
-                  </div>
-                  <div class="form-control pb-4 ">
-                    <label htmlFor="Features" class="label">
-                      <span class="label-text">Features</span>
-                    </label>
-                    <select id="Features" class="select select-bordered w-full ">
-                      <option disabled selected>
-                        Who shot first?
-                      </option>
-                      <option>Han Solo</option>
-                      <option>Greedo</option>
-                    </select>
-                  </div>
-
-                  <div class="form-control pb-4">
-                    <label htmlFor="Category" class="label">
-                      <span class="label-text">Category</span>
-                    </label>
-                    <textarea
-                      id="productName"
-                      class="textarea textarea-bordered h-[150px]"
-                      placeholder="Bio"
-                    ></textarea>
-                  </div>
-                </div>
-              </div>
+              <BasicInformation register={register} errors={errors} />
             </div>
+            {/* Computer component */}
+            <div className="pt-5">
+              <Computer register={register} errors={errors} />
+            </div>
+            {/* Product Images */}
             <div className="py-5">
-              <div className="bg-base-100 p-5 rounded-md">
-                <h4 className="text-neutral text-lg capitalize pb-4">Product Images</h4>
-                <div className="w-full h-60 flex justify-center  items-center  border-white border-dashed border-2 rounded-md">
-                  <div className="text-5xl text-center">
-                    <p>
-                      <IoMdCloudUpload className="relative left-8" />
-                    </p>
-                    <p className="text-lg">upload photo</p>
-                  </div>
-                </div>
-              </div>
+              <ProductImage>{info}</ProductImage>
             </div>
+            {/* Meta Data */}
             <div className="bg-base-100 p-5 rounded-md">
               <div className="pb-6">
-                <h4 className="capitalize text-lg text-neutral">Meta Data</h4>
+                <h4 className="capitalize text-xl font-bold">Meta Data</h4>
                 <span className="text-xs ">Fill all information below</span>
               </div>
               <div className="grid sm:grid-cols-2 grid-cols-1 gap-10">
                 <div>
+                  {/* Meta Title */}
                   <div class="form-control pb-4">
                     <label htmlFor="MetaTitle" class="label">
-                      <span class="label-text">Meta Title</span>
+                      <span class="label-text text-xs">Meta Title</span>
                     </label>
                     <input
                       id="MetaTitle"
                       type="text"
-                      placeholder="Meta title"
+                      placeholder=""
                       class="input input-bordered"
+                      {...register("MetaTitle")}
                     />
                   </div>
+                  {/* Meta Keywords */}
                   <div class="form-control pb-4">
                     <label htmlFor="MetaKeywords" class="label">
-                      <span class="label-text">Meta Keywords</span>
+                      <span class="label-text text-xs">Meta Keywords</span>
                     </label>
                     <input
                       id="MetaKeywords"
                       type="text"
-                      placeholder="Meta Keywords"
+                      placeholder=""
                       class="input input-bordered"
+                      {...register("MetaKeywords")}
                     />
                   </div>
                 </div>
                 <div>
+                  {/* Meta Description */}
                   <div class="form-control pb-4">
                     <label htmlFor="MetaDescription" class="label">
-                      <span class="label-text">Meta Description</span>
+                      <span class="label-text text-xs">Meta Description</span>
                     </label>
                     <textarea
                       id="MetaDescription"
                       class="textarea textarea-bordered h-[150px]"
-                      placeholder="Bio"
+                      placeholder=""
+                      {...register("MetaDescription")}
                     ></textarea>
                   </div>
                 </div>
               </div>
+              {/* Add Product */}
               <div className="flex gap-5">
                 <button type="submit" className="btn btn-primary">
                   Add Product
@@ -179,6 +215,7 @@ const AddProduct = () => {
             </div>
           </form>
         </div>
+        <ScrollBtn />
       </div>
     </>
   );

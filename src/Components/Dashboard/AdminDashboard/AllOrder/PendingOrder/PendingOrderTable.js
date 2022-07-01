@@ -46,12 +46,12 @@ const PendingOrderTable = () => {
               </td>
               <td>Santiago De Los Caballeros</td>
               <td>
-                <div className="flex gap-1 bg-success text-neutral items-center px-2 py-1 rounded">
+                <button className="flex gap-1 bg-success text-neutral items-center px-2 py-1 rounded">
                   <span>
                     <FaStar className="text-xs" />
                   </span>
-                  <span className=" text-xs">4.4</span>
-                </div>
+                  <span className=" text-xs ">4.4</span>
+                </button>
               </td>
               <td class=" ">
                 <span class="">60</span>

@@ -11,6 +11,7 @@
     "daisyui": "^2.15.4",
     "firebase": "^9.8.3",
     "framer-motion": "^6.3.15",
+    "multi-range-slider-react": "^1.0.7",
     "react": "^18.2.0",
     "react-collapsible": "^2.10.0",
     "react-dom": "^18.2.0",

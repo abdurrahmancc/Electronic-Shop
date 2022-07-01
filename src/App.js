@@ -18,6 +18,7 @@ import ProductDetails from "./Components/Dashboard/AdminDashboard/Ecommerce/Prod
 import Customer from "./Components/Dashboard/AdminDashboard/AllUsers/Customer/Customer";
 import PendingOrder from "./Components/Dashboard/AdminDashboard/AllOrder/PendingOrder/PendingOrder";
 import PaidOrder from "./Components/Dashboard/AdminDashboard/AllOrder/PaidOrder/PaidOrder";
+import AllProducts from "./Components/Dashboard/AdminDashboard/Ecommerce/AllProducts/AllProducts";
 export const ToggleSideBarContext = createContext("sideBar");
 export const ThemesApi = createContext("themes");
 
@@ -84,6 +85,7 @@ function App() {
                   <Route path="customer" element={<Customer />} />
                   <Route path="admin" element={<AllAdmin />} />
                   <Route path="all-order" element={<AllOrder />} />
+                  <Route path="all-product" element={<AllProducts />} />
                   <Route path="order-pending" element={<PendingOrder />} />
                   <Route path="order-paid" element={<PaidOrder />} />
                 </Route>
