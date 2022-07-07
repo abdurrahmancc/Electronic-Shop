@@ -61,8 +61,8 @@ const Register = () => {
     navigate(from, { replace: true });
   }
   return (
-    <div class="hero min-h-screen bg-[#58448F]">
-      <div class="hero-content w-full flex-col">
+    <div className="hero min-h-screen bg-[#58448F]">
+      <div className="hero-content w-full flex-col">
         <div className="absolute top-5 lg:left-10 left-4">
           <span
             onClick={() => window.history.back()}
@@ -78,13 +78,13 @@ const Register = () => {
             <img className="w-4/12" src={logo} alt="" />
           </Link>
         </div>
-        <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-neutral">
-          <div class="card-body text-accent">
+        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-neutral">
+          <div className="card-body text-accent">
             <h3 className="text-center text-lg font-bold text-accent">Create your an account</h3>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div class="form-control mt-2">
-                <label class="label relative pb-0">
-                  <span class="label-text text-accent">Full name</span>
+              <div className="form-control mt-2">
+                <label className="label relative pb-0">
+                  <span className="label-text text-accent">Full name</span>
                   <span className="absolute top-11 left-2 border-r  border-gray-400 pr-2 text-[#58448F]">
                     <FaUser />
                   </span>
@@ -92,7 +92,7 @@ const Register = () => {
                 <input
                   type="text"
                   placeholder="Full name"
-                  class="input border-[#58448F]  bg-white input-bordered pl-10"
+                  className="input border-[#58448F]  bg-white input-bordered pl-10"
                   {...register("name", {
                     required: { value: true, message: "Name is require" },
                     pattern: {
@@ -112,9 +112,9 @@ const Register = () => {
                   </span>
                 )}
               </div>
-              <div class="form-control mt-2">
-                <label class="label relative pb-0">
-                  <span class="label-text text-accent">Email</span>
+              <div className="form-control mt-2">
+                <label className="label relative pb-0">
+                  <span className="label-text text-accent">Email</span>
                   <span className="absolute top-11 left-2 border-r  border-gray-400 pr-2 text-[#58448F]">
                     <FaUser />
                   </span>
@@ -122,7 +122,7 @@ const Register = () => {
                 <input
                   type="email"
                   placeholder="email"
-                  class="input border-[#58448F]  bg-white input-bordered pl-10"
+                  className="input border-[#58448F]  bg-white input-bordered pl-10"
                   {...register("email", {
                     required: { value: true, message: "Email is require" },
                     pattern: {
@@ -143,9 +143,9 @@ const Register = () => {
                   </span>
                 )}
               </div>
-              <div class="form-control mt-2">
-                <label class="label relative pb-0">
-                  <span class="label-text text-accent">Password</span>
+              <div className="form-control mt-2">
+                <label className="label relative pb-0">
+                  <span className="label-text text-accent">Password</span>
                   <div>
                     <div className="absolute top-11 left-2 border-r  text-[#58448F] border-gray-400 pr-2">
                       <FaLock />
@@ -162,7 +162,7 @@ const Register = () => {
                 <input
                   type={`${showPass ? "text" : "password"}`}
                   placeholder="password"
-                  class="input bg-white border-[#58448F] pl-10 input-bordered"
+                  className="input bg-white border-[#58448F] pl-10 input-bordered"
                   {...register("password", {
                     required: { value: true, message: "password is require" },
                     pattern: {
@@ -183,9 +183,9 @@ const Register = () => {
                   </span>
                 )}
               </div>
-              <div class="form-control mt-2">
-                <label class="label relative pb-0">
-                  <span class="label-text text-accent">Confirm Password</span>
+              <div className="form-control mt-2">
+                <label className="label relative pb-0">
+                  <span className="label-text text-accent">Confirm Password</span>
                   <div>
                     <div className="absolute top-11 left-2 border-r  text-[#58448F] border-gray-400 pr-2">
                       <FaLock />
@@ -202,7 +202,7 @@ const Register = () => {
                 <input
                   type={`${showConfirmPass ? "text" : "password"}`}
                   placeholder="confirm password"
-                  class="input bg-white border-[#58448F] pl-10 input-bordered"
+                  className="input bg-white border-[#58448F] pl-10 input-bordered"
                   {...register("confirmPassword", {
                     required: { value: true, message: "Confirm Password is require" },
                     pattern: {
@@ -223,26 +223,26 @@ const Register = () => {
                   </span>
                 )}
               </div>
-              <div class="form-control">
-                <label class="label cursor-pointer justify-start gap-5">
+              <div className="form-control">
+                <label className="label cursor-pointer justify-start gap-5">
                   <input
                     onClick={() => setCheckBoxToggle(!checkBoxToggle)}
                     type="checkbox"
                     checked={`${checkBoxToggle ? "checked" : ""}`}
-                    class="checkbox-xs "
+                    className="checkbox-xs "
                   />
-                  <span class="label-text">Accept Terms & Condition</span>
+                  <span className="label-text">Accept Terms & Condition</span>
                 </label>
               </div>
               {matchingPass && <span className="text-red-500 leb">{matchingPass}</span>}
               {error && <span className="text-red-500 leb">{error?.message}</span>}
               {updatingError && <span className="text-red-500 leb">{updatingError?.message}</span>}
 
-              <div class="form-control mt-4 ">
+              <div className="form-control mt-4 ">
                 <button
                   type="submit"
                   disabled={!checkBoxToggle}
-                  class="btn text-neutral  bg-gradient-to-r from-[#63467F] to-[#83508C]"
+                  className="btn text-neutral  bg-gradient-to-r from-[#63467F] to-[#83508C]"
                 >
                   Register
                 </button>

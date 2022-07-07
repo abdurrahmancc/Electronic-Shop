@@ -12,10 +12,10 @@ const ComputerSideSaleCard = () => {
         <span className="absolute top-[-5px] left-[-5px] z-40">
           <img src={offerBadge} alt="" />
         </span>
-        {/* <div class="badge  text-[#16163b] absolute  right-4 bg-red-500 py-3 px-4  md:left-24  top-4">
+        {/* <div className="badge  text-[#16163b] absolute  right-4 bg-red-500 py-3 px-4  md:left-24  top-4">
             <span className="text-base-100">5%</span>
           </div> */}
-        <div class="badge text-[#16163b] absolute  right-4 bg-red-500 py-3 px-4 top-2">
+        <div className="badge text-[#16163b] absolute  right-4 bg-red-500 py-3 px-4 top-2">
           <span className="text-base-100">5%</span>
         </div>
 

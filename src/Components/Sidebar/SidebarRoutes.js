@@ -6,7 +6,7 @@ import { MdAddShoppingCart, MdMessage, MdStorefront } from "react-icons/md";
 
 export const routes = [
   {
-    path: "all-user",
+    path: "home-dashboard",
     name: "Home",
     icon: <FaHome />,
   },

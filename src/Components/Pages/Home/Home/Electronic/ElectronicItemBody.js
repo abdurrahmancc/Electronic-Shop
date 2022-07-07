@@ -108,18 +108,18 @@ const ElectronicItemBody = () => {
             //   onMouseEnter={showCartHandler}
             //   onMouseLeave={hideCartHandler}
             key={index}
-            class="card max-w-[260px] hover:z-10 w-full mx-auto bg-base-100 hover:shadow-xl hover:border hover:border-gray-300 scale-100 hover:scale-110 ease-in duration-200"
+            className="card max-w-[260px] hover:z-10 w-full mx-auto bg-base-100 hover:shadow-xl hover:border hover:border-gray-300 scale-100 hover:scale-110 ease-in duration-200"
           >
             <figure className="relative">
               <div
-                class={` badge rounded-full bg-red-500 text-neutral capitalize absolute top-3 left-3 ${
+                className={` badge rounded-full bg-red-500 text-neutral capitalize absolute top-3 left-3 ${
                   !item?.offer && "hidden"
                 }`}
               >
                 {item?.offer}%
               </div>
               <div
-                class={`badge badge-outline hover:bg-primary hover:text-neutral badge-primary text-neutral capitalize absolute top-3 right-3 ${
+                className={`badge badge-outline hover:bg-primary hover:text-neutral badge-primary text-neutral capitalize absolute top-3 right-3 ${
                   !item?.badge && "hidden"
                 }`}
               >
@@ -129,7 +129,7 @@ const ElectronicItemBody = () => {
               <img src={item?.img} alt="Shoes" />
             </figure>
 
-            <div class="card-body p-4 pt-6 gap-0 relative">
+            <div className="card-body p-4 pt-6 gap-0 relative">
               <div className={`absolute z-10 top-[-20px] right-1 w-full ${hoveredCart}`}>
                 <div className="flex justify-center items-center ">
                   <span
@@ -146,7 +146,7 @@ const ElectronicItemBody = () => {
                   </span>
                 </div>
               </div>
-              <h2 class="card-title text-primary text-sm">{item.title}</h2>
+              <h2 className="card-title text-primary text-sm">{item.title}</h2>
               <div className="flex items-center gap-2 justify-start">
                 <Rating />
                 <span>{item?.review}</span>

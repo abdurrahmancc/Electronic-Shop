@@ -6,14 +6,14 @@ import { MdDelete, MdDetails } from "react-icons/md";
 const AdminTable = () => {
   return (
     <div className="pt-6">
-      <div class="overflow-x-auto w-full pb-[6.5rem]">
-        <table class="table w-full">
+      <div className="overflow-x-auto w-full pb-[6.5rem]">
+        <table className="table w-full">
           {/* <!-- head --> */}
           <thead>
             <tr>
               <th>
                 <label>
-                  <input type="checkbox" class="checkbox rounded-none checkbox-xs" />
+                  <input type="checkbox" className="checkbox rounded-none checkbox-xs" />
                 </label>
               </th>
               <th>Name</th>
@@ -26,10 +26,10 @@ const AdminTable = () => {
           </thead>
           <tbody id="order_Table_Row" className="cursor-pointer">
             {/* <!-- row 1 --> */}
-            <tr class="hover">
+            <tr className="hover">
               <th>
                 <label>
-                  <input type="checkbox" class="checkbox rounded-none checkbox-xs" />
+                  <input type="checkbox" className="checkbox rounded-none checkbox-xs" />
                 </label>
               </th>
               <td>
@@ -37,8 +37,8 @@ const AdminTable = () => {
               </td>
               <td>
                 <div>
-                  <div class="font-normal ">017325-250106</div>
-                  <div class="text-xs ">jeremyholloway@gmail.com</div>
+                  <div className="font-normal ">017325-250106</div>
+                  <div className="text-xs ">jeremyholloway@gmail.com</div>
                 </div>
               </td>
               <td>Santiago De Los Caballeros</td>
@@ -46,21 +46,21 @@ const AdminTable = () => {
                 <span className=" text-xs">Admin</span>
               </td>
               <td>
-                <span class="">05 jun 2010</span>
+                <span className="">05 jun 2010</span>
               </td>
               <td>
-                <div class="dropdown dropdown-end">
-                  <label tabindex="0" class=" m-1">
+                <div className="dropdown dropdown-end">
+                  <label tabIndex="0" className=" m-1">
                     <span>
                       <BsThreeDots className="text-lg" />
                     </span>
                   </label>
                   <ul
-                    tabindex="0"
-                    class="dropdown-content menu border top-10 border-gray-700 rounded-sm shadow bg-base-100  w-40"
+                    tabIndex="0"
+                    className="dropdown-content menu border top-10 border-gray-700 rounded-sm shadow bg-base-100  w-40"
                   >
                     <li>
-                      <div class="">
+                      <div className="">
                         <span>
                           <FiEdit className="text-success" />
                         </span>
@@ -68,7 +68,7 @@ const AdminTable = () => {
                       </div>
                     </li>
                     <li>
-                      <div class=" ">
+                      <div className=" ">
                         <span>
                           <MdDelete className="text-error text-lg" />
                         </span>
@@ -76,7 +76,7 @@ const AdminTable = () => {
                       </div>
                     </li>
                     <li>
-                      <div class=" ">
+                      <div className=" ">
                         <span>
                           <MdDetails className=" text-white text-lg" />
                         </span>

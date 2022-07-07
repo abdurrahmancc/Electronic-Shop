@@ -9,8 +9,10 @@
 /* #collapsible-trigger-1656684839386{
     font-size: 24px;
     padding: 20px 20px;
-}
-.Collapsible__trigger{
-    font-size: 24px;
-    padding: 20px 20px;
 } */
+#dashboardFilter .Collapsible__trigger{
+    font-size: 20px;
+    padding: 20px;
+    line-height: 28px;
+    font-weight: bold;
+}

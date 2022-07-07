@@ -3,15 +3,15 @@ import React from "react";
 const CheckBox = ({ children }) => {
   return (
     <>
-      <div class="form-control">
-        <label class="label justify-start cursor-pointer">
+      <div className="form-control">
+        <label className="label justify-start cursor-pointer">
           <input
             type="checkbox"
             //   checked="checked"
-            class="checkbox checkbox-primary  checkbox-xs text-white  rounded-sm
+            className="checkbox checkbox-primary  checkbox-xs text-white  rounded-sm
                 "
           />
-          <span class="label-text pl-2">{children}</span>
+          <span className="label-text pl-2">{children}</span>
         </label>
       </div>
     </>

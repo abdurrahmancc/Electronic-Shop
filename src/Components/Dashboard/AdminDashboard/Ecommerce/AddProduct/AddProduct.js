@@ -2,12 +2,20 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { multipleImgUpload } from "../../../../API/Api";
 import Breadcrumb from "../../../Breadcrumb/Breadcrumb";
-import Computer from "./Computer";
 import axiosPrivet from "../../../../Hooks/axiosPrivet";
 import ProductImage from "./ProductImage";
 import BasicInformation from "./BasicInformation";
 import toast from "react-hot-toast";
 import ScrollBtn from "../../../../Share/ScrollBtn/ScrollBtn";
+import AddPhone from "./AddPhone";
+import AddLaptop from "./AddLaptop";
+import AddComputer from "./AddComputer";
+import AddWatch from "./AddWatch";
+import AddSpeaker from "./AddSpeaker";
+import AddAC from "./AddAC";
+import AddHeadPhone from "./AddHeadPhone";
+import AddRefrigerator from "./AddRefrigerator";
+import AddMonitor from "./AddMonitor";
 
 const AddProduct = () => {
   const [uploadAImage, setUploadAImage] = useState(true);
@@ -25,6 +33,9 @@ const AddProduct = () => {
     setError,
     formState: { errors },
   } = useForm();
+
+  const selectCategory = watch("category");
+  console.log(selectCategory);
 
   const onSubmit = async (data) => {
     let images;
@@ -47,9 +58,8 @@ const AddProduct = () => {
         ImageURL4: data.fourthImageURL,
       };
     }
-    if (images) {
-    }
-    const features = {
+
+    const laptopFeatures = {
       processor: data.Processor,
       MPN: data.MPN,
       model: data.model,
@@ -75,7 +85,7 @@ const AddProduct = () => {
       metaDescription: data.MetaDescription,
     };
 
-    const info = {
+    const laptopInfo = {
       productName: data.productName,
       manufacturerName: data.manufacturerName,
       price: data.Price,
@@ -85,17 +95,98 @@ const AddProduct = () => {
       manufacturerBrand: data.ManufacturerBrand,
       productDescription: data.ProductDescription,
       metaInfo,
-      features,
+      laptopFeatures,
       images,
     };
-    console.log(info);
-    const { data: result } = await axiosPrivet.post("/add-product", info);
-    if (result.acknowledged) {
-      toast.success("success", { id: "success-add" });
-      reset();
+
+    const phoneFeatures = {
+      phoneName: data.phoneName,
+      releaseDate: data.releaseDate,
+      colors: data.colors,
+      Network: data.Network,
+      SIM: data.SIM,
+      WLAN: data.WLAN,
+      bluetooth: data.bluetooth,
+      GPS: data.GPS,
+      radio: data.radio,
+      USB: data.USB,
+      madeIn: data.madeIn,
+      weight: data.weight,
+      displaySize: data.displaySize,
+      displayResolution: data.displayResolution,
+      displayTechnology: data.displayTechnology,
+      displayProtection: data.displayProtection,
+      displayFeatures: data.displayFeatures,
+      backCameraResolution: data.backCameraResolution,
+      backCameraFeatures: data.backCameraFeatures,
+      backCameraVideoRecording: data.backCameraVideoRecording,
+      frontCameraResolution: data.frontCameraResolution,
+      frontCameraFeatures: data.frontCameraFeatures,
+      frontCameraVideoRecording: data.frontCameraVideoRecording,
+      BatteryTypeAndCapacity: data.BatteryTypeAndCapacity,
+      operatingSystem: data.operatingSystem,
+      chipset: data.chipset,
+      RAM: data.RAM,
+      processor: data.processor,
+      GPU: data.GPU,
+      ROM: data.ROM,
+      sensors: data.sensors,
+    };
+
+    const phoneInfo = {
+      productName: data.productName,
+      manufacturerName: data.manufacturerName,
+      price: data.Price,
+      productCode: data.productCode,
+      quantity: data.Quantity,
+      category: data.Category,
+      manufacturerBrand: data.ManufacturerBrand,
+      productDescription: data.ProductDescription,
+      metaInfo,
+      phoneFeatures,
+      images,
+    };
+
+    // laptop
+    if (selectCategory == "laptop") {
+      const { data: result } = await axiosPrivet.post("/add-product", laptopInfo);
+      if (result.acknowledged) {
+        toast.success("success", { id: "success-add" });
+        reset();
+      }
+      console.log(result);
+      console.log(laptopInfo);
     }
 
-    console.log(result);
+    // phone
+    if (selectCategory == "phone") {
+      try {
+        const { data: result } = await axiosPrivet.post("/add-product", phoneInfo);
+        console.log(result);
+        if (result.acknowledged) {
+          toast.success("success", { id: "success-add" });
+          reset();
+        }
+      } catch (error) {
+        toast.error(error.message);
+      }
+    }
+
+    const info = { ...data, images };
+    console.log(data);
+    // without phone and laptop
+    if (selectCategory !== "phone" && selectCategory !== "laptop") {
+      try {
+        const { data: result } = await axiosPrivet.post("/add-product", info);
+        console.log(result);
+        if (result.acknowledged) {
+          toast.success("success", { id: "success-add" });
+          reset();
+        }
+      } catch (error) {
+        toast.error(error.message);
+      }
+    }
   };
 
   const handleUploadAImage = () => {
@@ -126,13 +217,15 @@ const AddProduct = () => {
     watch,
     reset,
   };
+  console.log(selectCategory);
+
   return (
     <>
       <div className="p-10 w-full">
         <div className="flex justify-between pb-4">
           <h4 className="uppercase text-[1.4vw]   font-bold">add product</h4>
           <div>
-            <div class="text-sm breadcrumbs">
+            <div className="text-sm breadcrumbs">
               <Breadcrumb crumbs={crumbs} />
             </div>
           </div>
@@ -149,7 +242,15 @@ const AddProduct = () => {
             </div>
             {/* Computer component */}
             <div className="pt-5">
-              <Computer register={register} errors={errors} />
+              {selectCategory === "computer" && <AddComputer register={register} errors={errors} />}
+              {selectCategory === "laptop" && <AddLaptop register={register} errors={errors} />}
+              {selectCategory === "phone" && <AddPhone register={register} errors={errors} />}
+              {selectCategory === "watch" && <AddWatch register={register} errors={errors} />}
+              {selectCategory === "speaker" && <AddSpeaker register={register} errors={errors} />}
+              {selectCategory === "headphone" && <AddHeadPhone register={register} />}
+              {selectCategory === "AC" && <AddAC register={register} errors={errors} />}
+              {selectCategory === "refrigerator" && <AddRefrigerator register={register} />}
+              {selectCategory === "monitor" && <AddMonitor register={register} />}
             </div>
             {/* Product Images */}
             <div className="py-5">
@@ -164,41 +265,41 @@ const AddProduct = () => {
               <div className="grid sm:grid-cols-2 grid-cols-1 gap-10">
                 <div>
                   {/* Meta Title */}
-                  <div class="form-control pb-4">
-                    <label htmlFor="MetaTitle" class="label">
-                      <span class="label-text text-xs">Meta Title</span>
+                  <div className="form-control pb-4">
+                    <label htmlFor="MetaTitle" className="label">
+                      <span className="label-text text-xs">Meta Title</span>
                     </label>
                     <input
                       id="MetaTitle"
                       type="text"
                       placeholder=""
-                      class="input input-bordered"
+                      className="input input-bordered"
                       {...register("MetaTitle")}
                     />
                   </div>
                   {/* Meta Keywords */}
-                  <div class="form-control pb-4">
-                    <label htmlFor="MetaKeywords" class="label">
-                      <span class="label-text text-xs">Meta Keywords</span>
+                  <div className="form-control pb-4">
+                    <label htmlFor="MetaKeywords" className="label">
+                      <span className="label-text text-xs">Meta Keywords</span>
                     </label>
                     <input
                       id="MetaKeywords"
                       type="text"
                       placeholder=""
-                      class="input input-bordered"
+                      className="input input-bordered"
                       {...register("MetaKeywords")}
                     />
                   </div>
                 </div>
                 <div>
                   {/* Meta Description */}
-                  <div class="form-control pb-4">
-                    <label htmlFor="MetaDescription" class="label">
-                      <span class="label-text text-xs">Meta Description</span>
+                  <div className="form-control pb-4">
+                    <label htmlFor="MetaDescription" className="label">
+                      <span className="label-text text-xs">Meta Description</span>
                     </label>
                     <textarea
                       id="MetaDescription"
-                      class="textarea textarea-bordered h-[150px]"
+                      className="textarea textarea-bordered h-[150px]"
                       placeholder=""
                       {...register("MetaDescription")}
                     ></textarea>
@@ -206,11 +307,11 @@ const AddProduct = () => {
                 </div>
               </div>
               {/* Add Product */}
-              <div className="flex gap-5">
+              <div className="flex gap-5 justify-end">
+                <button className="btn btn-primary capitalize">cancel</button>
                 <button type="submit" className="btn btn-primary">
                   Add Product
                 </button>
-                <button className="btn btn-primary capitalize">cancel</button>
               </div>
             </div>
           </form>

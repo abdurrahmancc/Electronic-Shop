@@ -23,18 +23,18 @@ const Themes = () => {
   };
   return (
     <>
-      <label class="swap swap-rotate">
+      <label className="swap swap-rotate">
         {/* <!-- this hidden checkbox controls the state --> */}
         <input
           onClick={() => handleGetToggleSiteBar()}
           data-toggle-theme="dark,light"
-          data-act-class="ACTIVECLASS"
+          data-act-className="ACTIVECLASS"
           type="checkbox"
         />
 
         {/* <!-- sun icon --> */}
         <svg
-          class="swap-on fill-current w-8 h-8"
+          className="swap-on fill-current w-8 h-8"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
         >
@@ -43,7 +43,7 @@ const Themes = () => {
 
         {/* <!-- moon icon --> */}
         <svg
-          class="swap-off fill-current w-8 h-8"
+          className="swap-off fill-current w-8 h-8"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
         >

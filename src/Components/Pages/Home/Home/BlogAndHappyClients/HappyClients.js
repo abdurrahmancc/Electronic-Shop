@@ -45,8 +45,8 @@ const HappyClients = () => {
                   incidunt laboriosam, sunt nemo, totam quidem vero consequuntur mollitia!
                   Laudantium.
                 </p>
-                <div class="avatar pt-4">
-                  <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                <div className="avatar pt-4">
+                  <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                     <img src="https://api.lorem.space/image/face?hash=3174" />
                   </div>
                 </div>

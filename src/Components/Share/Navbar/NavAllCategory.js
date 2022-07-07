@@ -5,16 +5,16 @@ const NavAllCategory = ({ categoryDown }) => {
   return (
     <>
       <ul
-        class={`menu bg-base-100 w-full shadow-lg border-primary relative border-[2px]  ease-in-out duration-500 border-t-0 rounded-b-xl ${
+        className={`menu bg-base-100 w-full shadow-lg border-primary relative border-[2px]  ease-in-out duration-500 border-t-0 rounded-b-xl ${
           categoryDown ? "top-0" : "hidden"
         }`}
       >
-        <li tabindex="0" className="">
+        <li tabIndex="0" className="">
           <div className="flex justify-between hover:bg-primary border-b hover:text-neutral border-gray-300">
             <span className="py-1">Computer - Laptop</span>
             <FaAngleRight />
           </div>
-          <ul class=" bg-base-100 shadow border border-gray-300 ">
+          <ul className=" bg-base-100 shadow border border-gray-300 ">
             <li className="hover:bg-primary  hover:text-neutral ">
               <a>Submenu 1</a>
             </li>
@@ -23,12 +23,12 @@ const NavAllCategory = ({ categoryDown }) => {
             </li>
           </ul>
         </li>
-        <li tabindex="0" className="">
+        <li tabIndex="0" className="">
           <div className="flex justify-between border-b hover:bg-primary  hover:text-neutral border-gray-200">
             <span>Electronic</span>
             <FaAngleRight />
           </div>
-          <ul class=" bg-base-100 shadow border border-gray-200 ">
+          <ul className=" bg-base-100 shadow border border-gray-200 ">
             <li className="hover:bg-primary  hover:text-neutral ">
               <a>Electronic</a>
             </li>
@@ -37,12 +37,12 @@ const NavAllCategory = ({ categoryDown }) => {
             </li>
           </ul>
         </li>
-        <li tabindex="0" className="">
+        <li tabIndex="0" className="">
           <div className="flex justify-between border-b   hover:bg-primary  hover:text-neutral border-gray-300">
             <span>Toys & Hobbies</span>
             <FaAngleRight />
           </div>
-          <ul class=" bg-base-100 shadow border border-gray-200 ">
+          <ul className=" bg-base-100 shadow border border-gray-200 ">
             <li className="hover:bg-primary  hover:text-neutral ">
               <a>Submenu 1</a>
             </li>

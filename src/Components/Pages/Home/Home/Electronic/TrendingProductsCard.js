@@ -5,12 +5,12 @@ import Rating from "../../../../Share/Rating/Rating";
 const TrendingProductsCard = ({ product }) => {
   return (
     <>
-      <div class="card card-side w-full max-w-xs md:max-w-sm lg:max-w-xs shadow-xl lg:shadow  border border-gray-200  bg-base-100 ">
+      <div className="card card-side w-full max-w-xs md:max-w-sm lg:max-w-xs shadow-xl lg:shadow  border border-gray-200  bg-base-100 ">
         <figure>
           <img className="lg:w-24 w-36 lg:pl-3  lg:p-4" src={product?.img} alt="Album" />
         </figure>
-        <div class="card-body p-3">
-          <h4 class="text-primary text-sm font-bold">{product?.title}</h4>
+        <div className="card-body p-3">
+          <h4 className="text-primary text-sm font-bold">{product?.title}</h4>
           <span>
             <Rating />
           </span>

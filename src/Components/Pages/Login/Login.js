@@ -49,8 +49,8 @@ const Login = () => {
   // console.log(token)
 
   return (
-    <div class="hero min-h-screen bg-[#58448F]">
-      <div class="hero-content w-full flex-col">
+    <div className="hero min-h-screen bg-[#58448F]">
+      <div className="hero-content w-full flex-col">
         <div className="absolute top-5 lg:left-10 left-4">
           <span
             onClick={() => window.history.back()}
@@ -66,13 +66,13 @@ const Login = () => {
             <img className="w-4/12" src={logo} alt="" />
           </Link>
         </div>
-        <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-neutral">
-          <div class="card-body text-accent">
+        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-neutral">
+          <div className="card-body text-accent">
             <h3 className="text-center text-lg font-bold text-accent">Login to your account</h3>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div class="form-control">
-                <label class="label relative pb-0">
-                  <span class="label-text text-accent">Email</span>
+              <div className="form-control">
+                <label className="label relative pb-0">
+                  <span className="label-text text-accent">Email</span>
                   <span className="absolute top-11 left-2 border-r  border-gray-400 pr-2 text-[#58448F]">
                     <FaUser />
                   </span>
@@ -80,7 +80,7 @@ const Login = () => {
                 <input
                   type="email"
                   placeholder="email"
-                  class="input border-[#58448F]  bg-white input-bordered pl-10"
+                  className="input border-[#58448F]  bg-white input-bordered pl-10"
                   {...register("email", {
                     required: { value: true, message: "Email is require" },
                     pattern: {
@@ -101,9 +101,9 @@ const Login = () => {
                   </span>
                 )}
               </div>
-              <div class="form-control mt-2">
-                <label class="label relative pb-0">
-                  <span class="label-text text-accent">Password</span>
+              <div className="form-control mt-2">
+                <label className="label relative pb-0">
+                  <span className="label-text text-accent">Password</span>
 
                   <div>
                     <div className="absolute top-11 left-2 border-r  text-[#58448F] border-gray-400 pr-2">
@@ -121,7 +121,7 @@ const Login = () => {
                 <input
                   type={`${showPass ? "text" : "password"}`}
                   placeholder="password"
-                  class="input bg-white border-[#58448F] pl-10 input-bordered"
+                  className="input bg-white border-[#58448F] pl-10 input-bordered"
                   {...register("password", {
                     required: { value: true, message: "password is require" },
                     pattern: {
@@ -141,17 +141,20 @@ const Login = () => {
                     {errors.password.message}
                   </span>
                 )}
-                <label class="label">
-                  <a href="#" class="label-text-alt link link-hover text-accent hover:text-primary">
+                <label className="label">
+                  <a
+                    href="#"
+                    className="label-text-alt link link-hover text-accent hover:text-primary"
+                  >
                     Forgot password?
                   </a>
                 </label>
               </div>
               {eError && <span className="text-red-500 label-text-alt">{eError?.message}</span>}
-              <div class="form-control mt-4">
+              <div className="form-control mt-4">
                 <button
                   type="submit"
-                  class="btn text-neutral bg-gradient-to-r from-[#63467F] to-[#83508C]"
+                  className="btn text-neutral bg-gradient-to-r from-[#63467F] to-[#83508C]"
                 >
                   Login
                 </button>

@@ -13,7 +13,7 @@ import google from "../../../assets/googlePlay1.png";
 const FooterTop = () => {
   return (
     <div className="lg:container mx-auto">
-      <div class="footer grid sm:grid-cols-2 lg:grid-cols-4 p-10 text-base-content">
+      <div className="footer grid sm:grid-cols-2 lg:grid-cols-4 p-10 text-base-content">
         <div>
           <img className="w-4/12" src={logo} alt="" />
           <p>Awesome AWS website template</p>
@@ -65,29 +65,29 @@ const FooterTop = () => {
           </div>
         </div>
         <div>
-          <button class="footer-title">Company</button>
-          <a class="link link-hover animate py-2">Delivery Information</a>
-          <a class="link link-hover animate py-2">Privacy Policy</a>
-          <a class="link link-hover animate py-2">Terms & Conditions</a>
-          <a class="link link-hover animate py-2">Support Center</a>
-          <a class="link link-hover animate">Careers</a>
+          <button className="footer-title">Company</button>
+          <a className="link link-hover animate py-2">Delivery Information</a>
+          <a className="link link-hover animate py-2">Privacy Policy</a>
+          <a className="link link-hover animate py-2">Terms & Conditions</a>
+          <a className="link link-hover animate py-2">Support Center</a>
+          <a className="link link-hover animate">Careers</a>
         </div>
         <div>
-          <span class="footer-title">Account</span>
-          <a class="link link-hover animate  py-2">Sign In</a>
-          <a class="link link-hover animate py-2">View Cart</a>
-          <a class="link link-hover animate py-2">View Cart</a>
-          <a class="link link-hover animate py-2">Shipping Details</a>
-          <a class="link link-hover animate py-2">Compare products</a>
+          <span className="footer-title">Account</span>
+          <a className="link link-hover animate  py-2">Sign In</a>
+          <a className="link link-hover animate py-2">View Cart</a>
+          <a className="link link-hover animate py-2">View Cart</a>
+          <a className="link link-hover animate py-2">Shipping Details</a>
+          <a className="link link-hover animate py-2">Compare products</a>
         </div>
         {/* <div>
-          <span class="footer-title">Legal</span>
-          <a class="link link-hover animate py-2">Terms of use</a>
-          <a class="link link-hover animate py-2">Privacy policy</a>
-          <a class="link link-hover animate py-2">Cookie policy</a>
+          <span className="footer-title">Legal</span>
+          <a className="link link-hover animate py-2">Terms of use</a>
+          <a className="link link-hover animate py-2">Privacy policy</a>
+          <a className="link link-hover animate py-2">Cookie policy</a>
         </div> */}
         <div>
-          <span class="footer-title">Install App</span>
+          <span className="footer-title">Install App</span>
           <p className="py-2">From App Store or Google Play</p>
           <div className="flex items-center gap-4">
             <div className="relative hover:top-[-4px] top-0 ease-in-out duration-200 ">

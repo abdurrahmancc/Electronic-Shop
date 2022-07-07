@@ -15,7 +15,7 @@ const AllAdmin = () => {
       <div className="flex justify-between pb-4">
         <h4 className="uppercase text-[1.4vw]   text-neutral font-bold">all Admin</h4>
         <div>
-          <div class="text-sm breadcrumbs">
+          <div className="text-sm breadcrumbs">
             <Breadcrumb crumbs={crumbs} />
           </div>
         </div>
@@ -24,16 +24,16 @@ const AllAdmin = () => {
         <div className="flex justify-between">
           <div>
             <form action="">
-              <label class={`relative w-[250px]  md:block max-w-xs hidden `}>
+              <label className={`relative w-[250px]  md:block max-w-xs hidden `}>
                 <form action="">
                   <button
                     type="submit"
-                    class="absolute inset-y-0 right-2 rounded pr-1  flex items-center pl-2"
+                    className="absolute inset-y-0 right-2 rounded pr-1  flex items-center pl-2"
                   >
                     <BiSearchAlt className="text-2xl text-gray-400" />
                   </button>
                   <input
-                    class="placeholder:italic placeholder:text-slate-400 block bg-base-200 w-full  py-2 pl-6  pr-9 shadow-sm focus:outline-none focus:border-0 rounded-full  focus:ring-0 sm:text-sm"
+                    className="placeholder:italic placeholder:text-slate-400 block bg-base-200 w-full  py-2 pl-6  pr-9 shadow-sm focus:outline-none focus:border-0 rounded-full  focus:ring-0 sm:text-sm"
                     placeholder="Search..."
                     type="text"
                     name="search"

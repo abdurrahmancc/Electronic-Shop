@@ -10,10 +10,10 @@ const ElectronicLeftSite = () => {
           <span className="absolute   top-[-5px] left-[-5px] z-40">
             <img src={""} alt="" />
           </span>
-          <div class="badge lg:hidden text-[#16163b] absolute lg:right-4 right-4 bg-red-500 py-3 px-4  md:left-24  top-4">
+          <div className="badge lg:hidden text-[#16163b] absolute lg:right-4 right-4 bg-red-500 py-3 px-4  md:left-24  top-4">
             <span className="text-base-100">5%</span>
           </div>
-          <div class="badge text-[#16163b] absolute lg:right-4 bg-red-500 py-3 px-4 top-4">
+          <div className="badge text-[#16163b] absolute lg:right-4 bg-red-500 py-3 px-4 top-4">
             <span className="text-base-100">5%</span>
           </div>
 

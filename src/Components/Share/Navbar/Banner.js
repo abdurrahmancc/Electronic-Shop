@@ -16,7 +16,7 @@ const Banner = () => {
   const pagination = {
     clickable: true,
     renderBullet: function (index, className) {
-      return '<span class="' + className + '">' + (index + 1) + "</span>";
+      return '<span className="' + className + '">' + (index + 1) + "</span>";
     },
   };
   const bgItems = [img1, img2, img3, img4, img5, img6, img7];

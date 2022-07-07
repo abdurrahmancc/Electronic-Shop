@@ -19,6 +19,9 @@ import Customer from "./Components/Dashboard/AdminDashboard/AllUsers/Customer/Cu
 import PendingOrder from "./Components/Dashboard/AdminDashboard/AllOrder/PendingOrder/PendingOrder";
 import PaidOrder from "./Components/Dashboard/AdminDashboard/AllOrder/PaidOrder/PaidOrder";
 import AllProducts from "./Components/Dashboard/AdminDashboard/Ecommerce/AllProducts/AllProducts";
+import AllProducts1 from "./Components/Dashboard/AdminDashboard/Ecommerce/AllProducts/AllProducts1";
+import AllProducts2 from "./Components/Dashboard/AdminDashboard/Ecommerce/AllProducts/AllProducts2";
+import HomeDashboard from "./Components/Dashboard/AdminDashboard/HomeDashboard.js/HomeDashboard";
 export const ToggleSideBarContext = createContext("sideBar");
 export const ThemesApi = createContext("themes");
 
@@ -77,7 +80,8 @@ function App() {
               </Route> */}
               <Route element={<RequireAuth />}>
                 <Route path="/admin-dashboard" element={<Sidebar />}>
-                  <Route index element={<AllUsers />} />
+                  <Route index element={<HomeDashboard />} />
+                  <Route path="home-dashboard" element={<HomeDashboard />} />
                   <Route path="ecommerce" element={<Ecommerce />} />
                   <Route path="add-product" element={<AddProduct />} />
                   <Route path="product-details" element={<ProductDetails />} />
@@ -85,7 +89,11 @@ function App() {
                   <Route path="customer" element={<Customer />} />
                   <Route path="admin" element={<AllAdmin />} />
                   <Route path="all-order" element={<AllOrder />} />
-                  <Route path="all-product" element={<AllProducts />} />
+                  <Route path="all-product" element={<AllProducts />}>
+                    <Route index element={<AllProducts1 />}></Route>
+                    <Route path="1" element={<AllProducts1 />}></Route>
+                    <Route path="2" element={<AllProducts2 />}></Route>
+                  </Route>
                   <Route path="order-pending" element={<PendingOrder />} />
                   <Route path="order-paid" element={<PaidOrder />} />
                 </Route>

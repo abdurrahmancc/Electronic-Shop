@@ -15,8 +15,11 @@ const Ecommerce = ({ route, isOpen }) => {
               <NavLink
                 to={subItem.path}
                 key={i}
-                activeClassName="bg-[rgb(45,51,89)]"
-                className={`menus link hover:link hover:bg-[rgb(45,51,89)] font-normal hover:border-r-4 border-white z-50 flex text-  gap-3 py-2 no-underline hover:no-underline text-sm`}
+                className={({ isActive }) =>
+                  `menus link hover:link hover:bg-[rgb(45,51,89)] font-normal hover:border-r-4 border-white z-50 flex text-  gap-3 py-2 no-underline hover:no-underline text-sm ${
+                    isActive ? "border-r-[4px] border-white bg-[rgb(45,51,89)] " : ""
+                  }`
+                }
               >
                 <div className="icon">{subItem.icon}</div>
                 {subItem.name}

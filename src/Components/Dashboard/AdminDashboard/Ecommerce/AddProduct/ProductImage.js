@@ -29,41 +29,41 @@ const ProductImage = ({ children }) => {
             <h4 className=" text-xl font-bold capitalize pb-4">Product Images</h4>
           </div>
           <div className="flex gap-5">
-            <div class="form-control">
-              <label htmlFor="aImage" class="label cursor-pointer gap-1">
-                <span class="label-text">Upload a Image</span>
+            <div className="form-control">
+              <label htmlFor="aImage" className="label cursor-pointer gap-1">
+                <span className="label-text">Upload a Image</span>
                 <input
                   id="aImage"
                   onClick={() => handleUploadAImage()}
                   type="radio"
                   name="radio-6"
-                  class="radio checked:bg-primary"
+                  className="radio checked:bg-primary"
                   checked={uploadAImage}
                 />
               </label>
             </div>
-            <div class="form-control">
-              <label htmlFor="imageURL" class="label cursor-pointer gap-1">
-                <span class="label-text">Image URL</span>
+            <div className="form-control">
+              <label htmlFor="imageURL" className="label cursor-pointer gap-1">
+                <span className="label-text">Image URL</span>
                 <input
                   onClick={() => handleImageUrl()}
                   id="imageURL"
                   type="radio"
                   name="radio-6"
-                  class="radio checked:bg-blue-500"
+                  className="radio checked:bg-blue-500"
                   checked={imageUrl}
                 />
               </label>
             </div>
-            <div class="form-control">
-              <label htmlFor="multipleImage" class="label cursor-pointer gap-1">
-                <span class="label-text">Multiple Image URL</span>
+            <div className="form-control">
+              <label htmlFor="multipleImage" className="label cursor-pointer gap-1">
+                <span className="label-text">Multiple Image URL</span>
                 <input
                   onClick={() => handleMultipleImage()}
                   id="multipleImage"
                   type="radio"
                   name="radio-6"
-                  class="radio checked:bg-blue-500"
+                  className="radio checked:bg-blue-500"
                   checked={multipleImageUrl}
                 />
               </label>
@@ -109,15 +109,15 @@ const ProductImage = ({ children }) => {
         {/*an image url */}
         {imageUrl && (
           <div className="">
-            <div class="form-control pb-4">
-              <label htmlFor="anImageURL" class="label">
-                <span class="label-text text-xs">Image URL</span>
+            <div className="form-control pb-4">
+              <label htmlFor="anImageURL" className="label">
+                <span className="label-text text-xs">Image URL</span>
               </label>
               <input
                 id="anImageURL"
                 type="text"
                 placeholder=""
-                class="input input-bordered w-full max-w-xl"
+                className="input input-bordered w-full max-w-xl"
                 {...register("anImageURL", {
                   required: { value: true, message: "an Image URL is require" },
                 })}
@@ -133,15 +133,15 @@ const ProductImage = ({ children }) => {
         {/* multiple image url*/}
         {multipleImageUrl && (
           <div className="grid sm:grid-cols-2 gap-x-10">
-            <div class="form-control pb-4">
-              <label htmlFor="firstImageURL" class="label">
-                <span class="label-text text-xs">First Image URL</span>
+            <div className="form-control pb-4">
+              <label htmlFor="firstImageURL" className="label">
+                <span className="label-text text-xs">First Image URL</span>
               </label>
               <input
                 id="firstImageURL"
                 type="text"
                 placeholder=""
-                class="input input-bordered"
+                className="input input-bordered"
                 {...register("firstImageURL", {
                   required: { value: true, message: "First Image URL is Require" },
                 })}
@@ -153,15 +153,15 @@ const ProductImage = ({ children }) => {
               )}
             </div>
             {/* Meta Keywords */}
-            <div class="form-control pb-4">
-              <label htmlFor="secondImageURL" class="label">
-                <span class="label-text text-xs">Second Image URL</span>
+            <div className="form-control pb-4">
+              <label htmlFor="secondImageURL" className="label">
+                <span className="label-text text-xs">Second Image URL</span>
               </label>
               <input
                 id="secondImageURL"
                 type="text"
                 placeholder=""
-                class="input input-bordered"
+                className="input input-bordered"
                 {...register("secondImageURL", {
                   required: { value: true, message: "Second Image URL is Require" },
                 })}
@@ -172,27 +172,27 @@ const ProductImage = ({ children }) => {
                 </span>
               )}
             </div>
-            <div class="form-control pb-4">
-              <label htmlFor="thirdImageURL" class="label">
-                <span class="label-text text-xs">Third Image URL</span>
+            <div className="form-control pb-4">
+              <label htmlFor="thirdImageURL" className="label">
+                <span className="label-text text-xs">Third Image URL</span>
               </label>
               <input
                 id="thirdImageURL"
                 type="text"
                 placeholder=""
-                class="input input-bordered"
+                className="input input-bordered"
                 {...register("thirdImageURL")}
               />
             </div>
-            <div class="form-control pb-4">
-              <label htmlFor="fourthImageURL" class="label">
-                <span class="label-text text-xs">Fourth Image URL</span>
+            <div className="form-control pb-4">
+              <label htmlFor="fourthImageURL" className="label">
+                <span className="label-text text-xs">Fourth Image URL</span>
               </label>
               <input
                 id="fourthImageURL"
                 type="text"
                 placeholder=""
-                class="input input-bordered"
+                className="input input-bordered"
                 {...register("fourthImageURL")}
               />
             </div>

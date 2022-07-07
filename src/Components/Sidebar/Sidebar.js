@@ -92,8 +92,11 @@ const Sidebar = () => {
               <NavLink
                 to={route.path}
                 key={index}
-                activeClassName="bg-[rgb(45,51,89)] text-white "
-                className={`link  flex hover:text-white hover:font-bold gap-3 py-2 px-3 no-underline hover:no-underline text-lg`}
+                className={({ isActive }) =>
+                  `link  flex hover:text-white hover:font-bold  py-2 px-3 no-underline hover:no-underline text-lg ${
+                    isActive ? "border-r-[4px] border-white bg-[rgb(45,51,89)] " : ""
+                  }`
+                }
               >
                 <div className="icon mt-1">{route.icon}</div>
                 <AnimatePresence>
