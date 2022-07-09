@@ -1,21 +1,16 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { AiFillEye } from "react-icons/ai";
-import { BiRefresh, BiSearchAlt } from "react-icons/bi";
-import { CgMenuGridR } from "react-icons/cg";
+import { BiSearchAlt } from "react-icons/bi";
+import { IoIosClose } from "react-icons/io";
 import { FaList } from "react-icons/fa";
-import { MdAddShoppingCart, MdGridView } from "react-icons/md";
-import { useQuery } from "react-query";
+import { MdGridView } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 import axiosPrivet from "../../../../Hooks/axiosPrivet";
-import HartIcon from "../../../../Share/HartIcon";
-import Loading from "../../../../Share/Loading/Loading";
-import Rating from "../../../../Share/Rating/Rating";
 import Breadcrumb from "../../../Breadcrumb/Breadcrumb";
-import Pagination from "../../../Pagination/Pagination";
 import DashboardFilterSidebar from "../../DashboardFilterSidebar/DashboardFilterSidebar";
 import { useForm } from "react-hook-form";
 import { createContext } from "react";
+import { useQuery } from "react-query";
 export const DashboardAllProducts = createContext("AllProducts");
 
 const AllProducts = () => {
@@ -23,10 +18,11 @@ const AllProducts = () => {
   const [showModal, setShowModal] = useState("");
   const [products, setProducts] = useState([]);
   const [allProducts, setAllProducts] = useState([]);
+  const [reload, setReload] = useState("");
   const [error, setError] = useState("");
   const [minPrice, setMinPrice] = useState(100);
   const [maxPrice, setMaxPrice] = useState(90000);
-  const [resultsFound, setResultsFound] = useState(true);
+  // const [inputSearch, setInputSearch] = useState("");
   const [categories, setCategories] = useState([
     { id: 1, checked: false, label: "phone" },
     { id: 2, checked: false, label: "computer" },
@@ -42,8 +38,10 @@ const AllProducts = () => {
     register,
     handleSubmit,
     watch,
+    resetField,
     formState: { errors },
   } = useForm();
+  const inputSearch = watch("search");
 
   const crumbs = [
     { path: "admin-dashboard", name: "admin-dashboard" },
@@ -63,10 +61,12 @@ const AllProducts = () => {
         console.log(error.message);
       }
     })();
-  }, []);
+  }, [reload]);
 
-  const [notIncludesTrue, setNotIncludesTrue] = useState(true);
-  const [newSoftwares, setNewSoftwares] = useState([]);
+  // const { data } = useQuery("dashboardAllProducts", () => axiosPrivet.get("/all-products"));
+  // // setAllProducts(data?.data);
+  // // setProducts(data?.data);
+  // console.log(data);
 
   const handleChangeChecked = (id) => {
     const categoriesStateList = categories;
@@ -99,6 +99,13 @@ const AllProducts = () => {
       }
     }
 
+    // Search Filter
+    if (inputSearch) {
+      filterAllProducts = allProducts.filter(
+        (item) => item?.productName.toLowerCase().search(inputSearch.toLowerCase().trim()) !== -1
+      );
+    }
+
     // filter price
     if (minPrice !== 100 || maxPrice !== 90000) {
       priceFilter = filterAllProducts.filter(
@@ -117,16 +124,15 @@ const AllProducts = () => {
 
   useEffect(() => {
     applyFilters();
-  }, [categories, minPrice, maxPrice]);
+  }, [categories, minPrice, maxPrice, inputSearch]);
 
   console.log(allProducts);
   return (
     <>
-      <DashboardAllProducts.Provider value={[products, setProducts]}>
+      <DashboardAllProducts.Provider value={[products, setProducts, setReload]}>
         <div className="p-10 w-full">
           <div className="flex justify-between pb-4">
             <h4 className="uppercase text-[1.4vw]  text-neutral font-bold">all Products</h4>
-
             <div>
               <div className="text-sm breadcrumbs">
                 <Breadcrumb crumbs={crumbs} />
@@ -153,12 +159,22 @@ const AllProducts = () => {
                     <label className={`relative   `}>
                       <button
                         type="submit"
-                        className="absolute inset-y-0 right-2 rounded pr-1  flex items-center pl-2"
+                        className="absolute inset-y-0 left-2 rounded pr-1  flex items-center pl-2"
                       >
                         <BiSearchAlt className="text-2xl text-gray-400" />
                       </button>
+                      <button
+                        onClick={() => resetField("search")}
+                        className={`absolute inset-y-0 right-2 rounded pr-1  flex items-center pl-2 ${
+                          inputSearch ? "block" : "hidden"
+                        }`}
+                      >
+                        <IoIosClose className="text-2xl text-gray-400" />
+                      </button>
                       <input
-                        className="placeholder:italic w-full placeholder:text-slate-400 block bg-base-200   py-2 pl-6  pr-9 shadow-sm focus:outline-none focus:border-0 rounded-full h-12 focus:ring-0 sm:text-sm"
+                        value={inputSearch}
+                        // onChange={(e) => setInputSearch(e.target.value)}
+                        className="placeholder:italic w-full placeholder:text-slate-400 block bg-base-200   py-2 pl-12  pr-9 shadow-sm focus:outline-none focus:border-0 rounded-full h-12 focus:ring-0 sm:text-sm"
                         placeholder="Search..."
                         type="text"
                         name="search"

@@ -86,9 +86,11 @@ const AddProduct = () => {
     };
 
     const laptopInfo = {
+      MPN: data.MPN,
       productName: data.productName,
       manufacturerName: data.manufacturerName,
       price: data.Price,
+      regularPrice: data.regularPrice,
       productCode: data.productCode,
       quantity: data.Quantity,
       category: data.Category,
@@ -103,7 +105,7 @@ const AddProduct = () => {
       phoneName: data.phoneName,
       releaseDate: data.releaseDate,
       colors: data.colors,
-      Network: data.Network,
+      Network: data.network,
       SIM: data.SIM,
       WLAN: data.WLAN,
       bluetooth: data.bluetooth,
@@ -134,14 +136,16 @@ const AddProduct = () => {
     };
 
     const phoneInfo = {
+      MPN: data.MPN,
       productName: data.productName,
       manufacturerName: data.manufacturerName,
-      price: data.Price,
+      price: data.price,
+      regularPrice: data.regularPrice,
       productCode: data.productCode,
-      quantity: data.Quantity,
-      category: data.Category,
-      manufacturerBrand: data.ManufacturerBrand,
-      productDescription: data.ProductDescription,
+      quantity: data.quantity,
+      category: data.category,
+      manufacturerBrand: data.manufacturerBrand,
+      productDescription: data.productDescription,
       metaInfo,
       phoneFeatures,
       images,

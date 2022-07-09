@@ -195,9 +195,12 @@ const AllProducts2 = () => {
                       </span>
                     </div>
                   </div>
-                  <div>
+                  <div className="flex gap-2">
                     <button className="rounded-lg px-2 py-1 cursor-pointer text-primary  hover:bg-primary hover:text-neutral inline-block bg-gray-300">
                       Details
+                    </button>
+                    <button className="rounded-lg px-2 py-1 cursor-pointer text-primary  hover:bg-primary hover:text-neutral inline-block bg-gray-300">
+                      Delete
                     </button>
                   </div>
                 </div>

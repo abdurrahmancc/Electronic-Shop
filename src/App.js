@@ -22,6 +22,7 @@ import AllProducts from "./Components/Dashboard/AdminDashboard/Ecommerce/AllProd
 import AllProducts1 from "./Components/Dashboard/AdminDashboard/Ecommerce/AllProducts/AllProducts1";
 import AllProducts2 from "./Components/Dashboard/AdminDashboard/Ecommerce/AllProducts/AllProducts2";
 import HomeDashboard from "./Components/Dashboard/AdminDashboard/HomeDashboard.js/HomeDashboard";
+
 export const ToggleSideBarContext = createContext("sideBar");
 export const ThemesApi = createContext("themes");
 
@@ -84,7 +85,7 @@ function App() {
                   <Route path="home-dashboard" element={<HomeDashboard />} />
                   <Route path="ecommerce" element={<Ecommerce />} />
                   <Route path="add-product" element={<AddProduct />} />
-                  <Route path="product-details" element={<ProductDetails />} />
+                  <Route path="product-details/:id" element={<ProductDetails />} />
                   <Route path="all-user" element={<AllUsers />} />
                   <Route path="customer" element={<Customer />} />
                   <Route path="admin" element={<AllAdmin />} />

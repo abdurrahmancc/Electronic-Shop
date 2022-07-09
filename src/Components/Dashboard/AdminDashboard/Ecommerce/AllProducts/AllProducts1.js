@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useContext } from "react";
+import toast from "react-hot-toast";
 import { AiFillEye } from "react-icons/ai";
 import { BiRefresh } from "react-icons/bi";
 import { MdAddShoppingCart, MdDetails } from "react-icons/md";
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
 import axiosPrivet from "../../../../Hooks/axiosPrivet";
 import HartIcon from "../../../../Share/HartIcon";
 import Rating from "../../../../Share/Rating/Rating";
@@ -13,7 +15,16 @@ import { DashboardAllProducts } from "./AllProducts";
 const AllProducts1 = () => {
   const [hoveredCart, setHoveredCart] = useState("");
   const [showModal, setShowModal] = useState("");
-  const [products] = useContext(DashboardAllProducts);
+  const [products, , setReload] = useContext(DashboardAllProducts);
+
+  const handleDelete = async (id) => {
+    const { data } = await axiosPrivet.delete(`/product-delete/${id}`);
+    if (data?.acknowledged) {
+      toast.success("deleted");
+      setReload("delete");
+    }
+    console.log(data);
+  };
 
   const showCartHandler = () => {
     setHoveredCart("block");
@@ -180,9 +191,18 @@ const AllProducts1 = () => {
                       {/* ${item?.previousPrice} */}
                     </span>
                   </div>
-                  <div>
-                    <button className="rounded-lg px-2 py-1 cursor-pointer text-primary  hover:bg-primary hover:text-neutral inline-block bg-gray-300">
+                  <div className="flex gap-2">
+                    <Link
+                      to={`/admin-dashboard/product-details/${item?._id}`}
+                      className="rounded-lg px-2 py-1 cursor-pointer text-primary  hover:bg-primary hover:text-neutral inline-block bg-gray-300"
+                    >
                       Details
+                    </Link>
+                    <button
+                      onClick={() => handleDelete(item?._id)}
+                      className="rounded-lg px-2 py-1 cursor-pointer text-primary  hover:bg-primary hover:text-neutral inline-block bg-gray-300"
+                    >
+                      Delete
                     </button>
                   </div>
                 </div>
