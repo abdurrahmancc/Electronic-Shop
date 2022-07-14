@@ -33,12 +33,12 @@ const ContactForm = () => {
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-control">
               <label className="label  pb-0">
-                <span className="label-text ">Name</span>
+                {/* <span className="label-text ">Name</span> */}
               </label>
               <input
                 type="text"
                 placeholder="Your name"
-                className="input  input-bordered border border-gray-300  w-full "
+                className="input  input-bordered border border-gray-300 py-6  w-full "
                 {...register("name", { required: true })}
               />
               {errors?.name && (
@@ -47,12 +47,12 @@ const ContactForm = () => {
             </div>
             <div className="form-control">
               <label className="label pb-0 pt-4">
-                <span className="label-text ">Email</span>
+                {/* <span className="label-text ">Email</span> */}
               </label>
               <input
                 type="email"
-                placeholder="email"
-                className="input  input-bordered border border-gray-300  w-full "
+                placeholder="Email"
+                className="input  input-bordered border border-gray-300 py-6  w-full "
                 {...register("email", {
                   required: { value: true, message: "Email is require" },
                   pattern: {
@@ -72,12 +72,12 @@ const ContactForm = () => {
             </div>
             <div className="form-control">
               <label className="label pt-4 pb-0">
-                <span className="label-text ">Phone number</span>
+                {/* <span className="label-text ">Phone number</span> */}
               </label>
               <input
                 type="text"
                 placeholder="Phone Number"
-                className="input  input-bordered border border-gray-300 w-full "
+                className="input  input-bordered border border-gray-300 py-6 w-full "
                 {...register("number", { required: true })}
               />
               {errors?.number && (
@@ -86,7 +86,7 @@ const ContactForm = () => {
             </div>
             <div className="form-control">
               <label className="label pt-4 pb-0">
-                <span className="label-text ">How can I help you?</span>
+                {/* <span className="label-text ">How can I help you?</span> */}
               </label>
               <textarea
                 className="textarea h-44  border border-gray-300  textarea-bordered"

@@ -38,32 +38,62 @@ const Navbar = () => {
   const liItems = (
     <>
       <li>
-        <NavLink to={"/home"} className=" text-lg  text-secondary">
+        <NavLink
+          to={"/home"}
+          className={({ isActive }) =>
+            isActive ? "text-lg text-neutral bg-sky-700 " : "text-lg text-neutral"
+          }
+        >
           Home
         </NavLink>
       </li>
       <li>
-        <NavLink to={"/shop"} className="text-lg text-secondary">
+        <NavLink
+          to={"/shop"}
+          className={({ isActive }) =>
+            isActive ? "text-lg text-neutral bg-sky-700 " : "text-lg text-neutral"
+          }
+        >
           Shop
         </NavLink>
       </li>
       <li>
-        <NavLink to={"/mega-menu"} className="text-lg text-secondary">
+        <NavLink
+          to={"/mega-menu"}
+          className={({ isActive }) =>
+            isActive ? "text-lg text-neutral bg-sky-700 " : "text-lg text-neutral"
+          }
+        >
           Mega menu
         </NavLink>
       </li>
       <li>
-        <NavLink to={"/blog"} className="text-lg  text-secondary">
+        <NavLink
+          to={"/blog"}
+          className={({ isActive }) =>
+            isActive ? "text-lg text-neutral bg-sky-700 " : "text-lg text-neutral"
+          }
+        >
           Blog
         </NavLink>
       </li>
       <li>
-        <NavLink to={"/contact"} className="text-lg text-secondary">
+        <NavLink
+          to={"/contact"}
+          className={({ isActive }) =>
+            isActive ? "text-lg text-neutral bg-sky-700 " : "text-lg text-neutral"
+          }
+        >
           Contact
         </NavLink>
       </li>
       <li>
-        <NavLink to={"/user-dashboard"} className="text-lg text-secondary lg:hidden">
+        <NavLink
+          to={"/user-dashboard"}
+          className={({ isActive }) =>
+            isActive ? "text-lg text-neutral bg-sky-700 " : "text-lg text-neutral"
+          }
+        >
           Account
         </NavLink>
       </li>
@@ -158,11 +188,11 @@ const Navbar = () => {
             </div>
           </div>
           <div className="navbar-center w-full justify-center hidden z-10 lg:flex">
-            <ul className="menu menu-horizontal p-0 gap-2">{liItems}</ul>
+            <ul className="menu menu-horizontal p-0 gap-2 ">{liItems}</ul>
           </div>
           <div className="navbar-end absolute top-1 right-1 hidden lg:block ">
             <div className="flex justify-end w-full">
-              <div className="flex flex-col justify-center mt-[-8px]">
+              <div className="flex flex-col justify-center text-neutral">
                 <span className="text-[10px] block mx-auto">Only this weekend</span>
                 <span>Super Discount</span>
               </div>
