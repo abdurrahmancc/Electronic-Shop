@@ -6,13 +6,14 @@ import { MdLocationOn } from "react-icons/md";
 import { BiNotepad, BiHeart } from "react-icons/bi";
 import { AiFillSetting } from "react-icons/ai";
 import { FiLogIn, FiLogOut } from "react-icons/fi";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../Firebase/Firebase";
 import { signOut } from "firebase/auth";
 
 const TopNavbar = () => {
   const [user, loading, error] = useAuthState(auth);
+
   const handleSignOut = () => {
     signOut(auth);
     localStorage.removeItem("accessToken");
@@ -25,7 +26,7 @@ const TopNavbar = () => {
           <div className="navbar-start">
             <img src={logo} className="w-20" alt="" />
           </div>
-          <div className="navbar-center  rounded bg-[white] w-screen max-w-[700px] hidden  lg:flex">
+          <div className="navbar-center  rounded bg-[white] w-screen max-w-[700px] hidden lg:flex">
             <div className="w-full  border rounded border-primary">
               <form action="" className="flex justify-center w-full relative px-4 ">
                 <div className="inline-block  mt-1 ml-[-10px] max-w-[190px]  relative w-full">
@@ -43,21 +44,33 @@ const TopNavbar = () => {
                           <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
                         </svg>
                       </span>
-                      <ul className="bg-white z-10 shadow-lg w-[200px] ml-[-6px] max-h-[200px] ">
-                        <li className="hover:bg-primary w-full">
-                          <span className="py-1">Submenu 1</span>
+                      <ul className="bg-white z-10 shadow-lg w-[200px] ml-[-6px]  ">
+                        <li className="hover:bg-primary w-full hover:text-neutral">
+                          <span className="py-1">computer</span>
                         </li>
-                        <li className="hover:bg-primary w-full">
-                          <span className="py-1">Submenu 1</span>
+                        <li className="hover:bg-primary w-full hover:text-neutral">
+                          <span className="py-1">Laptop</span>
                         </li>
-                        <li className="hover:bg-primary w-full">
-                          <span className="py-1">Submenu 1</span>
+                        <li className="hover:bg-primary w-full hover:text-neutral">
+                          <span className="py-1">monitor</span>
                         </li>
-                        <li className="hover:bg-primary w-full">
-                          <span className="py-1">Submenu 1</span>
+                        <li className="hover:bg-primary w-full hover:text-neutral">
+                          <span className="py-1">Phone</span>
                         </li>
-                        <li className="hover:bg-primary w-full">
-                          <span className="py-1">Submenu 1</span>
+                        <li className="hover:bg-primary w-full hover:text-neutral">
+                          <span className="py-1">Headphone</span>
+                        </li>
+                        <li className="hover:bg-primary w-full hover:text-neutral">
+                          <span className="py-1">speaker</span>
+                        </li>
+                        <li className="hover:bg-primary w-full hover:text-neutral">
+                          <span className="py-1">Watch</span>
+                        </li>
+                        <li className="hover:bg-primary w-full hover:text-neutral">
+                          <span className="py-1">refrigerator</span>
+                        </li>
+                        <li className="hover:bg-primary w-full hover:text-neutral">
+                          <span className="py-1">AC</span>
                         </li>
                       </ul>
                     </li>

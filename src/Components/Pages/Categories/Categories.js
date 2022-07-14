@@ -1,35 +1,35 @@
 import React, { createContext, useEffect, useState } from "react";
+import Breadcrumb from "../../Dashboard/Breadcrumb/Breadcrumb";
 import axiosPrivet from "../../Hooks/axiosPrivet";
+import Footer from "../../Share/Footer/Footer";
 import Navbar from "../../Share/Navbar/Navbar";
-import TopNavbar from "../../Share/Navbar/TopNavbar";
 import { useForm } from "react-hook-form";
-import { NavLink, Outlet } from "react-router-dom";
+import TopNavbar from "../../Share/Navbar/TopNavbar";
+import FreeOnlineMoney from "../Home/Home/FreeOnlineMoney";
+import Newsletters from "../Home/Home/Newsletters/Newsletters";
+import Loading from "../../Share/Loading/Loading";
+import { NavLink, Outlet, useParams } from "react-router-dom";
 import { MdGridView } from "react-icons/md";
 import { FaList } from "react-icons/fa";
-import { IoIosClose } from "react-icons/io";
 import { BiSearchAlt } from "react-icons/bi";
-import DashboardFilterSidebar from "../../Dashboard/AdminDashboard/DashboardFilterSidebar/DashboardFilterSidebar";
-import Breadcrumb from "../../Dashboard/Breadcrumb/Breadcrumb";
+import { IoIosClose } from "react-icons/io";
+import CategoryFilter from "./CategoryFilter";
+import { useQuery } from "react-query";
+import toast from "react-hot-toast";
+import { async } from "@firebase/util";
+export const CategoriesProducts = createContext("categories");
 
-import ShopFilter from "./ShopFilter";
-import Footer from "../../Share/Footer/Footer";
-import Newsletters from "../Home/Home/Newsletters/Newsletters";
-import FreeOnlineMoney from "../Home/Home/FreeOnlineMoney";
-import Loading from "../../Share/Loading/Loading";
-export const shopAllProducts = createContext("products");
-
-const Shop = () => {
+const Categories = () => {
   const [hoveredCart, setHoveredCart] = useState("");
   const [showModal, setShowModal] = useState("");
   const [products, setProducts] = useState([]);
-  const [allProducts, setAllProducts] = useState([]);
   const [reload, setReload] = useState("");
   const [error, setError] = useState("");
   const [minPrice, setMinPrice] = useState(100);
   const [maxPrice, setMaxPrice] = useState(90000);
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(20);
-  // const [inputSearch, setInputSearch] = useState("");
+  const { category } = useParams();
 
   const [categories, setCategories] = useState([
     { id: 1, checked: false, label: "phone" },
@@ -53,67 +53,25 @@ const Shop = () => {
 
   const crumbs = [
     { path: "home", name: "home" },
-    { path: "shop", name: "shop" },
+    { path: `categories/${category}`, name: category, disabled: "disabled" },
   ];
 
-  const categoriesChecked = categories
-    .filter((item) => item.checked)
-    .map((item) => item.label.toLowerCase());
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const { data } = await axiosPrivet.post(
-          `/all-products/?page=${page}&size=${size}`,
-          categoriesChecked
-        );
-        if (data) {
-          setAllProducts(data);
-          setProducts(data);
-          // console.log(data);
-        }
-      } catch (error) {
-        console.log(error.message);
-      }
-    })();
-  }, [reload, page, size, categoriesChecked.length]);
-
-  // filter categories
-
-  const handleChangeChecked = (id) => {
-    const categoriesStateList = categories;
-    const changeCheckedList = categoriesStateList.map((item) =>
-      item.id === id ? { ...item, checked: !item.checked } : item
-    );
-    setCategories(changeCheckedList);
-  };
+  const { data, isLoading, isError } = useQuery(
+    ["filterCategory", reload, page, size, category],
+    async () => await axiosPrivet.get(`/categories/${category}/?page=${page}&size=${size}`)
+  );
 
   // filter products
   const applyFilters = () => {
-    let filterAllProducts = allProducts;
-    let filterProducts = products;
-    let priceFilter;
-    let filterProduct;
-
-    // filter categories
-    const categoriesChecked = categories
-      .filter((item) => item.checked)
-      .map((item) => item.label.toLowerCase());
-
-    if (categoriesChecked.length) {
-      filterProduct = filterAllProducts.filter((item) =>
-        categoriesChecked.includes(item.category.toLowerCase())
-      );
-
-      if (filterProduct.length) {
-        // setProducts(filterProduct);
-        filterAllProducts = filterProduct;
-      }
+    if (isLoading) {
+      return <Loading />;
     }
+    let filterAllProducts = data?.data;
+    let priceFilter;
 
     // Search Filter
     if (inputSearch) {
-      filterAllProducts = allProducts.filter(
+      filterAllProducts = data?.data.filter(
         (item) => item?.productName.toLowerCase().search(inputSearch.toLowerCase().trim()) !== -1
       );
     }
@@ -124,11 +82,10 @@ const Shop = () => {
         (item) => item.price >= minPrice && item.price <= maxPrice
       );
 
-      if (filterProducts.length) {
+      if (priceFilter.length) {
         filterAllProducts = priceFilter;
       }
     }
-
     setProducts(filterAllProducts);
   };
 
@@ -136,11 +93,16 @@ const Shop = () => {
 
   useEffect(() => {
     applyFilters();
-  }, [categories, minPrice, maxPrice, inputSearch]);
+  }, [minPrice, maxPrice, inputSearch, data?.data]);
 
-  if (!products) {
+  if (isLoading) {
     return <Loading />;
   }
+  if (isError) {
+    toast.error(isError?.message);
+  }
+  // console.log(data);
+  // console.log("fsdf", products);
   return (
     <>
       <div className="">
@@ -155,13 +117,12 @@ const Shop = () => {
         </div>
       </section>
       <div className="container mx-auto">
-        <shopAllProducts.Provider value={[products, setProducts, setReload, page, setPage]}>
+        <CategoriesProducts.Provider value={[products, setProducts, setReload, page, setPage]}>
           <div className=" w-full">
             <div className="grid lg:grid-cols-12 gap-10">
               <div className="lg:col-span-3 w-full">
                 <div className="lg:sticky top-0 ">
-                  <ShopFilter
-                    handleChangeChecked={handleChangeChecked}
+                  <CategoryFilter
                     categories={categories}
                     set_minValue={setMinPrice}
                     minValue={minPrice}
@@ -183,7 +144,7 @@ const Shop = () => {
                         </button>
                         <button
                           onClick={() => resetField("search")}
-                          className={`absolute inset-y-0 right-2 rounded pr-1  flex items-center pl-2 ${
+                          className={`absolute  inset-y-0 right-2 rounded pr-1  flex items-center pl-2 ${
                             inputSearch ? "block" : "hidden"
                           }`}
                         >
@@ -232,9 +193,9 @@ const Shop = () => {
               </div>
             </div>
           </div>
-        </shopAllProducts.Provider>
+        </CategoriesProducts.Provider>
       </div>
-      <section className="py-10 container mx-auto">
+      <section className="pt-5 container mx-auto">
         <FreeOnlineMoney />
       </section>
       <Newsletters />
@@ -243,4 +204,4 @@ const Shop = () => {
   );
 };
 
-export default Shop;
+export default Categories;

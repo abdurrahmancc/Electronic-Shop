@@ -22,6 +22,12 @@ import AllProducts from "./Components/Dashboard/AdminDashboard/Ecommerce/AllProd
 import AllProducts1 from "./Components/Dashboard/AdminDashboard/Ecommerce/AllProducts/AllProducts1";
 import AllProducts2 from "./Components/Dashboard/AdminDashboard/Ecommerce/AllProducts/AllProducts2";
 import HomeDashboard from "./Components/Dashboard/AdminDashboard/HomeDashboard.js/HomeDashboard";
+import Shop from "./Components/Pages/Shop/Shop";
+import ShopAllProducts1 from "./Components/Pages/Shop/ShopAllProducts1";
+import ShopAllProducts2 from "./Components/Pages/Shop/ShopAllProducts2";
+import Categories from "./Components/Pages/Categories/Categories";
+import CategoryProducts1 from "./Components/Pages/Categories/CategoryProducts1";
+import CategoryProducts2 from "./Components/Pages/Categories/CategoryProducts2";
 
 export const ToggleSideBarContext = createContext("sideBar");
 export const ThemesApi = createContext("themes");
@@ -59,6 +65,16 @@ function App() {
               {publicRoutes.map(({ path, Component }, index) => (
                 <Route key={index} path={path} element={<Component></Component>}></Route>
               ))}
+              <Route path="/shop" element={<Shop />}>
+                <Route index element={<ShopAllProducts1 />}></Route>
+                <Route path="1" element={<ShopAllProducts1 />}></Route>
+                <Route path="2" element={<ShopAllProducts2 />}></Route>
+              </Route>
+              <Route path="/categories/:category" element={<Categories />}>
+                <Route index element={<CategoryProducts1 />}></Route>
+                <Route path="1" element={<CategoryProducts1 />}></Route>
+                <Route path="2" element={<CategoryProducts2 />}></Route>
+              </Route>
               {/* <Route element={<RequireAuth />}>
                 {PrivetRoutes.map(({ path, Component }, index) => (
                   <Route key={index} path={path} element={<Component></Component>}></Route>

@@ -1,23 +1,19 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { useContext } from "react";
-import toast from "react-hot-toast";
+import React, { useContext, useEffect, useState } from "react";
 import { AiFillEye } from "react-icons/ai";
 import { BiRefresh } from "react-icons/bi";
-import { MdAddShoppingCart, MdDetails } from "react-icons/md";
-import { useQuery } from "react-query";
+import { MdAddShoppingCart } from "react-icons/md";
 import { Link } from "react-router-dom";
-import axiosPrivet from "../../../../Hooks/axiosPrivet";
-import HartIcon from "../../../../Share/HartIcon";
-import Rating from "../../../../Share/Rating/Rating";
-import ScrollBtn from "../../../../Share/ScrollBtn/ScrollBtn";
-import { DashboardAllProducts } from "./AllProducts";
+import axiosPrivet from "../../Hooks/axiosPrivet";
+import HartIcon from "../../Share/HartIcon";
+import Rating from "../../Share/Rating/Rating";
+import ScrollBtn from "../../Share/ScrollBtn/ScrollBtn";
+import { CategoriesProducts } from "./Categories";
 
-const AllProducts1 = () => {
+const CategoryProducts2 = () => {
   const [hoveredCart, setHoveredCart] = useState("");
   const [showModal, setShowModal] = useState("");
+  const [products, , , page, setPage] = useContext(CategoriesProducts);
   const [pageCount, setPageCount] = useState(0);
-  const [products, , setReload, page, setPage] = useContext(DashboardAllProducts);
 
   useEffect(() => {
     (async () => {
@@ -28,15 +24,6 @@ const AllProducts1 = () => {
     })();
   }, []);
 
-  const handleDelete = async (id) => {
-    const { data } = await axiosPrivet.delete(`/product-delete/${id}`);
-    if (data?.acknowledged) {
-      toast.success("deleted");
-      setReload("delete");
-    }
-    console.log(data);
-  };
-
   const showCartHandler = () => {
     setHoveredCart("block");
   };
@@ -44,19 +31,17 @@ const AllProducts1 = () => {
   const hideCartHandler = () => {
     setHoveredCart("hidden");
   };
-
-  console.log(products);
   return (
     <>
-      <div className="grid xl:grid-cols-3  md:grid-cols-2 grid-cols-1  gap-8">
+      <div id="" className="grid grid-cols-1  gap-8 ">
         {products.map((item) => (
           <div
             onMouseEnter={showCartHandler}
             onMouseLeave={hideCartHandler}
             key={item?._id}
-            className="card bg-neutral max-w-sm hover:z-10 w-full mx-auto  hover:shadow-xl hover:border hover:border-gray-300 scale-100 hover:scale-110 ease-in duration-200 "
+            className="card bg-neutral max-w-[334px]  md:max-w-xl md:card-side hover:z-10 w-full mx-auto  hover:shadow-xl hover:border hover:border-gray-300 scale-100 hover:scale-110 ease-in duration-200 "
           >
-            <figure className="relative ">
+            <figure className="relative max-w-[260px] w-full">
               <div
                 className={` badge rounded-full bg-red-500 text-neutral capitalize absolute top-3 left-3 ${
                   !item?.offer && "hidden"
@@ -72,11 +57,15 @@ const AllProducts1 = () => {
               >
                 {item?.badge}
               </div>
-              <img className="w-full h-[340px]" src={item?.images?.ImageURL1} alt="Shoes" />
+              <img
+                className="lg:h-[260px] lg:w-[260px]   md:h-full  h-auto w-full"
+                src={item?.images?.ImageURL1}
+                alt="Shoes"
+              />
             </figure>
 
             <div className="card-body p-4 pt-6 gap-1 relative">
-              <div className={`absolute z-10 top-[-20px] right-1 w-full ${hoveredCart}`}>
+              <div className={`sm:hidden absolute z-10 top-[-20px] right-1 w-full ${hoveredCart}`}>
                 <div className="flex justify-center items-center ">
                   <span
                     onClick={setShowModal}
@@ -102,7 +91,7 @@ const AllProducts1 = () => {
                   <span className="text-gray-600 text-sm">Code: {item?.productCode}</span>
                 </div>
               </div>
-              {item?.category == "Laptop" && (
+              {item?.category == "laptop" && (
                 <div className="text-gray-600 text-xs flex flex-col gap-y-2 mt-2">
                   <li title={item?.features?.processor.length >= "52" && item?.features?.processor}>
                     {item?.features?.processor.length >= "52"
@@ -195,26 +184,34 @@ const AllProducts1 = () => {
               <div className=" relative">
                 <div className="flex justify-between items-center">
                   <div className="flex justify-start items-center gap-1">
-                    <span className="text-red-500 text-lg font-bold">
-                      ${item?.price || item?.Price}
-                    </span>
+                    <span className="text-red-500 text-lg font-bold">${item?.price}</span>
                     <span className="text-gray-500 line-through text-sm">
                       {/* ${item?.previousPrice} */}
                     </span>
                   </div>
+                  <div className={`hidden sm:block  w-full ${hoveredCart}`}>
+                    <div className="flex justify-center items-center ">
+                      <span
+                        onClick={setShowModal}
+                        className="text-neutral scale-50 hover:scale-100 ease-in-out duration-200 bg-gray-500 hover:bg-primary  p-2 rounded-full"
+                      >
+                        <AiFillEye />
+                      </span>
+                      <span className="text-neutral scale-50 hover:scale-100 ease-in-out duration-200 bg-gray-500 hover:bg-primary p-2 rounded-full">
+                        <BiRefresh />
+                      </span>
+                      <span className="text-neutral scale-50 hover:scale-100 ease-in-out duration-200 bg-gray-500 hover:bg-primary p-2 rounded-full">
+                        <HartIcon />
+                      </span>
+                    </div>
+                  </div>
                   <div className="flex gap-2">
                     <Link
-                      to={`/admin-dashboard/product-details/${item?._id}`}
-                      className="rounded-lg px-2 py-1 cursor-pointer text-primary  hover:bg-primary hover:text-neutral inline-block bg-gray-300"
+                      to={`/item-details/${item?._id}`}
+                      className="rounded-full px-2 py-2 cursor-pointer text-primary  hover:bg-primary hover:text-neutral inline-block bg-gray-300"
                     >
-                      Details
+                      <MdAddShoppingCart />
                     </Link>
-                    <button
-                      onClick={() => handleDelete(item?._id)}
-                      className="rounded-lg px-2 py-1 cursor-pointer text-primary  hover:bg-primary hover:text-neutral inline-block bg-gray-300"
-                    >
-                      Delete
-                    </button>
                   </div>
                 </div>
               </div>
@@ -226,16 +223,15 @@ const AllProducts1 = () => {
         {[...Array(pageCount).keys()].map((number, index) => (
           <button
             key={index}
-            className={`btn border rounded-none border-primary ${page === number && "bg-primary"}`}
+            className={`btn border border-primary rounded-none ${page === number && "bg-primary"}`}
             onClick={() => setPage(number)}
           >
             {number + 1}
           </button>
         ))}
       </div>
-      <ScrollBtn />
     </>
   );
 };
 
-export default AllProducts1;
+export default CategoryProducts2;

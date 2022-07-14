@@ -1,6 +1,9 @@
 import axios from "axios";
 
-const axiosPrivet = axios.create({ baseURL: "http://localhost:5000/" });
+const axiosPrivet = axios.create({
+  // baseURL: "https://secure-brushlands-00535.herokuapp.com/",
+  baseURL: "http://localhost:5000/",
+});
 axiosPrivet.interceptors.request.use(
   function (config) {
     // Do something before request is sent

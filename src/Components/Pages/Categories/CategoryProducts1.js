@@ -1,23 +1,20 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { AiFillEye } from "react-icons/ai";
 import { BiRefresh } from "react-icons/bi";
-import { MdAddShoppingCart, MdDetails } from "react-icons/md";
-import { useQuery } from "react-query";
+import { MdAddShoppingCart } from "react-icons/md";
 import { Link } from "react-router-dom";
-import axiosPrivet from "../../../../Hooks/axiosPrivet";
-import HartIcon from "../../../../Share/HartIcon";
-import Rating from "../../../../Share/Rating/Rating";
-import ScrollBtn from "../../../../Share/ScrollBtn/ScrollBtn";
-import { DashboardAllProducts } from "./AllProducts";
+import axiosPrivet from "../../Hooks/axiosPrivet";
+import HartIcon from "../../Share/HartIcon";
+import Rating from "../../Share/Rating/Rating";
+import ScrollBtn from "../../Share/ScrollBtn/ScrollBtn";
+import { CategoriesProducts } from "./Categories";
 
-const AllProducts1 = () => {
+const CategoryProducts1 = () => {
   const [hoveredCart, setHoveredCart] = useState("");
   const [showModal, setShowModal] = useState("");
   const [pageCount, setPageCount] = useState(0);
-  const [products, , setReload, page, setPage] = useContext(DashboardAllProducts);
+  const [products, , setReload, page, setPage] = useContext(CategoriesProducts);
 
   useEffect(() => {
     (async () => {
@@ -102,7 +99,7 @@ const AllProducts1 = () => {
                   <span className="text-gray-600 text-sm">Code: {item?.productCode}</span>
                 </div>
               </div>
-              {item?.category == "Laptop" && (
+              {item?.category == "laptop" && (
                 <div className="text-gray-600 text-xs flex flex-col gap-y-2 mt-2">
                   <li title={item?.features?.processor.length >= "52" && item?.features?.processor}>
                     {item?.features?.processor.length >= "52"
@@ -204,17 +201,11 @@ const AllProducts1 = () => {
                   </div>
                   <div className="flex gap-2">
                     <Link
-                      to={`/admin-dashboard/product-details/${item?._id}`}
-                      className="rounded-lg px-2 py-1 cursor-pointer text-primary  hover:bg-primary hover:text-neutral inline-block bg-gray-300"
+                      to={`/item-details/${item?._id}`}
+                      className=" px-2 py-2 cursor-pointer text-primary  hover:bg-primary hover:text-neutral inline-block bg-gray-300 rounded-full"
                     >
-                      Details
+                      <MdAddShoppingCart />
                     </Link>
-                    <button
-                      onClick={() => handleDelete(item?._id)}
-                      className="rounded-lg px-2 py-1 cursor-pointer text-primary  hover:bg-primary hover:text-neutral inline-block bg-gray-300"
-                    >
-                      Delete
-                    </button>
                   </div>
                 </div>
               </div>
@@ -238,4 +229,4 @@ const AllProducts1 = () => {
   );
 };
 
-export default AllProducts1;
+export default CategoryProducts1;

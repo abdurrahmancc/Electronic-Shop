@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AiFillEye } from "react-icons/ai";
 import { BiRefresh } from "react-icons/bi";
 import { MdAddShoppingCart, MdDetails } from "react-icons/md";
@@ -6,13 +6,24 @@ import { useQuery } from "react-query";
 import axiosPrivet from "../../../../Hooks/axiosPrivet";
 import HartIcon from "../../../../Share/HartIcon";
 import Rating from "../../../../Share/Rating/Rating";
+import ScrollBtn from "../../../../Share/ScrollBtn/ScrollBtn";
 import { DashboardAllProducts } from "./AllProducts";
 import "./dashboardAllProducts2.css";
 
 const AllProducts2 = () => {
   const [hoveredCart, setHoveredCart] = useState("");
   const [showModal, setShowModal] = useState("");
-  const [products] = useContext(DashboardAllProducts);
+  const [pageCount, setPageCount] = useState(0);
+  const [products, , , page, setPage] = useContext(DashboardAllProducts);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await axiosPrivet.get("counter");
+      const count = data.count;
+      const pages = Math.ceil(count / 10);
+      setPageCount(pages);
+    })();
+  }, []);
 
   const showCartHandler = () => {
     setHoveredCart("block");
@@ -209,6 +220,18 @@ const AllProducts2 = () => {
           </div>
         ))}
       </div>
+      <div className="flex justify-center mt-10">
+        {[...Array(pageCount).keys()].map((number, index) => (
+          <button
+            key={index}
+            className={`btn border rounded-none border-primary ${page === number && "bg-primary"}`}
+            onClick={() => setPage(number)}
+          >
+            {number + 1}
+          </button>
+        ))}
+      </div>
+      <ScrollBtn />
     </>
   );
 };

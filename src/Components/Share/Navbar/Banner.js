@@ -30,7 +30,7 @@ const Banner = () => {
           disableOnInteraction: false,
         }}
         loop={true}
-        navigation={true}
+        // navigation={true}
         // pagination={pagination}
         pagination={{
           dynamicBullets: true,

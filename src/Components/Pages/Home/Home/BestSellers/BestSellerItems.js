@@ -1,10 +1,10 @@
 import React from "react";
 import BestSellerCard from "./BestSellerCard";
 
-const BestSellerItems = () => {
+const BestSellerItems = ({ products }) => {
   return (
     <div className="">
-      <BestSellerCard />
+      <BestSellerCard products={products} />
     </div>
   );
 };

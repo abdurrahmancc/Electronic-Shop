@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ElectronicBanner from "./ElectronicBanner";
 import ElectronicItemBody from "./ElectronicItemBody";
 
@@ -13,6 +13,9 @@ import img6 from "../../../../../assets/watch-6.jpg";
 import img7 from "../../../../../assets/watch-7.jpg";
 import img8 from "../../../../../assets/watch-8.jpg";
 import TrendingProductsCard from "./TrendingProductsCard";
+import { useQuery } from "react-query";
+import axiosPrivet from "../../../../Hooks/axiosPrivet";
+import Loading from "../../../../Share/Loading/Loading";
 
 const Electronic = () => {
   const trendingProducts = [
@@ -90,7 +93,21 @@ const Electronic = () => {
     },
   ];
 
-  trendingProducts.length = 7;
+  const [category, setCategory] = useState("watch");
+
+  const { data, isLoading } = useQuery(
+    ["homeElectronic", category],
+    async () => await axiosPrivet.get(`home-electronic/${category}`)
+  );
+
+  const { data: trendProducts, isLoading: sIsLoading } = useQuery(
+    ["home-watch", category],
+    async () => await axiosPrivet.get(`home-watch/watch`)
+  );
+
+  if (isLoading || sIsLoading) {
+    return <Loading />;
+  }
 
   return (
     <section className="container mx-auto mt-10">
@@ -100,16 +117,14 @@ const Electronic = () => {
           <h3 className=" pb-10 text-2xl uppercase lg:hidden font-bold text-center">
             Trending Products
           </h3>
-          <div className="grid lg:grid-rows-4 md:grid-cols-2 lg:grid-cols-none justify-items-center gap-5">
-            {trendingProducts.map((product) => (
-              <TrendingProductsCard key={product?.id} product={product}></TrendingProductsCard>
-            ))}
+          <div>
+            <TrendingProductsCard trendProducts={trendProducts?.data}></TrendingProductsCard>
           </div>
         </div>
         <div className="lg:col-span-3 lg:order-2 order-1">
           <ElectronicBanner />
-          <ElectronicTitle />
-          <ElectronicItemBody />
+          <ElectronicTitle setCategory={setCategory} category={category} />
+          <ElectronicItemBody products={data?.data} />
         </div>
       </div>
     </section>

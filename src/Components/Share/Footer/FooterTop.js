@@ -12,8 +12,8 @@ import google from "../../../assets/googlePlay1.png";
 
 const FooterTop = () => {
   return (
-    <div className="lg:container mx-auto">
-      <div className="footer grid sm:grid-cols-2 lg:grid-cols-4 p-10 text-base-content">
+    <div className="lg:container mx-auto px-10 lg:px-0">
+      <div className="footer grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 py-10 text-base-content">
         <div>
           <img className="w-4/12" src={logo} alt="" />
           <p>Awesome AWS website template</p>

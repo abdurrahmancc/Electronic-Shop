@@ -1,0 +1,8 @@
+#shopCategories span{
+    font-size: 26px;
+}
+#shopCategories .Collapsible__trigger{
+    font-size: 20px;
+    padding: 18px 20px;
+    line-height: 28px;
+}

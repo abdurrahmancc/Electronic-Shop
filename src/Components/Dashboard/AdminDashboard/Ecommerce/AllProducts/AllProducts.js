@@ -11,6 +11,7 @@ import DashboardFilterSidebar from "../../DashboardFilterSidebar/DashboardFilter
 import { useForm } from "react-hook-form";
 import { createContext } from "react";
 import { useQuery } from "react-query";
+import Loading from "../../../../Share/Loading/Loading";
 export const DashboardAllProducts = createContext("AllProducts");
 
 const AllProducts = () => {
@@ -22,12 +23,14 @@ const AllProducts = () => {
   const [error, setError] = useState("");
   const [minPrice, setMinPrice] = useState(100);
   const [maxPrice, setMaxPrice] = useState(90000);
+  const [page, setPage] = useState(0);
+  const [size, setSize] = useState(20);
   // const [inputSearch, setInputSearch] = useState("");
   const [categories, setCategories] = useState([
     { id: 1, checked: false, label: "phone" },
+    { id: 4, checked: false, label: "laptop" },
     { id: 2, checked: false, label: "computer" },
     { id: 3, checked: false, label: "watch" },
-    { id: 4, checked: false, label: "laptop" },
     { id: 6, checked: false, label: "speaker" },
     { id: 7, checked: false, label: "headphone" },
     { id: 8, checked: false, label: "AC" },
@@ -48,10 +51,17 @@ const AllProducts = () => {
     { path: "admin-dashboard/all-product", name: "products" },
   ];
 
+  const categoriesChecked = categories
+    .filter((item) => item.checked)
+    .map((item) => item.label.toLowerCase());
+
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await axiosPrivet.get("/all-products");
+        const { data } = await axiosPrivet.post(
+          `/all-products/?page=${page}&size=${size}`,
+          categoriesChecked
+        );
         if (data) {
           setAllProducts(data);
           setProducts(data);
@@ -61,12 +71,7 @@ const AllProducts = () => {
         console.log(error.message);
       }
     })();
-  }, [reload]);
-
-  // const { data } = useQuery("dashboardAllProducts", () => axiosPrivet.get("/all-products"));
-  // // setAllProducts(data?.data);
-  // // setProducts(data?.data);
-  // console.log(data);
+  }, [reload, page, size, categoriesChecked.length]);
 
   const handleChangeChecked = (id) => {
     const categoriesStateList = categories;
@@ -126,10 +131,9 @@ const AllProducts = () => {
     applyFilters();
   }, [categories, minPrice, maxPrice, inputSearch]);
 
-  console.log(allProducts);
   return (
     <>
-      <DashboardAllProducts.Provider value={[products, setProducts, setReload]}>
+      <DashboardAllProducts.Provider value={[products, setProducts, setReload, page, setPage]}>
         <div className="p-10 w-full">
           <div className="flex justify-between pb-4">
             <h4 className="uppercase text-[1.4vw]  text-neutral font-bold">all Products</h4>
@@ -186,6 +190,21 @@ const AllProducts = () => {
                 </div>
 
                 <div className="sm:flex justify-center items-center gap-5 hidden ">
+                  <div>
+                    <span>Show: </span>
+                    <select
+                      onClick={(e) => setSize(e.target.value)}
+                      className="border-primary border py-1 text-black"
+                    >
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="20" selected>
+                        20
+                      </option>
+                      <option value="30">30</option>
+                      <option value="50">50</option>
+                    </select>
+                  </div>
                   <NavLink to="1">
                     <MdGridView className="cursor-pointer text-lg" />
                   </NavLink>
@@ -194,7 +213,6 @@ const AllProducts = () => {
                   </NavLink>
                 </div>
               </div>
-
               <div className="my-10 ">
                 <Outlet />
               </div>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import BestSellersBanner from "./BestSellersBanner";
 import offerItem from "../../../../../assets/noise3.webp";
 import offerBadge from "../../../../../assets/sale-offer.webp";
@@ -9,10 +9,21 @@ import BestSellersTitle from "./BestSellersTitle";
 import BestSellerItems from "./BestSellerItems";
 import phoneItem from "../../../../../assets/banner-1.webp";
 import BestSellersSideCard from "./BestSellersSideCard";
+import { useQuery } from "react-query";
+import axiosPrivet from "../../../../Hooks/axiosPrivet";
+import Loading from "../../../../Share/Loading/Loading";
 
 const BestSellers = () => {
   const themes = useContext(ThemesApi);
-  console.log(themes);
+  const [category, setCategory] = useState("monitor");
+  const { data, isLoading } = useQuery(
+    ["home-bestProducts", category],
+    async () => await axiosPrivet.get(`home-bestProducts/${category}`)
+  );
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <section className="container mx-auto">
@@ -26,8 +37,8 @@ const BestSellers = () => {
         </div>
         <div className="lg:col-span-3 lg:order-2 order-1">
           <BestSellersBanner />
-          <BestSellersTitle />
-          <BestSellerItems />
+          <BestSellersTitle setCategory={setCategory} category={category} />
+          <BestSellerItems products={data?.data} />
         </div>
       </div>
     </section>

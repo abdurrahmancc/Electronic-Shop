@@ -1,23 +1,24 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
-import { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { DashboardAllProducts } from "../../Dashboard/AdminDashboard/Ecommerce/AllProducts/AllProducts";
+import axiosPrivet from "../../Hooks/axiosPrivet";
 import toast from "react-hot-toast";
 import { AiFillEye } from "react-icons/ai";
 import { BiRefresh } from "react-icons/bi";
-import { MdAddShoppingCart, MdDetails } from "react-icons/md";
-import { useQuery } from "react-query";
+import HartIcon from "../../Share/HartIcon";
+import Rating from "../../Share/Rating/Rating";
 import { Link } from "react-router-dom";
-import axiosPrivet from "../../../../Hooks/axiosPrivet";
-import HartIcon from "../../../../Share/HartIcon";
-import Rating from "../../../../Share/Rating/Rating";
-import ScrollBtn from "../../../../Share/ScrollBtn/ScrollBtn";
-import { DashboardAllProducts } from "./AllProducts";
+import ScrollBtn from "../../Share/ScrollBtn/ScrollBtn";
+import { useEffect } from "react";
+import { shopAllProducts } from "./Shop";
+import { MdAddShoppingCart } from "react-icons/md";
 
-const AllProducts1 = () => {
+const ShopAllProducts1 = () => {
   const [hoveredCart, setHoveredCart] = useState("");
   const [showModal, setShowModal] = useState("");
   const [pageCount, setPageCount] = useState(0);
-  const [products, , setReload, page, setPage] = useContext(DashboardAllProducts);
+  // const [page, setPage] = useState(0);
+  // const [size, setSize] = useState(0);
+  const [products, , setReload, page, setPage] = useContext(shopAllProducts);
 
   useEffect(() => {
     (async () => {
@@ -28,15 +29,6 @@ const AllProducts1 = () => {
     })();
   }, []);
 
-  const handleDelete = async (id) => {
-    const { data } = await axiosPrivet.delete(`/product-delete/${id}`);
-    if (data?.acknowledged) {
-      toast.success("deleted");
-      setReload("delete");
-    }
-    console.log(data);
-  };
-
   const showCartHandler = () => {
     setHoveredCart("block");
   };
@@ -45,7 +37,7 @@ const AllProducts1 = () => {
     setHoveredCart("hidden");
   };
 
-  console.log(products);
+  // console.log(products);
   return (
     <>
       <div className="grid xl:grid-cols-3  md:grid-cols-2 grid-cols-1  gap-8">
@@ -204,17 +196,11 @@ const AllProducts1 = () => {
                   </div>
                   <div className="flex gap-2">
                     <Link
-                      to={`/admin-dashboard/product-details/${item?._id}`}
+                      to={`/item-details/${item?._id}`}
                       className="rounded-lg px-2 py-1 cursor-pointer text-primary  hover:bg-primary hover:text-neutral inline-block bg-gray-300"
                     >
-                      Details
+                      <MdAddShoppingCart />
                     </Link>
-                    <button
-                      onClick={() => handleDelete(item?._id)}
-                      className="rounded-lg px-2 py-1 cursor-pointer text-primary  hover:bg-primary hover:text-neutral inline-block bg-gray-300"
-                    >
-                      Delete
-                    </button>
                   </div>
                 </div>
               </div>
@@ -238,4 +224,4 @@ const AllProducts1 = () => {
   );
 };
 
-export default AllProducts1;
+export default ShopAllProducts1;
