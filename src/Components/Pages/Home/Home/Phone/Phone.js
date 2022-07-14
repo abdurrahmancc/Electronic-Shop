@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PhoneBanner from "./PhoneBanner";
 import PhoneItemBody from "./PhoneItemBody";
 import PhoneSideSaleCard from "./PhoneSideSaleCard";
@@ -12,6 +12,9 @@ import img6 from "../../../../../assets/phone-6.jpg";
 import img7 from "../../../../../assets/phone-7.jpg";
 import img8 from "../../../../../assets/phone-8.jpg";
 import PhoneSideBanner from "./PhoneSideBanner";
+import { useQuery } from "react-query";
+import axiosPrivet from "../../../../Hooks/axiosPrivet";
+import Loading from "../../../../Share/Loading/Loading";
 
 const Phone = () => {
   const trendingPhoneProducts = [
@@ -97,6 +100,22 @@ const Phone = () => {
     },
   ];
 
+  const [category, setCategory] = useState("phone");
+
+  const { data, isLoading } = useQuery(
+    ["homePhone", category],
+    async () => await axiosPrivet.get(`home-phone/${category}`)
+  );
+
+  const { data: trendProducts, isLoading: sIsLoading } = useQuery(
+    ["home-watch", category],
+    async () => await axiosPrivet.get(`home-watch/watch`)
+  );
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   trendingPhoneProducts.length = 4;
   return (
     <section className="container mx-auto mt-10">
@@ -120,7 +139,7 @@ const Phone = () => {
         <div className="lg:col-span-3 lg:order-2 order-1">
           <PhoneBanner />
           <PhoneTitle />
-          <PhoneItemBody />
+          <PhoneItemBody products={data?.data} />
         </div>
       </div>
     </section>

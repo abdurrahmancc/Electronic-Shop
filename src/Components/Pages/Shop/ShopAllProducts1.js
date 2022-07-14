@@ -197,7 +197,7 @@ const ShopAllProducts1 = () => {
                   <div className="flex gap-2">
                     <Link
                       to={`/item-details/${item?._id}`}
-                      className="rounded-lg px-2 py-1 cursor-pointer text-primary  hover:bg-primary hover:text-neutral inline-block bg-gray-300"
+                      className="rounded-full px-2 py-2 cursor-pointer text-primary  hover:bg-primary hover:text-neutral inline-block bg-gray-300"
                     >
                       <MdAddShoppingCart />
                     </Link>

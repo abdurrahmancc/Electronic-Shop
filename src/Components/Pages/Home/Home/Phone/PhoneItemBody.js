@@ -12,8 +12,9 @@ import img5 from "../../../../../assets/phone-5.jpg";
 import img6 from "../../../../../assets/phone-6.jpg";
 import img7 from "../../../../../assets/phone-7.jpg";
 import img8 from "../../../../../assets/phone-8.jpg";
+import { Link } from "react-router-dom";
 
-const PhoneItemBody = () => {
+const PhoneItemBody = ({ products }) => {
   const [hoveredCart, setHoveredCart] = useState("");
   const [showModal, setShowModal] = useState("");
 
@@ -106,10 +107,12 @@ const PhoneItemBody = () => {
       offer: "",
     },
   ];
+
+  products.length = 8;
   return (
     <div className="my-10 mx-4">
       <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-x-0 gap-y-10 gap-8">
-        {computerItems.map((item, index) => (
+        {products.map((item, index) => (
           <div
             // onMouseEnter={showCartHandler}
             // onMouseLeave={hideCartHandler}
@@ -132,7 +135,7 @@ const PhoneItemBody = () => {
                 {item?.badge}
               </div>
 
-              <img src={item?.img} alt="Shoes" />
+              <img src={item?.images?.ImageURL1} alt="Shoes" />
             </figure>
 
             <div className="card-body p-4 pt-6 gap-0 relative">
@@ -142,7 +145,9 @@ const PhoneItemBody = () => {
                     //   onClick={setShowModal}
                     className="text-neutral scale-50 hover:scale-100 ease-in-out duration-200 bg-gray-500 hover:bg-primary  p-2 rounded-full"
                   >
-                    <AiFillEye />
+                    <Link to={`/item-details/${item?._id}`}>
+                      <AiFillEye />
+                    </Link>
                   </span>
                   <span className="text-neutral scale-50 hover:scale-100 ease-in-out duration-200 bg-gray-500 hover:bg-primary p-2 rounded-full">
                     <BiRefresh />
@@ -152,19 +157,25 @@ const PhoneItemBody = () => {
                   </span>
                 </div>
               </div>
-              <h2 className="card-title text-primary text-sm">{item.title}</h2>
+              <h2 className="card-title text-primary text-sm">{item?.productName}</h2>
               <div className="flex items-center gap-2 justify-start">
                 <Rating />
-                <span>{item?.review}</span>
+                <span>{item?.review ? item?.review : "1"}</span>
               </div>
               <div className="flex justify-between items-center">
                 <div className="flex justify-start items-center gap-1">
-                  <span className="text-red-500 text-lg font-bold">${item?.currentPrice}</span>
-                  <span className="text-gray-500 line-through text-sm">${item?.previousPrice}</span>
+                  <span className="text-red-500 text-lg font-bold">${item?.price}</span>
+                  {item?.previousPrice && (
+                    <span className="text-gray-500 line-through text-sm">
+                      ${item?.previousPrice}
+                    </span>
+                  )}
                 </div>
                 <div>
                   <span className="rounded-full px-2 py-2  hover:bg-primary hover:text-neutral inline-block bg-gray-300">
-                    <MdAddShoppingCart />
+                    <Link to={`/item-details/${item?._id}`}>
+                      <MdAddShoppingCart />
+                    </Link>
                   </span>
                 </div>
               </div>

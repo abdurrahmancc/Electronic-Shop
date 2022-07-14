@@ -91,7 +91,7 @@ const ShopAllProducts2 = () => {
                   <span className="text-gray-600 text-sm">Code: {item?.productCode}</span>
                 </div>
               </div>
-              {item?.category == "Laptop" && (
+              {item?.category == "laptop" && (
                 <div className="text-gray-600 text-xs flex flex-col gap-y-2 mt-2">
                   <li title={item?.features?.processor.length >= "52" && item?.features?.processor}>
                     {item?.features?.processor.length >= "52"
@@ -208,7 +208,7 @@ const ShopAllProducts2 = () => {
                   <div className="flex gap-2">
                     <Link
                       to={`/item-details/${item?._id}`}
-                      className="rounded-lg px-2 py-1 cursor-pointer text-primary  hover:bg-primary hover:text-neutral inline-block bg-gray-300"
+                      className="rounded-full px-2 py-2 cursor-pointer text-primary  hover:bg-primary hover:text-neutral inline-block bg-gray-300"
                     >
                       <MdAddShoppingCart />
                     </Link>
