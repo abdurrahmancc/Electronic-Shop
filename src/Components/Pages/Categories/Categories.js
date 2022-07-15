@@ -117,7 +117,9 @@ const Categories = () => {
         </div>
       </section>
       <div className="container mx-auto">
-        <CategoriesProducts.Provider value={[products, setProducts, setReload, page, setPage]}>
+        <CategoriesProducts.Provider
+          value={[products, setProducts, setReload, page, setPage, size]}
+        >
           <div className=" w-full">
             <div className="grid lg:grid-cols-12 gap-10">
               <div className="lg:col-span-3 w-full">
@@ -167,14 +169,13 @@ const Categories = () => {
                     <div>
                       <span>Show: </span>
                       <select
-                        onClick={(e) => setSize(e.target.value)}
+                        defaultValue={size}
+                        onChange={(e) => setSize(e.target.value)}
                         className="border-primary border py-1"
                       >
                         <option value="5">5</option>
                         <option value="10">10</option>
-                        <option value="20" selected>
-                          20
-                        </option>
+                        <option value="20">20</option>
                         <option value="30">30</option>
                         <option value="50">50</option>
                       </select>

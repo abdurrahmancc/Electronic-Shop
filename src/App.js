@@ -28,6 +28,7 @@ import ShopAllProducts2 from "./Components/Pages/Shop/ShopAllProducts2";
 import Categories from "./Components/Pages/Categories/Categories";
 import CategoryProducts1 from "./Components/Pages/Categories/CategoryProducts1";
 import CategoryProducts2 from "./Components/Pages/Categories/CategoryProducts2";
+import AddOthers from "./Components/Dashboard/AdminDashboard/Ecommerce/AddOthers/AddOthers";
 
 export const ToggleSideBarContext = createContext("sideBar");
 export const ThemesApi = createContext("themes");
@@ -101,6 +102,7 @@ function App() {
                   <Route path="home-dashboard" element={<HomeDashboard />} />
                   <Route path="ecommerce" element={<Ecommerce />} />
                   <Route path="add-product" element={<AddProduct />} />
+                  <Route path="add-others" element={<AddOthers />} />
                   <Route path="product-details/:id" element={<ProductDetails />} />
                   <Route path="all-user" element={<AllUsers />} />
                   <Route path="customer" element={<Customer />} />

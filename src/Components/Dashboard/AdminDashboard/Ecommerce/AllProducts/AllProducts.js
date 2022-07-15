@@ -133,7 +133,9 @@ const AllProducts = () => {
 
   return (
     <>
-      <DashboardAllProducts.Provider value={[products, setProducts, setReload, page, setPage]}>
+      <DashboardAllProducts.Provider
+        value={[products, setProducts, setReload, page, setPage, size]}
+      >
         <div className="p-10 w-full">
           <div className="flex justify-between pb-4">
             <h4 className="uppercase text-[1.4vw]  text-neutral font-bold">all Products</h4>
@@ -193,14 +195,13 @@ const AllProducts = () => {
                   <div>
                     <span>Show: </span>
                     <select
+                      defaultValue={size}
                       onClick={(e) => setSize(e.target.value)}
                       className="border-primary border py-1 text-black"
                     >
                       <option value="5">5</option>
                       <option value="10">10</option>
-                      <option value="20" selected>
-                        20
-                      </option>
+                      <option value="20">20</option>
                       <option value="30">30</option>
                       <option value="50">50</option>
                     </select>
