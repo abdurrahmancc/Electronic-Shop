@@ -59,16 +59,6 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
-          to={"/mega-menu"}
-          className={({ isActive }) =>
-            isActive ? "text-lg text-neutral bg-sky-700 " : "text-lg text-neutral"
-          }
-        >
-          Mega menu
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
           to={"/blog"}
           className={({ isActive }) =>
             isActive ? "text-lg text-neutral bg-sky-700 " : "text-lg text-neutral"
@@ -79,19 +69,29 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
+          to={"/about"}
+          className={({ isActive }) =>
+            isActive ? "text-lg text-neutral bg-sky-700 " : "text-lg text-neutral"
+          }
+        >
+          About Us
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to={"/contact"}
           className={({ isActive }) =>
             isActive ? "text-lg text-neutral bg-sky-700 " : "text-lg text-neutral"
           }
         >
-          Contact
+          Contact Us
         </NavLink>
       </li>
-      <li>
+      <li className="lg:hidden">
         <NavLink
           to={"/user-dashboard"}
           className={({ isActive }) =>
-            isActive ? "text-lg text-neutral bg-sky-700 " : "text-lg text-neutral"
+            isActive ? "text-lg text-neutral  bg-sky-700 " : "text-lg text-neutral"
           }
         >
           Account

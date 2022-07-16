@@ -24,10 +24,6 @@ export const routes = [
         name: "Products",
       },
       {
-        path: "product-details/id",
-        name: "productDetails",
-      },
-      {
         path: "add-others",
         name: "Add Others",
       },

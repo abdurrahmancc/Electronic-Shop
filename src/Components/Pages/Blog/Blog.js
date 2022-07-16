@@ -4,6 +4,7 @@ import { BiSearchAlt } from "react-icons/bi";
 import { IoIosClose } from "react-icons/io";
 import { VscTriangleRight } from "react-icons/vsc";
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
 import Breadcrumb from "../../Dashboard/Breadcrumb/Breadcrumb";
 import axiosPrivet from "../../Hooks/axiosPrivet";
 import Footer from "../../Share/Footer/Footer";
@@ -92,9 +93,13 @@ const Blog = () => {
                         <h2 class="card-title text-2xl leading-10">{item?.data?.title}</h2>
                         <p className="text-sm pt-2">{item?.data?.description1.slice(0, 184)}...</p>
                         <div class="card-actions justify-start pt-4">
-                          <a href="" className="capitalize font-bold text-primary">
+                          <Link
+                            to={`/blog-details/${item?._id}`}
+                            href=""
+                            className="capitalize font-bold text-primary"
+                          >
                             read more
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </div>
@@ -198,6 +203,13 @@ const Blog = () => {
                       Speaker
                     </a>
                   </div>
+                </div>
+                <div>
+                  <img
+                    src={"https://i.ibb.co/0M8HbGZ/bannerfs.jpg"}
+                    className="w-full h-auto"
+                    alt=""
+                  />
                 </div>
               </div>
             </div>

@@ -2,7 +2,7 @@ import React from "react";
 import logo from "../../../assets/logo.png";
 import Themes from "./Themes";
 import { FaUserAlt } from "react-icons/fa";
-import { MdLocationOn } from "react-icons/md";
+import { MdDarkMode, MdLocationOn } from "react-icons/md";
 import { BiNotepad, BiHeart } from "react-icons/bi";
 import { AiFillSetting } from "react-icons/ai";
 import { FiLogIn, FiLogOut } from "react-icons/fi";
@@ -197,6 +197,15 @@ const TopNavbar = () => {
                     <span>Dashboard</span>
                   </NavLink>
                 </li>
+                <li className="hover:text-primary ">
+                  <div className="flex justify-items-center">
+                    <span className="text-sm  ">
+                      <MdDarkMode />
+                    </span>
+                    <span>DarkMode</span>
+                    <Themes></Themes>
+                  </div>
+                </li>
                 <li className="hover:text-primary">
                   {user ? (
                     <span onClick={() => handleSignOut()}>
@@ -216,7 +225,6 @@ const TopNavbar = () => {
                 </li>
               </ul>
             </div>
-            <Themes></Themes>
           </div>
         </div>
       </div>
