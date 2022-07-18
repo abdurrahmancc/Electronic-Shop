@@ -36,12 +36,15 @@ const About = () => {
               Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit, ducimus!
             </p>
           </div>
-          <div class="mt-20">
-            <div class="grid lg:grid-cols-2 grid-cols-1 gap-10 ">
-              <img src="https://i.ibb.co/DkMNkv8/success.jpg" class=" w-full h-auto shadow-2xl" />
+          <div className="mt-20">
+            <div className="grid lg:grid-cols-2 grid-cols-1 gap-10 ">
+              <img
+                src="https://i.ibb.co/DkMNkv8/success.jpg"
+                className=" w-full h-auto shadow-2xl"
+              />
               <div>
-                <h1 class="text-3xl font-bold">WHY WE ARE?</h1>
-                <p class="py-6">
+                <h1 className="text-3xl font-bold">WHY WE ARE?</h1>
+                <p className="py-6">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, praesentium autem.
                   Fugiat voluptatibus repellendus quibusdam dicta. Error aliquid at, officia minima
                   ea numquam corrupti reiciendis. Debitis, consequatur inventore rerum fugit
@@ -82,7 +85,7 @@ const About = () => {
                       <span className=" relative left-5">HTML5 </span>
                     </p>
                     <progress
-                      class="progress progress-info w-96 lg:w-full h-5 mt-3"
+                      className="progress progress-info w-96 lg:w-full h-5 mt-3"
                       value="99"
                       max="100"
                     ></progress>
@@ -95,7 +98,7 @@ const About = () => {
                       <span className=" relative left-5">CSS3</span>
                     </p>
                     <progress
-                      class="progress progress-info w-96 lg:w-full h-5 mt-3"
+                      className="progress progress-info w-96 lg:w-full h-5 mt-3"
                       value="92"
                       max="100"
                     ></progress>
@@ -108,7 +111,7 @@ const About = () => {
                       <span className=" relative left-5">CSS3</span>
                     </p>
                     <progress
-                      class="progress progress-info w-96 lg:w-full h-5 mt-3"
+                      className="progress progress-info w-96 lg:w-full h-5 mt-3"
                       value="92"
                       max="100"
                     ></progress>
@@ -122,7 +125,7 @@ const About = () => {
                       <span className=" relative left-5">Node</span>
                     </p>
                     <progress
-                      class="progress progress-info w-96 lg:w-full h-5 mt-3"
+                      className="progress progress-info w-96 lg:w-full h-5 mt-3"
                       value="90"
                       max="100"
                     ></progress>
@@ -135,7 +138,7 @@ const About = () => {
                       <span className=" relative left-5">MongoDB</span>
                     </p>
                     <progress
-                      class="progress progress-info w-96 lg:w-full h-5 mt-3"
+                      className="progress progress-info w-96 lg:w-full h-5 mt-3"
                       value="90"
                       max="100"
                     ></progress>

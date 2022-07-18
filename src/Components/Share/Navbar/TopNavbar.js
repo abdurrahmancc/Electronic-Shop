@@ -2,23 +2,38 @@ import React from "react";
 import logo from "../../../assets/logo.png";
 import Themes from "./Themes";
 import { FaUserAlt } from "react-icons/fa";
-import { MdDarkMode, MdLocationOn } from "react-icons/md";
+import { MdAddShoppingCart, MdDarkMode, MdLocationOn } from "react-icons/md";
 import { BiNotepad, BiHeart } from "react-icons/bi";
 import { AiFillSetting } from "react-icons/ai";
 import { FiLogIn, FiLogOut } from "react-icons/fi";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../Firebase/Firebase";
 import { signOut } from "firebase/auth";
+import { HiOutlineShoppingCart } from "react-icons/hi";
+import { BsSuitHeart } from "react-icons/bs";
+import useProducts from "../../Hooks/useProducts";
+import { useState } from "react";
+import { useEffect } from "react";
+import { getShoppingId } from "../../LocalStorage/FakeDB";
 
 const TopNavbar = () => {
   const [user, loading, error] = useAuthState(auth);
+  const [cartProducts, setCartProducts] = useProducts();
+  const [cartQuantity, setCartQuantity] = useState(0);
+  const navigate = useNavigate();
+  const storedCart = getShoppingId();
+
+  useEffect(() => {
+    const keys = Object.keys(storedCart);
+    setCartQuantity(keys.length);
+  }, [storedCart]);
 
   const handleSignOut = () => {
     signOut(auth);
     localStorage.removeItem("accessToken");
   };
-  console.log(user);
+  // console.log(user);
   return (
     <div className="hidden lg:block z-20 relative ">
       <div className="navbar  py-4">
@@ -93,8 +108,8 @@ const TopNavbar = () => {
                     >
                       <path
                         strokeLinecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
                         d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                       />
                     </svg>
@@ -110,38 +125,21 @@ const TopNavbar = () => {
             </div>
           </div>
           <div className="navbar-end text-accent flex items-center xl:gap-8 lg:gap-4 justify-end">
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8 "
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  stroke-linejoin="round"
-                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                />
-              </svg>
-            </span>
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  stroke-linejoin="round"
-                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                />
-              </svg>
-            </span>
+            <div className="indicator">
+              <p className="indicator-item badge badge-primary text-white  w-4 h-5">1</p>
+              <span>
+                <BsSuitHeart className="text-2xl" />
+              </span>
+            </div>
+
+            <div onClick={() => navigate("/view-cart")} className="indicator cursor-pointer">
+              <p className="indicator-item badge badge-primary text-white  w-4 h-5">
+                {cartQuantity}
+              </p>
+              <span>
+                <HiOutlineShoppingCart className="text-2xl " />
+              </span>
+            </div>
 
             <div className="dropdown dropdown-hover dropdown-end">
               <label tabIndex="0" className="btn m-1">

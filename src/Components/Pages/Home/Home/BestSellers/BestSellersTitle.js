@@ -7,7 +7,10 @@ const BestSellersTitle = ({ setCategory, category }) => {
     <div className="">
       <div className="flex justify-between border-b pt-10  border-gray-200">
         <div className="flex flex-row gap-2 ">
-          <h3 className="text-[2vw] md:text-lg bg-primary py-2 text-neutral px-4 rounded-t cursor-pointer">
+          <h3
+            onClick={() => setCategory("monitor")}
+            className="text-[2vw] md:text-lg bg-primary py-2 text-neutral px-4 rounded-t cursor-pointer"
+          >
             Best Sellers
           </h3>
           <h3

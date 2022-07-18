@@ -12,11 +12,15 @@ import img5 from "../../../../../assets/phone-5.jpg";
 import img6 from "../../../../../assets/phone-6.jpg";
 import img7 from "../../../../../assets/phone-7.jpg";
 import img8 from "../../../../../assets/phone-8.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import useAddProduct from "../../../../Hooks/useAddProduct";
 
 const PhoneItemBody = ({ products }) => {
   const [hoveredCart, setHoveredCart] = useState("");
   const [showModal, setShowModal] = useState("");
+  const [handleAddToCartProduct] = useAddProduct();
+  const navigate = useNavigate();
 
   const showCartHandler = () => {
     setHoveredCart("block");
@@ -108,6 +112,12 @@ const PhoneItemBody = ({ products }) => {
     },
   ];
 
+  const handleAddToCart = (item) => {
+    handleAddToCartProduct(item);
+    // window.location.reload();
+    toast.success("Add To Cart", { id: "addToCart" });
+  };
+
   products.length = 8;
   return (
     <div className="my-10 mx-4">
@@ -135,7 +145,12 @@ const PhoneItemBody = ({ products }) => {
                 {item?.badge}
               </div>
 
-              <img src={item?.images?.ImageURL1} alt="Shoes" />
+              <img
+                onClick={() => navigate(`/item-details/${item?._id}`)}
+                src={item?.images?.ImageURL1}
+                alt="Shoes"
+                className="cursor-pointer"
+              />
             </figure>
 
             <div className="card-body p-4 pt-6 gap-0 relative">
@@ -157,7 +172,12 @@ const PhoneItemBody = ({ products }) => {
                   </span>
                 </div>
               </div>
-              <h2 className="card-title text-primary text-sm">{item?.productName}</h2>
+              <h2
+                onClick={() => navigate(`/item-details/${item?._id}`)}
+                className="card-title cursor-pointer text-primary text-sm"
+              >
+                {item?.productName}
+              </h2>
               <div className="flex items-center gap-2 justify-start">
                 <Rating />
                 <span>{item?.review ? item?.review : "1"}</span>
@@ -172,10 +192,11 @@ const PhoneItemBody = ({ products }) => {
                   )}
                 </div>
                 <div>
-                  <span className="rounded-full px-2 py-2  hover:bg-primary hover:text-neutral inline-block bg-gray-300">
-                    <Link to={`/item-details/${item?._id}`}>
-                      <MdAddShoppingCart />
-                    </Link>
+                  <span
+                    onClick={() => handleAddToCart(item)}
+                    className="rounded-full px-2 py-2 cursor-pointer  hover:bg-primary hover:text-neutral inline-block bg-gray-300"
+                  >
+                    <MdAddShoppingCart />
                   </span>
                 </div>
               </div>

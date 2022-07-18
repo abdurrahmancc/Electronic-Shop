@@ -71,14 +71,14 @@ const Blog = () => {
             <div className="col-span-2">
               <div className="py-14 mx-auto">
                 <h4 className="uppercase text-2xl font-bold text-center pb-2">ALL LATEST BLOGS</h4>
-                <progress class="progress w-60 bg-orange-500 h-[2px] mx-auto block"></progress>
+                <progress className="progress w-60 bg-orange-500 h-[2px] mx-auto block"></progress>
               </div>
               <div className="grid md:grid-cols-2 gap-10 lg:max-w-[808px] max-w-[848px] mx-auto">
                 {data?.data.length &&
                   data.data.map((item) => (
                     <div
                       key={item?._id}
-                      class="card  rounded-none card-compact lg:max-w-sm max-w-md mx-auto  bg-base-100 shadow-xl"
+                      className="card  rounded-none card-compact lg:max-w-sm max-w-md mx-auto  bg-base-100 shadow-xl"
                     >
                       <figure>
                         <img
@@ -89,10 +89,10 @@ const Blog = () => {
                           alt="blog"
                         />
                       </figure>
-                      <div class="card-body">
-                        <h2 class="card-title text-2xl leading-10">{item?.data?.title}</h2>
+                      <div className="card-body">
+                        <h2 className="card-title text-2xl leading-10">{item?.data?.title}</h2>
                         <p className="text-sm pt-2">{item?.data?.description1.slice(0, 184)}...</p>
-                        <div class="card-actions justify-start pt-4">
+                        <div className="card-actions justify-start pt-4">
                           <Link
                             to={`/blog-details/${item?._id}`}
                             href=""

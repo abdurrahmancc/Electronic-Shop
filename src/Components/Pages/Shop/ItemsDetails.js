@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axiosPrivet from "../../Hooks/axiosPrivet";
 import { useQuery } from "react-query";
 import { BiMinus } from "react-icons/bi";
@@ -19,12 +19,17 @@ import Footer from "../../Share/Footer/Footer";
 import TopNavbar from "../../Share/Navbar/TopNavbar";
 import Navbar from "../../Share/Navbar/Navbar";
 import Breadcrumb from "../../Dashboard/Breadcrumb/Breadcrumb";
+import toast from "react-hot-toast";
+import useAddProduct from "../../Hooks/useAddProduct";
+import Loading from "../../Share/Loading/Loading";
 
 const ItemsDetails = () => {
   const [showDescription, setShowDescription] = useState(true);
   const [showReviews, setShowReviews] = useState(false);
   const [value, setValue] = useState(1);
+  const navigate = useNavigate();
   const { id } = useParams();
+  const [handleAddToCartProduct] = useAddProduct();
 
   const crumbs = [
     { path: "home", name: "home" },
@@ -32,8 +37,14 @@ const ItemsDetails = () => {
     { path: `item-details/${id}`, name: "details" },
   ];
 
-  const { data } = useQuery("itemsDetails", () => axiosPrivet.get(`product-details/${id}`));
-  console.log(data);
+  const { data, isLoading } = useQuery("itemsDetails", () =>
+    axiosPrivet.get(`product-details/${id}`)
+  );
+  // console.log(data);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   const handleOnChange = (data) => {
     const inputValue = data;
@@ -62,6 +73,12 @@ const ItemsDetails = () => {
     setShowDescription(false);
     setShowReviews(true);
   };
+
+  const handleAddToCart = () => {
+    handleAddToCartProduct(data?.data);
+    toast.success("Add To Cart", { id: "addToCart" });
+  };
+
   return (
     <>
       <div className="">
@@ -134,7 +151,20 @@ const ItemsDetails = () => {
                   />
                 </div>
                 <div>
-                  <button className="btn btn-primary px-10 rounded-sm">add to cart</button>
+                  <button
+                    onClick={() => navigate(`/checkout/${id}/?info=${value}`)}
+                    className="btn btn-primary px-10 rounded-sm text-neutral"
+                  >
+                    proceed To checkOut
+                  </button>
+                </div>
+                <div>
+                  <button
+                    onClick={handleAddToCart}
+                    className="btn btn-primary px-10 rounded-sm text-neutral"
+                  >
+                    add to cart
+                  </button>
                 </div>
               </div>
               <hr className="border-gray-700" />

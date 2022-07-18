@@ -13,11 +13,14 @@ import img5 from "../../../../assets/laptop-5.jpg";
 import img6 from "../../../../assets/laptop-6.jpg";
 import img7 from "../../../../assets/laptop-7.jpg";
 import img8 from "../../../../assets/laptop-8.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAddProduct from "../../../Hooks/useAddProduct";
 
 const ComputerItemBody = ({ products }) => {
   const [hoveredCart, setHoveredCart] = useState("");
   const [showModal, setShowModal] = useState("");
+  const navigate = useNavigate();
+  const [handleAddToCartProduct] = useAddProduct();
 
   const showCartHandler = () => {
     setHoveredCart("block");
@@ -109,6 +112,12 @@ const ComputerItemBody = ({ products }) => {
     },
   ];
 
+  const handleAddToCart = (item) => {
+    handleAddToCartProduct(item);
+    // window.location.reload();
+    toast.success("Add To Cart", { id: "addToCart" });
+  };
+
   products.length = 8;
 
   return (
@@ -138,7 +147,12 @@ const ComputerItemBody = ({ products }) => {
                   {item?.badge}
                 </div>
 
-                <img src={item?.images?.ImageURL1} alt="Shoes" />
+                <img
+                  onClick={() => navigate(`/item-details/${item?._id}`)}
+                  src={item?.images?.ImageURL1}
+                  alt="Shoes"
+                  className="cursor-pointer"
+                />
               </figure>
 
               <div className="card-body p-4 pt-6 gap-0 relative">
@@ -160,7 +174,12 @@ const ComputerItemBody = ({ products }) => {
                     </span>
                   </div>
                 </div>
-                <h2 className="card-title text-primary text-sm">{item?.productName}</h2>
+                <h2
+                  onClick={() => navigate(`/item-details/${item?._id}`)}
+                  className="card-title text-primary cursor-pointer text-sm"
+                >
+                  {item?.productName}
+                </h2>
                 <div className="flex items-center gap-2 justify-start pt-2">
                   <Rating />
                   <span>{item?.review ? item?.review : "1"}</span>
@@ -177,10 +196,11 @@ const ComputerItemBody = ({ products }) => {
                     )}
                   </div>
                   <div>
-                    <span className="rounded-full px-2 py-2  hover:bg-primary hover:text-neutral inline-block bg-gray-300">
-                      <Link to={`/item-details/${item?._id}`}>
-                        <MdAddShoppingCart />
-                      </Link>
+                    <span
+                      onClick={() => handleAddToCart(item)}
+                      className="rounded-full px-2 py-2 cursor-pointer hover:bg-primary hover:text-neutral inline-block bg-gray-300"
+                    >
+                      <MdAddShoppingCart />
                     </span>
                   </div>
                 </div>

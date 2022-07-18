@@ -137,8 +137,8 @@ const BlogDetails = () => {
                 </div>
                 <div className="grid grid-cols-12 bg-base-200 py-10">
                   <div className="col-span-2">
-                    <div class="avatar w-full justify-center pt-12">
-                      <div class="w-20 rounded">
+                    <div className="avatar w-full justify-center pt-12">
+                      <div className="w-20 rounded">
                         <img src={adminLogo} alt="" className="w-[70px] h-auto" />
                       </div>
                     </div>

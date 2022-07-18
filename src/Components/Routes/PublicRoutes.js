@@ -7,8 +7,10 @@ import Contact from "../Pages/Contact/Contact";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Login/Register";
+import CheckOut from "../Pages/Shop/CheckOut";
 import ItemsDetails from "../Pages/Shop/ItemsDetails";
 import Shop from "../Pages/Shop/Shop";
+import ViewCart from "../Pages/Shop/ViewCart";
 import Loading from "../Share/Loading/Loading";
 import Sidebar from "../Sidebar/Sidebar";
 
@@ -18,6 +20,9 @@ export const publicRoutes = [
   { path: "/about", Component: About },
   { path: "/contact", Component: Contact },
   { path: "/item-details/:id", Component: ItemsDetails },
+  { path: "/view-cart", Component: ViewCart },
+  { path: "/checkOut", Component: CheckOut },
+  { path: "/checkOut/:id", Component: CheckOut },
   // { path: "/categories/:category", Component: Categories },
   // { path: "/shop", Component: Shop },
   { path: "/blog", Component: Blog },

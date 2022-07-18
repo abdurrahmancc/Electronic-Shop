@@ -16,7 +16,7 @@ const BlogComment = () => {
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="mt-4">
         <span className="font-bold">Comment *</span>
-        <textarea class="textarea textarea-bordered w-full h-40" placeholder=""></textarea>
+        <textarea className="textarea textarea-bordered w-full h-40" placeholder=""></textarea>
         <div className="flex gap-5 pt-4 pb-6">
           <div className="form-control w-full">
             <input

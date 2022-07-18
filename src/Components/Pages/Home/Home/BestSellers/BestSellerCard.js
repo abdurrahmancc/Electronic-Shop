@@ -1,20 +1,27 @@
 import React, { useState } from "react";
-import { Autoplay, FreeMode } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import toast from "react-hot-toast";
 import Rating from "../../../../Share/Rating/Rating";
 import { MdAddShoppingCart } from "react-icons/md";
 import { BiRefresh } from "react-icons/bi";
 import { AiFillEye } from "react-icons/ai";
 import HartIcon from "../../../../Share/HartIcon";
-import CardDetailsModal from "../../../../Share/CardDetailsModal/CardDetailsModal";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAddProduct from "../../../../Hooks/useAddProduct";
 
 const BestSellerCard = ({ products }) => {
   const [hoveredCart, setHoveredCart] = useState("");
   const [showModal, setShowModal] = useState("");
+  const navigate = useNavigate();
+  const [handleAddToCartProduct] = useAddProduct();
+
+  const handleAddToCart = (item) => {
+    handleAddToCartProduct(item);
+    // window.location.reload();
+    toast.success("Add To Cart", { id: "addToCart" });
+  };
 
   const showCartHandler = () => {
     setHoveredCart("block");
@@ -24,7 +31,6 @@ const BestSellerCard = ({ products }) => {
     setHoveredCart("hidden");
   };
 
-  console.log(hoveredCart);
   const allItems = [
     {
       img: "https://htmldemo.net/circleshop/circleshop/assets/images/product/product-2.jpg",
@@ -80,8 +86,8 @@ const BestSellerCard = ({ products }) => {
       offer: "5",
     },
   ];
-
   products.length = 8;
+
   return (
     <>
       <div className="my-10 mx-4">
@@ -110,7 +116,12 @@ const BestSellerCard = ({ products }) => {
                   >
                     {item?.badge}
                   </div>
-                  <img src={item?.images?.ImageURL1} alt="Shoes" />
+                  {/* <Link className="cursor-pointer" to={`/item-details/${item?._id}`}> */}
+                  <img
+                    onClick={() => navigate(`/item-details/${item?._id}`)}
+                    src={item?.images?.ImageURL1}
+                    alt="Shoes"
+                  />
                 </figure>
 
                 <div className="card-body p-4 pt-6 gap-1 relative">
@@ -132,7 +143,12 @@ const BestSellerCard = ({ products }) => {
                       </span>
                     </div>
                   </div>
-                  <h2 className="card-title text-primary text-sm">{item?.productName}</h2>
+                  <h2
+                    onClick={() => navigate(`/item-details/${item?._id}`)}
+                    className="card-title text-primary text-sm cursor-pointer"
+                  >
+                    {item?.productName}
+                  </h2>
                   <div className="flex items-center gap-2 justify-start">
                     <Rating />
                     <span>{item?.review ? item?.review : "1"}</span>
@@ -147,10 +163,11 @@ const BestSellerCard = ({ products }) => {
                       )}
                     </div>
                     <div>
-                      <span className="rounded-full px-2 py-2  hover:bg-primary hover:text-neutral inline-block bg-gray-300">
-                        <Link to={`/item-details/${item?._id}`}>
-                          <MdAddShoppingCart />
-                        </Link>
+                      <span
+                        onClick={() => handleAddToCart(item)}
+                        className="rounded-full px-2 py-2 cursor-pointer  hover:bg-primary hover:text-neutral inline-block bg-gray-300"
+                      >
+                        <MdAddShoppingCart />
                       </span>
                     </div>
                   </div>
