@@ -1,16 +1,18 @@
 import React, { useState } from "react";
-import { BiSearch, BiSearchAlt } from "react-icons/bi";
+import { BiSearchAlt } from "react-icons/bi";
 import { HiOutlinePlus } from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
 import Breadcrumb from "../../../Breadcrumb/Breadcrumb";
 import Pagination from "../../../Pagination/Pagination";
-import CustomerTable from "../Customer/CustomerTable";
 import UsersTable from "./UsersTable";
 
 const AllUsers = () => {
+  const navigate = useNavigate();
   const crumbs = [
     { path: "admin-dashboard", name: "admin-dashboard" },
     { path: "admin-dashboard/all-user", name: "all-user" },
   ];
+
   return (
     <div className="p-10 w-full">
       <div className="flex justify-between pb-4">
@@ -44,7 +46,10 @@ const AllUsers = () => {
             </form>
           </div>
           <div>
-            <button className="btn btn-sm capitalize font-normal  text-neutral rounded-full btn-success">
+            <button
+              onClick={() => navigate("/register")}
+              className="btn btn-sm capitalize font-normal  text-neutral rounded-full btn-success"
+            >
               <HiOutlinePlus className="" /> New User
             </button>
           </div>

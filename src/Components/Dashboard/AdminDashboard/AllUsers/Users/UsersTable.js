@@ -1,10 +1,30 @@
 import React from "react";
+import { useState } from "react";
+import toast from "react-hot-toast";
 import { BsThreeDots } from "react-icons/bs";
-import { FaStar } from "react-icons/fa";
+import { FaRegEdit, FaStar } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
 import { MdDelete, MdDetails } from "react-icons/md";
+import { useQuery } from "react-query";
+import axiosPrivet from "../../../../Hooks/axiosPrivet";
+import Loading from "../../../../Share/Loading/Loading";
+import DeleteUserModal from "./DeleteUserModal";
+import UserRoleConfirmModal from "./UserRoleConfirmModal";
+import UserTableRow from "./UserTableRow";
 
 const UsersTable = () => {
+  const [deleteModal, setDeleteModal] = useState(null);
+  const [inputRoleId, setInputRoleId] = useState({});
+  const { data, isLoading, isError, refetch } = useQuery("allUser", () => axiosPrivet.get("users"));
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    toast.error(isError?.message, { id: "allUsers" });
+  }
+  // console.log(data);
   return (
     <div className="pt-6">
       <div className="overflow-x-auto w-full pb-[6.5rem]">
@@ -13,9 +33,10 @@ const UsersTable = () => {
           <thead>
             <tr>
               <th>
-                <label>
+                {/* <label>
                   <input type="checkbox" className="checkbox rounded-none checkbox-xs" />
-                </label>
+                </label> */}
+                #
               </th>
               <th>Name</th>
               <th>Phone / Email</th>
@@ -27,70 +48,25 @@ const UsersTable = () => {
           </thead>
           <tbody id="order_Table_Row" className="cursor-pointer">
             {/* <!-- row 1 --> */}
-            <tr className="hover">
-              <th>
-                <label>
-                  <input type="checkbox" className="checkbox rounded-none checkbox-xs" />
-                </label>
-              </th>
-              <td>
-                <span>holloway</span>
-              </td>
-              <td>
-                <div>
-                  <div className="font-normal ">017325-250106</div>
-                  <div className="text-xs ">jeremyholloway@gmail.com</div>
-                </div>
-              </td>
-              <td>Santiago De Los Caballeros</td>
-              <td>
-                <span className=" text-xs">user</span>
-              </td>
-              <td>
-                <span className="">05 jun 2010</span>
-              </td>
-              <td>
-                <div className="dropdown dropdown-end">
-                  <label tabIndex="0" className=" m-1">
-                    <span>
-                      <BsThreeDots className="text-lg" />
-                    </span>
-                  </label>
-                  <ul
-                    tabIndex="0"
-                    className="dropdown-content menu border top-10 border-gray-700 rounded-sm shadow bg-base-100  w-40"
-                  >
-                    <li>
-                      <div className="">
-                        <span>
-                          <FiEdit className="text-success" />
-                        </span>
-                        <span>Edit</span>
-                      </div>
-                    </li>
-                    <li>
-                      <div className=" ">
-                        <span>
-                          <MdDelete className="text-error text-lg" />
-                        </span>
-                        <span>Delete</span>
-                      </div>
-                    </li>
-                    <li>
-                      <div className=" ">
-                        <span>
-                          <MdDetails className=" text-white text-lg" />
-                        </span>
-                        <span>Details</span>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              </td>
-            </tr>
+            {data?.data.map((user, index) => (
+              <UserTableRow
+                key={index}
+                user={user}
+                index={index}
+                refetch={refetch}
+                setDeleteModal={setDeleteModal}
+                setInputRoleId={setInputRoleId}
+              />
+            ))}
           </tbody>
-          {/* <!-- foot --> */}
         </table>
+
+        <DeleteUserModal
+          deleteModal={deleteModal}
+          setDeleteModal={setDeleteModal}
+          refetch={refetch}
+        />
+        {inputRoleId && <UserRoleConfirmModal inputRoleId={inputRoleId} refetch={refetch} />}
       </div>
     </div>
   );

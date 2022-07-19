@@ -3,7 +3,7 @@ import { createContext, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { publicRoutes } from "./Components/Routes/PublicRoutes";
 import { Toaster } from "react-hot-toast";
-import RequireAuth from "./Components/Share/RequireAuth/RequireAuth";
+import RequireAuth from "./Components/Hooks/RequireAuth/RequireAuth";
 import UserDashboard from "./Components/Dashboard/UserDashboard/UserDashboard/UserDashboard";
 import MyAccount from "./Components/Dashboard/UserDashboard/MyAccount/MyAccount";
 import MyOrder from "./Components/Dashboard/UserDashboard/MyOrder/MyOrder";
@@ -29,6 +29,8 @@ import Categories from "./Components/Pages/Categories/Categories";
 import CategoryProducts1 from "./Components/Pages/Categories/CategoryProducts1";
 import CategoryProducts2 from "./Components/Pages/Categories/CategoryProducts2";
 import AddOthers from "./Components/Dashboard/AdminDashboard/Ecommerce/AddOthers/AddOthers";
+import RequireAdmin from "./Components/Hooks/RequireAdmin";
+import RequireNotUser from "./Components/Hooks/RequireNotUser";
 
 export const ToggleSideBarContext = createContext("sideBar");
 export const ThemesApi = createContext("themes");
@@ -97,24 +99,28 @@ function App() {
                 </Route>
               </Route> */}
               <Route element={<RequireAuth />}>
-                <Route path="/admin-dashboard" element={<Sidebar />}>
-                  <Route index element={<HomeDashboard />} />
-                  <Route path="home-dashboard" element={<HomeDashboard />} />
-                  <Route path="ecommerce" element={<Ecommerce />} />
-                  <Route path="add-product" element={<AddProduct />} />
-                  <Route path="add-others" element={<AddOthers />} />
-                  <Route path="product-details/:id" element={<ProductDetails />} />
-                  <Route path="all-user" element={<AllUsers />} />
-                  <Route path="customer" element={<Customer />} />
-                  <Route path="admin" element={<AllAdmin />} />
-                  <Route path="all-order" element={<AllOrder />} />
-                  <Route path="all-product" element={<AllProducts />}>
-                    <Route index element={<AllProducts1 />}></Route>
-                    <Route path="1" element={<AllProducts1 />}></Route>
-                    <Route path="2" element={<AllProducts2 />}></Route>
+                <Route element={<RequireNotUser />}>
+                  <Route path="/admin-dashboard" element={<Sidebar />}>
+                    <Route index element={<HomeDashboard />} />
+                    <Route path="home-dashboard" element={<HomeDashboard />} />
+                    <Route path="ecommerce" element={<Ecommerce />} />
+                    <Route path="add-product" element={<AddProduct />} />
+                    <Route path="add-others" element={<AddOthers />} />
+                    <Route path="product-details/:id" element={<ProductDetails />} />
+                    <Route element={<RequireAdmin />}>
+                      <Route path="all-user" element={<AllUsers />} />
+                      <Route path="customer" element={<Customer />} />
+                      <Route path="admin" element={<AllAdmin />} />
+                    </Route>
+                    <Route path="all-order" element={<AllOrder />} />
+                    <Route path="all-product" element={<AllProducts />}>
+                      <Route index element={<AllProducts1 />}></Route>
+                      <Route path="1" element={<AllProducts1 />}></Route>
+                      <Route path="2" element={<AllProducts2 />}></Route>
+                    </Route>
+                    <Route path="order-pending" element={<PendingOrder />} />
+                    <Route path="order-paid" element={<PaidOrder />} />
                   </Route>
-                  <Route path="order-pending" element={<PendingOrder />} />
-                  <Route path="order-paid" element={<PaidOrder />} />
                 </Route>
               </Route>
             </Routes>

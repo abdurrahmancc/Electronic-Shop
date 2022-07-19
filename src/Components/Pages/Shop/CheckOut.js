@@ -41,11 +41,18 @@ const CheckOut = () => {
     (async () => {
       if (id) {
         const { data } = await axiosPrivet.get(`product-details/${id}`);
+        if (id) {
+          const search = window.location.search;
+          const params = new URLSearchParams(search);
+          const info = params.get("info");
+          data.quantity = info;
+        }
         setProduct([data]);
       }
     })();
   }, [id]);
   console.log(product);
+
   const onSubmit = async (data) => {};
   return (
     <>

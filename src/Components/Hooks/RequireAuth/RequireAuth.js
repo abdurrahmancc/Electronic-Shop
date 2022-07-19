@@ -1,8 +1,8 @@
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useLocation, Outlet, Navigate } from "react-router-dom";
-import auth from "../Firebase/Firebase";
-import Loading from "../Loading/Loading";
+import auth from "../../Share/Firebase/Firebase";
+import Loading from "../../Share/Loading/Loading";
 
 const RequireAuth = ({ children }) => {
   const [user, loading, error] = useAuthState(auth);

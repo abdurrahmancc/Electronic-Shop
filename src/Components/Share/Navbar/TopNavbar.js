@@ -16,6 +16,9 @@ import useProducts from "../../Hooks/useProducts";
 import { useState } from "react";
 import { useEffect } from "react";
 import { getShoppingId } from "../../LocalStorage/FakeDB";
+// import useAdmin from "../../Hooks/useAdmin";
+import Loading from "../Loading/Loading";
+import useNotUser from "../../Hooks/useNotUser";
 
 const TopNavbar = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -23,6 +26,8 @@ const TopNavbar = () => {
   const [cartQuantity, setCartQuantity] = useState(0);
   const navigate = useNavigate();
   const storedCart = getShoppingId();
+  const [isUser] = useNotUser(user);
+  // const [admin] = useAdmin(user);
 
   useEffect(() => {
     const keys = Object.keys(storedCart);
@@ -33,7 +38,11 @@ const TopNavbar = () => {
     signOut(auth);
     localStorage.removeItem("accessToken");
   };
-  // console.log(user);
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div className="hidden lg:block z-20 relative ">
       <div className="navbar  py-4">
@@ -187,14 +196,17 @@ const TopNavbar = () => {
                     <span>Setting</span>
                   </a>
                 </li>
-                <li className="hover:text-primary">
-                  <NavLink to={"/admin-dashboard"}>
-                    <span className="text-sm  ">
-                      <AiFillSetting />
-                    </span>{" "}
-                    <span>Dashboard</span>
-                  </NavLink>
-                </li>
+                {isUser && (
+                  <li className="hover:text-primary">
+                    <NavLink to={"/admin-dashboard"}>
+                      <span className="text-sm  ">
+                        <AiFillSetting />
+                      </span>{" "}
+                      <span>Dashboard</span>
+                    </NavLink>
+                  </li>
+                )}
+
                 <li className="hover:text-primary ">
                   <div className="flex justify-items-center">
                     <span className="text-sm  ">
