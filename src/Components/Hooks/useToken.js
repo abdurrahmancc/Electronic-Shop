@@ -12,7 +12,7 @@ const useToken = (user) => {
   const email = user?.email || user?.user?.email;
   const displayName = user?.displayName || user?.user?.displayName;
   const photoURL = user?.photoURL || user?.user?.photoURL || "";
-
+  // console.log(user);
   const currentUser = {
     email: email,
     displayName: displayName,
@@ -26,12 +26,13 @@ const useToken = (user) => {
       if (email && displayName) {
         const { data } = await axiosPrivet.put(`user/${email}`, currentUser);
         if (data?.result.acknowledged || data?.token) {
+          console.log(data?.token);
           localStorage.setItem("accessToken", data?.token);
           setToken(data?.token);
         }
       }
     })();
-  }, [user]);
+  }, [user, email, displayName, currentUser]);
 
   return [token];
 };

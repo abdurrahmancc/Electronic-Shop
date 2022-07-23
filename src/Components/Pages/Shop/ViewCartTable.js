@@ -15,7 +15,7 @@ const ViewCartTable = ({ cartProducts, setCartProducts, children }) => {
 
   return (
     <>
-      <div className="mt-20 mb-8">
+      <div className="mt-5 mb-8">
         <h4 className="text-4xl font-bold pb-2">Your Cart</h4>
         <div>
           <div className="flex justify-between">

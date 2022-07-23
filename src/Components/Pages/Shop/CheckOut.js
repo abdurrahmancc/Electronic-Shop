@@ -8,7 +8,7 @@ import Newsletters from "../Home/Home/Newsletters/Newsletters";
 import { useForm } from "react-hook-form";
 import BillingDetailsForm from "./BillingDetailsForm";
 import axiosPrivet from "../../Hooks/axiosPrivet";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import CheckoutTable from "./CheckoutTable";
 import { useEffect } from "react";
@@ -29,6 +29,7 @@ const CheckOut = () => {
   const date = format(fullDate, "MMMM d, yyyy");
   const formattedDate = format(fullDate, "PP");
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const crumbs = [
     { path: "home", name: "Home" },
@@ -103,6 +104,7 @@ const CheckOut = () => {
         const { data: result } = await axiosPrivet.post("order", data);
         if (result?.acknowledged) {
           toast.success("success", { id: "successOrder" });
+          navigate("/user-dashboard/my-order");
           reset();
         }
       } catch (error) {
@@ -144,9 +146,9 @@ const CheckOut = () => {
                 </h5>
                 <div className="mt-10">
                   {id ? (
-                    <CheckoutTable cartProducts={product} />
+                    <CheckoutTable cartProducts={product} onSubmit={onSubmit} />
                   ) : (
-                    <CheckoutTable cartProducts={cartProducts} />
+                    <CheckoutTable cartProducts={cartProducts} onSubmit={onSubmit} />
                   )}
                 </div>
               </div>

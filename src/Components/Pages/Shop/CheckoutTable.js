@@ -1,6 +1,6 @@
 import React from "react";
 
-const CheckoutTable = ({ cartProducts }) => {
+const CheckoutTable = ({ cartProducts, onSubmit }) => {
   let totalPrice;
   const price = cartProducts.map((product) => product.price * product.quantity);
   const initialValue = 0;
@@ -68,7 +68,11 @@ const CheckoutTable = ({ cartProducts }) => {
           </tbody>
         </table>
         <div className="mt-5">
-          <button className="btn btn-primary w-full text-neutral">Place Order</button>
+          <button
+            type="submit"
+            onClick={() => onSubmit()}
+            className="btn btn-primary w-full text-neutral"
+          ></button>
         </div>
       </div>
     </>

@@ -8,7 +8,7 @@ const SubTotalPrice = ({ totalPrice, cartProducts }) => {
   const tax = totalPrice * 0.05;
   let total = totalPrice + Shipping + tax;
   return (
-    <div className="lg:mt-48 mt-10 w-full">
+    <div className="lg:mt-32 mt-10 w-full">
       <div className="w-full bg-base-200 px-5 py-10">
         <table className=" w-full">
           <thead>

@@ -18,6 +18,7 @@ import { async } from "@firebase/util";
 import Loading from "../../Share/Loading/Loading";
 import { sendEmailVerification } from "firebase/auth";
 import useToken from "../../Hooks/useToken";
+import { useEffect } from "react";
 
 const Register = () => {
   const [checkBoxToggle, setCheckBoxToggle] = useState(true);
@@ -31,7 +32,6 @@ const Register = () => {
     useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
   const [updateProfile, updating, updatingError] = useUpdateProfile(auth);
   const [isCreateUser, setIsCreateUser] = useState(false);
-
   const [token] = useToken(cUser || user);
   const from = location.state?.from?.pathname || "/";
   const {
@@ -41,13 +41,9 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  if (updating || loading || cLoading) {
-    return <Loading />;
-  }
-
-  if (!token && isCreateUser) {
-    window.location.reload();
-  }
+  // if (!token && isCreateUser) {
+  //   window.location.reload();
+  // }
 
   const onSubmit = async (data) => {
     const email = data.email;
@@ -64,8 +60,15 @@ const Register = () => {
     setIsCreateUser(true);
   };
 
-  if (token) {
-    navigate(from, { replace: true });
+  useEffect(() => {
+    if (token) {
+      console.log(token);
+      navigate(from, { replace: true });
+    }
+  }, [token]);
+
+  if (updating || loading || cLoading) {
+    return <Loading />;
   }
 
   return (
