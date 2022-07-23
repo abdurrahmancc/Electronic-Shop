@@ -20,6 +20,9 @@ import { sendEmailVerification } from "firebase/auth";
 import useToken from "../../Hooks/useToken";
 
 const Register = () => {
+  const [checkBoxToggle, setCheckBoxToggle] = useState(true);
+  const location = useLocation();
+  const navigate = useNavigate();
   const [showPass, setShowPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
   const [matchingPass, setMatchingPass] = useState("");
@@ -27,12 +30,10 @@ const Register = () => {
   const [createUserWithEmailAndPassword, cUser, cLoading, error] =
     useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
   const [updateProfile, updating, updatingError] = useUpdateProfile(auth);
-  const [checkBoxToggle, setCheckBoxToggle] = useState(true);
-  const location = useLocation();
-  const navigate = useNavigate();
+  const [isCreateUser, setIsCreateUser] = useState(false);
+
   const [token] = useToken(cUser || user);
   const from = location.state?.from?.pathname || "/";
-
   const {
     register,
     handleSubmit,
@@ -42,6 +43,10 @@ const Register = () => {
 
   if (updating || loading || cLoading) {
     return <Loading />;
+  }
+
+  if (!token && isCreateUser) {
+    window.location.reload();
   }
 
   const onSubmit = async (data) => {
@@ -56,11 +61,13 @@ const Register = () => {
     await createUserWithEmailAndPassword(email, password);
     await updateProfile({ displayName });
     toast.success("check email and please verify");
+    setIsCreateUser(true);
   };
 
   if (token) {
     navigate(from, { replace: true });
   }
+
   return (
     <div className="hero min-h-screen bg-[#58448F]">
       <div className="hero-content w-full flex-col">

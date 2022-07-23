@@ -62,11 +62,14 @@ const UsersTable = () => {
           </tbody>
         </table>
 
-        <DeleteUserModal
-          deleteModal={deleteModal}
-          setDeleteModal={setDeleteModal}
-          refetch={refetch}
-        />
+        {deleteModal && (
+          <DeleteUserModal
+            deleteModal={deleteModal}
+            setDeleteModal={setDeleteModal}
+            refetch={refetch}
+          />
+        )}
+
         {inputRoleId && <UserRoleConfirmModal inputRoleId={inputRoleId} refetch={refetch} />}
       </div>
     </div>

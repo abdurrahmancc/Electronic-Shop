@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import Newsletters from "../../../Pages/Home/Home/Newsletters/Newsletters";
 import Footer from "../../../Share/Footer/Footer";
@@ -20,6 +20,7 @@ const UserDashboard = () => {
     { path: "home", name: "home" },
     { path: "/user-dashboard/my-order", name: "My Order" },
   ];
+
   if (loading) {
     return <Loading />;
   }
@@ -48,12 +49,12 @@ const UserDashboard = () => {
                 Open drawer
               </label>
             </div>
-            <div className="drawer-side p-1 w-[292.5px] lg:w-[250.5px] xl:w-[292.5px] ">
+            <div className="drawer-side relative lg:static right-1 lg:right-0 p-1 w-[292.5px] lg:w-[250.5px] xl:w-[292.5px] ">
               <label for="my-drawer-2" className="drawer-overlay"></label>
               <ul className="menu rounded-lg overflow-y-auto sidebar_shadow text-base-content">
                 {/* <!-- Sidebar content here --> */}
                 <li className="bg-primary mb-4">
-                  <div className="p-10">
+                  <div className="p-10 flex flex-col">
                     <div class="avatar online mx-auto">
                       <div class="w-24 rounded-full">
                         <img
@@ -63,6 +64,7 @@ const UserDashboard = () => {
                         />
                       </div>
                     </div>
+                    <h5 className="text-neutral font-bold text-xl">{user?.displayName}</h5>
                   </div>
                 </li>
                 <li>

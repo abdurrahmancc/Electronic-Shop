@@ -34,7 +34,13 @@ const MyOrderDetailsModal = ({ myOrderModal }) => {
                     <tr className="border border-slate-300">
                       <td className=" py-2">
                         <div className="flex gap-3 items-center text-gray-500">
-                          <img height={50} width={50} src={item?.images?.ImageURL1} alt="" />
+                          <img
+                            className="pl-2"
+                            height={50}
+                            width={50}
+                            src={item?.images?.ImageURL1}
+                            alt=""
+                          />
                           <span
                             className="text-xs"
                             title={item?.productName.length >= 25 && item?.productName}
@@ -59,22 +65,19 @@ const MyOrderDetailsModal = ({ myOrderModal }) => {
                   ))}
                 <tr className="border-x border-slate-300">
                   <td className="pl-5 py-2  font-bold">Subtotal</td>
-                  <td className="pr-5 text-lg text-end">$ {totalPrice}</td>
+                  <td className="pr-5 text-lg text-end">${totalPrice}</td>
                 </tr>
                 <tr className="border-x border-slate-300 ">
                   <td className="pl-5 py-2 font-bold">Shipping</td>
-                  <td className="pr-5 text-lg text-end">$ {Shipping}</td>
+                  <td className="pr-5 text-lg text-end">${Shipping}</td>
                 </tr>
                 <tr className="border-x border-slate-300 ">
                   <td className="pl-5 py-2 font-bold">VAT 5%</td>
-                  <td className="pr-5 text-lg text-end">$ {tax}</td>
+                  <td className="pr-5 text-lg text-end">${tax.toFixed(2)}</td>
                 </tr>
                 <tr className="border border-slate-300 ">
                   <td className="pl-5 py-2 text-2xl font-bold">Total</td>
-                  <td className="pr-5 text-lg font-bold text-end flex gap-1">
-                    <span>$</span>
-                    <span> {total}</span>
-                  </td>
+                  <td className="pr-5 text-lg font-bold text-end ">${total.toFixed(2)}</td>
                 </tr>
               </tbody>
             </table>
