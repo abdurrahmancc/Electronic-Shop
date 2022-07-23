@@ -63,7 +63,10 @@ const UserTableRow = ({ user, index, setDeleteModal, refetch, setInputRoleId }) 
           </div>
         </td>
         <td>
-          <span className="">05 jun 2010</span>
+          <span className="">{user?.joiningDate}</span>
+        </td>
+        <td>
+          <span className="">{user?.lastLoginDate}</span>
         </td>
         <td>
           <div className="dropdown dropdown-end">

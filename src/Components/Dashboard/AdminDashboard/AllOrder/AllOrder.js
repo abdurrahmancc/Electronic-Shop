@@ -1,4 +1,4 @@
-import React, { useState, useParams } from "react";
+import React, { useState, useParams, useEffect } from "react";
 import Collapsible from "react-collapsible";
 import { BiSearchAlt } from "react-icons/bi";
 import { HiOutlinePlus } from "react-icons/hi";
@@ -6,12 +6,70 @@ import Pagination from "../../Pagination/Pagination";
 import OrderTable from "./OrderTable";
 import Breadcrumb from "../../Breadcrumb/Breadcrumb";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import axiosPrivet from "../../../Hooks/axiosPrivet";
+import ScrollBtn from "../../../Share/ScrollBtn/ScrollBtn";
+import { useQuery } from "react-query";
+import Loading from "../../../Share/Loading/Loading";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import SearchOrderModal from "./SearchOrderModal";
 
 const AllOrder = () => {
+  const [page, setPage] = useState(0);
+  const [size, setSize] = useState(20);
+  const [pageCount, setPageCount] = useState(0);
+  const [searchResult, setSearchResult] = useState({});
+  const [toggleSearch, setToggleSearch] = useState(false);
+  const [orderDeleteModal, setOrderDeleteModal] = useState(null);
+  const [orderDetailModal, setOrderDetailModal] = useState(null);
   const crumbs = [
     { path: "admin-dashboard", name: "admin-dashboard" },
     { path: "admin-dashboard/all-order", name: "all-order" },
   ];
+  const {
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    setError,
+    formState: { errors },
+  } = useForm();
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await axiosPrivet.get("ordersCounter");
+      const count = data.count;
+      const pages = Math.ceil(count / size);
+      setPageCount(pages);
+    })();
+  }, [size]);
+
+  const { data, isLoading, refetch } = useQuery(["userOrders", page, size], () =>
+    axiosPrivet.post(`allOrders/?page=${page}&size=${size}`)
+  );
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  const onSubmit = async (data) => {
+    if (data?.searchOrder) {
+      try {
+        const { data: result } = await axiosPrivet.get(`searchOrder/${data?.searchOrder}`);
+        if (result) {
+          setSearchResult(result);
+          setToggleSearch(true);
+        }
+      } catch (error) {
+        toast.error(`not result found ${data?.searchOrder} please enter your order Id`, {
+          id: "orderNotFound",
+        });
+      }
+    }
+  };
+
+  console.log(orderDetailModal);
+
   return (
     <>
       <div className="p-10 w-full">
@@ -26,35 +84,80 @@ const AllOrder = () => {
         <div className="bg-base-100 p-5">
           <div className="flex justify-between">
             <div>
-              <form action="">
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <label className={`relative w-[250px]  md:block max-w-xs hidden `}>
-                  <form action="">
-                    <button
-                      type="submit"
-                      className="absolute inset-y-0 right-2 rounded pr-1  flex items-center pl-2"
-                    >
-                      <BiSearchAlt className="text-2xl text-gray-400" />
-                    </button>
-                    <input
-                      className="placeholder:italic placeholder:text-slate-400 block bg-base-200 w-full  py-2 pl-6  pr-9 shadow-sm focus:outline-none focus:border-0 rounded-full  focus:ring-0 sm:text-sm"
-                      placeholder="Search..."
-                      type="text"
-                      name="search"
-                    />
-                  </form>
+                  <button
+                    type="submit"
+                    className="absolute inset-y-0 right-2 rounded pr-1  flex items-center pl-2"
+                  >
+                    <BiSearchAlt className="text-2xl text-gray-400" />
+                  </button>
+                  <input
+                    className="placeholder:italic placeholder:text-slate-400 block bg-base-200 w-full  py-2 pl-6  pr-9 shadow-sm focus:outline-none focus:border-0 rounded-full  focus:ring-0 sm:text-sm"
+                    placeholder="Search..."
+                    type="text"
+                    name="search"
+                    {...register("searchOrder")}
+                  />
                 </label>
               </form>
             </div>
-            <div>
+            <div className="flex items-center gap-5">
+              <div>
+                <span>Show: </span>
+                <select
+                  defaultValue={size}
+                  onChange={(e) => setSize(e.target.value)}
+                  className="border-primary border py-1 text-black"
+                >
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="30">30</option>
+                  <option value="50">50</option>
+                </select>
+              </div>
               <button className="btn btn-sm capitalize font-normal  text-neutral rounded-full btn-success">
                 <HiOutlinePlus className="" /> add new order
               </button>
             </div>
           </div>
-          <OrderTable />
-          <div className="flex justify-center w-full relative top-[-40px]">
-            <Pagination />
+          <OrderTable
+            orders={data?.data}
+            refetch={refetch}
+            reset={reset}
+            setOrderDeleteModal={setOrderDeleteModal}
+            orderDeleteModal={orderDeleteModal}
+            setOrderDetailModal={setOrderDetailModal}
+            orderDetailModal={orderDetailModal}
+          />
+          {searchResult && (
+            <SearchOrderModal
+              order={searchResult}
+              toggleSearch={toggleSearch}
+              setToggleSearch={setToggleSearch}
+              setOrderDeleteModal={setOrderDeleteModal}
+              setOrderDetailModal={setOrderDetailModal}
+              orderDetailModal={orderDetailModal}
+            />
+          )}
+          <div className="flex justify-center ">
+            {[...Array(pageCount).keys()].map((number, index) => (
+              <button
+                key={index}
+                className={`btn border rounded-none text-neutral border-primary ${
+                  page === number && "btn-primary"
+                }`}
+                onClick={() => setPage(number)}
+              >
+                {number + 1}
+              </button>
+            ))}
           </div>
+          <ScrollBtn />
+          {/* <div className="flex justify-center w-full relative top-[-40px]">
+            <Pagination />
+          </div> */}
         </div>
       </div>
     </>

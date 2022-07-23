@@ -43,6 +43,7 @@ const UsersTable = () => {
               <th>Address</th>
               <th>Role</th>
               <th>Joining Date</th>
+              <th>Last Joined</th>
               <th>Action</th>
             </tr>
           </thead>

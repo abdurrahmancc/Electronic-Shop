@@ -3,11 +3,9 @@ import { useEffect } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BiMinus } from "react-icons/bi";
 import { FaTrashAlt } from "react-icons/fa";
-import useProducts from "../../Hooks/useProducts";
 import { addToDb, decreaseToCart, removeFromDb } from "../../LocalStorage/FakeDB";
 
 const ViewCartTableRow = ({ item, index, setCartProducts, children }) => {
-  // const [cartProducts] = useProducts();
   const [value, setValue] = useState();
   const [cartProducts] = children;
 

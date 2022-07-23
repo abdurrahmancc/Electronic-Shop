@@ -4,7 +4,6 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import auth from "../Share/Firebase/Firebase";
 import Loading from "../Share/Loading/Loading";
-import useAdmin from "./useAdmin";
 import useNotUser from "./useNotUser";
 
 const RequireNotUser = () => {
@@ -12,16 +11,17 @@ const RequireNotUser = () => {
   const location = useLocation();
   const [isUser, isUserLoading] = useNotUser(user);
 
+  if (loading || isUserLoading) {
+    return <Loading />;
+  }
+
   const handleSignOut = () => {
     signOut(auth);
     localStorage.removeItem("accessToken");
   };
 
-  if (loading || isUserLoading) {
-    return <Loading />;
-  }
-
-  if (!user) {
+  // console.log(isUser);
+  if (!user || !isUser) {
     handleSignOut();
     return <Navigate to="/login" state={{ from: location }} replace />;
   }

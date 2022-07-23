@@ -12,7 +12,6 @@ import auth from "../Firebase/Firebase";
 import { signOut } from "firebase/auth";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import { BsSuitHeart } from "react-icons/bs";
-import useProducts from "../../Hooks/useProducts";
 import { useState } from "react";
 import { useEffect } from "react";
 import { getShoppingId } from "../../LocalStorage/FakeDB";
@@ -22,7 +21,6 @@ import useNotUser from "../../Hooks/useNotUser";
 
 const TopNavbar = () => {
   const [user, loading, error] = useAuthState(auth);
-  const [cartProducts, setCartProducts] = useProducts();
   const [cartQuantity, setCartQuantity] = useState(0);
   const navigate = useNavigate();
   const storedCart = getShoppingId();

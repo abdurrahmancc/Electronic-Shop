@@ -30,8 +30,8 @@ const Register = () => {
   const [checkBoxToggle, setCheckBoxToggle] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
+  const [token] = useToken(cUser || user);
   const from = location.state?.from?.pathname || "/";
-  const [token] = useToken(user || cUser);
 
   const {
     register,
@@ -39,6 +39,10 @@ const Register = () => {
     watch,
     formState: { errors },
   } = useForm();
+
+  if (updating || loading || cLoading) {
+    return <Loading />;
+  }
 
   const onSubmit = async (data) => {
     const email = data.email;
@@ -53,9 +57,6 @@ const Register = () => {
     await updateProfile({ displayName });
     toast.success("check email and please verify");
   };
-  if (updating || loading || cLoading) {
-    return <Loading />;
-  }
 
   if (token) {
     navigate(from, { replace: true });

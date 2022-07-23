@@ -5,7 +5,7 @@ const SubTotalPrice = ({ totalPrice, cartProducts }) => {
   const navigate = useNavigate();
   let Shipping = 15;
   Shipping = cartProducts.length * Shipping;
-  const tax = totalPrice * 0.1;
+  const tax = totalPrice * 0.05;
   let total = totalPrice + Shipping + tax;
   return (
     <div className="lg:mt-48 mt-10 w-full">

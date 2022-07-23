@@ -13,6 +13,7 @@ const CheckoutTable = ({ cartProducts }) => {
   Shipping = cartProducts.length * Shipping;
   const tax = totalPrice * 0.05;
   let total = totalPrice + Shipping + tax;
+
   return (
     <>
       <div className="w-full bg-base-200 p-10">
@@ -39,11 +40,13 @@ const CheckoutTable = ({ cartProducts }) => {
                       </span>
                       <span className="flex gap-5 font-bold ">
                         <span>X</span>
-                        <span>{item.quantity}</span>
+                        <span>{item?.quantity}</span>
                       </span>
                     </div>
                   </td>
-                  <td className="pr-5 text-lg text-gray-500 text-end">$ {item?.price}</td>
+                  <td className="pr-5 text-lg text-gray-500 text-end">
+                    $ {item?.price * item?.quantity}
+                  </td>
                 </tr>
               ))}
             <tr className="border-x border-slate-300">

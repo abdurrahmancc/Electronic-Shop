@@ -41,7 +41,7 @@ const Navbar = () => {
         <NavLink
           to={"/home"}
           className={({ isActive }) =>
-            isActive ? "text-lg text-neutral bg-sky-700 " : "text-lg text-neutral"
+            isActive ? "text-lg text-neutral bg-primary lg:bg-sky-700 " : "text-lg lg:text-neutral"
           }
         >
           Home
@@ -51,7 +51,7 @@ const Navbar = () => {
         <NavLink
           to={"/shop"}
           className={({ isActive }) =>
-            isActive ? "text-lg text-neutral bg-sky-700 " : "text-lg text-neutral"
+            isActive ? "text-lg text-neutral bg-primary lg:bg-sky-700 " : "text-lg lg:text-neutral"
           }
         >
           Shop
@@ -61,7 +61,7 @@ const Navbar = () => {
         <NavLink
           to={"/blog"}
           className={({ isActive }) =>
-            isActive ? "text-lg text-neutral bg-sky-700 " : "text-lg text-neutral"
+            isActive ? "text-lg text-neutral bg-primary lg:bg-sky-700 " : "text-lg lg:text-neutral"
           }
         >
           Blog
@@ -71,7 +71,7 @@ const Navbar = () => {
         <NavLink
           to={"/about"}
           className={({ isActive }) =>
-            isActive ? "text-lg text-neutral bg-sky-700 " : "text-lg text-neutral"
+            isActive ? "text-lg text-neutral bg-primary lg:bg-sky-700 " : "text-lg lg:text-neutral"
           }
         >
           About Us
@@ -81,7 +81,7 @@ const Navbar = () => {
         <NavLink
           to={"/contact"}
           className={({ isActive }) =>
-            isActive ? "text-lg text-neutral bg-sky-700 " : "text-lg text-neutral"
+            isActive ? "text-lg text-neutral bg-primary lg:bg-sky-700 " : "text-lg lg:text-neutral"
           }
         >
           Contact Us
@@ -91,13 +91,13 @@ const Navbar = () => {
         <NavLink
           to={"/user-dashboard"}
           className={({ isActive }) =>
-            isActive ? "text-lg text-neutral  bg-sky-700 " : "text-lg text-neutral"
+            isActive ? "text-lg text-neutral  bg-primary lg:bg-sky-700 " : "text-lg lg:text-neutral"
           }
         >
           Account
         </NavLink>
       </li>
-      <li className="text-lg lg:hidden text-secondary flex flex-row justify-start">
+      <li className="text-lg lg:hidden text-secondary px-4 flex flex-row justify-start">
         <span className="pl-0 text-lg "> Darkmode</span>
         <span>
           <Themes></Themes>
@@ -192,7 +192,7 @@ const Navbar = () => {
           </div>
           <div className="navbar-end absolute top-1 right-1 hidden lg:block ">
             <div className="flex justify-end w-full">
-              <div className="flex flex-col justify-center text-neutral">
+              <div className="flex flex-col justify-center lg:text-neutral">
                 <span className="text-[10px] block mx-auto">Only this weekend</span>
                 <span>Super Discount</span>
               </div>

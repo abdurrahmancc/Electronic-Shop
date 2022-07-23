@@ -13,10 +13,21 @@ import { useQuery } from "react-query";
 import CheckoutTable from "./CheckoutTable";
 import { useEffect } from "react";
 import { useState } from "react";
+import { format } from "date-fns";
+import auth from "../../Share/Firebase/Firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import Loading from "../../Share/Loading/Loading";
+import { toast } from "react-hot-toast";
 
 const CheckOut = () => {
   const [cartProducts, setCartProducts] = useProducts();
+  const [user, loading] = useAuthState(auth);
   const [product, setProduct] = useState([]);
+  const [fullDate] = useState(new Date());
+  const [iError, setIError] = useState("");
+  const timeDate = format(fullDate, "MMMM d, yyyy h:mm aa");
+  const date = format(fullDate, "MMMM d, yyyy");
+  const formattedDate = format(fullDate, "PP");
   const { id } = useParams();
 
   const crumbs = [
@@ -33,10 +44,6 @@ const CheckOut = () => {
     formState: { errors },
   } = useForm();
 
-  // const { data, isLoading } = useQuery("cartProduct", () =>
-  //   axiosPrivet.get(`product-details/${id}`)
-  // );
-
   useEffect(() => {
     (async () => {
       if (id) {
@@ -51,9 +58,59 @@ const CheckOut = () => {
       }
     })();
   }, [id]);
-  console.log(product);
 
-  const onSubmit = async (data) => {};
+  if (loading) {
+    return <Loading />;
+  }
+
+  let totalPrice;
+  let Shipping = 15;
+  if (!id) {
+    const price = cartProducts.map((product) => product.price * product.quantity);
+    const initialValue = 0;
+    if (price?.length >= 1) {
+      const sumReduce = price.reduce((previous, current) => previous + current, initialValue);
+      totalPrice = sumReduce;
+      Shipping = cartProducts.length * Shipping;
+    }
+  } else {
+    totalPrice = product[0]?.price;
+    Shipping = product.length * Shipping;
+  }
+
+  const tax = totalPrice * 0.05;
+  let total = parseFloat(totalPrice) + Shipping + tax;
+
+  const onSubmit = async (data) => {
+    let itemInfo;
+    if (id) {
+      itemInfo = product;
+    } else {
+      itemInfo = cartProducts;
+    }
+
+    data.date = date;
+    data.timeDate = timeDate;
+    data.userEmail = user?.email;
+    data.photoURL = user?.photoURL;
+    data.dateAndCountry = fullDate;
+    data.formattedDate = formattedDate;
+    data.orderInfo = itemInfo;
+    data.totalPrice = total;
+
+    if (itemInfo) {
+      try {
+        const { data: result } = await axiosPrivet.post("order", data);
+        if (result?.acknowledged) {
+          toast.success("success", { id: "successOrder" });
+          reset();
+        }
+      } catch (error) {
+        toast.error(error.message);
+      }
+    }
+  };
+
   return (
     <>
       <header>
