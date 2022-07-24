@@ -72,7 +72,9 @@ const CheckoutTable = ({ cartProducts, onSubmit }) => {
             type="submit"
             onClick={() => onSubmit()}
             className="btn btn-primary w-full text-neutral"
-          ></button>
+          >
+            Place Order
+          </button>
         </div>
       </div>
     </>

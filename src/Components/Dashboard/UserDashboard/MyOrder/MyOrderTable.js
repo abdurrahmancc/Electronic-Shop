@@ -26,12 +26,13 @@ const MyOrderTable = ({ order, index, setMyOrderModal }) => {
             </span>
           )}
           {order?.totalPrice && order?.paid && (
-            <span className=" btn px-3 font-normal btn-primary text-neutral rounded-full btn-xs capitalize">
+            <span className="  px-3 font-normal text-success text-lg rounded-full py-1 capitalize">
               Paid
             </span>
           )}
         </td>
 
+        <td>{order?.status ? order?.status : "pending"}</td>
         <td>
           <label for="myOrderDetails" class="cursor-pointer">
             <BsInfoCircleFill

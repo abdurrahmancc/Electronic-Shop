@@ -1,16 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import { HiOutlinePlus } from "react-icons/hi";
 import Breadcrumb from "../../../Breadcrumb/Breadcrumb";
 import Pagination from "../../../Pagination/Pagination";
 import PaidOrderTable from "./PaidOrderTable";
+import { useQuery } from "react-query";
+import axiosPrivet from "../../../../Hooks/axiosPrivet";
+import Loading from "../../../../Share/Loading/Loading";
+import PaidOrderDeleteModal from "./PaidOrderDeleteModal";
 
 const PaidOrder = () => {
+  const [paidDeleteModal, setPaidDeleteModal] = useState(null);
   const crumbs = [
     { path: "admin-dashboard", name: "admin-dashboard" },
     { path: "admin-dashboard/order-paid", name: "order-paid" },
   ];
+  const { data, isLoading, refetch } = useQuery("allPayments", () =>
+    axiosPrivet.get("allPayments")
+  );
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  const deleteModalInfo = [setPaidDeleteModal, refetch, paidDeleteModal];
   return (
     <div className="p-10 w-full">
       <div className="flex justify-between pb-4">
@@ -49,10 +62,15 @@ const PaidOrder = () => {
             </button>
           </div>
         </div>
-        <PaidOrderTable />
+        <PaidOrderTable
+          refetch={refetch}
+          paidOrders={data?.data}
+          setPaidDeleteModal={setPaidDeleteModal}
+        />
         <div className="flex justify-center w-full relative top-[-40px]">
           <Pagination />
         </div>
+        {paidDeleteModal && <PaidOrderDeleteModal>{deleteModalInfo}</PaidOrderDeleteModal>}
       </div>
     </div>
   );

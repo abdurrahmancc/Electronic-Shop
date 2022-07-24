@@ -37,6 +37,7 @@ const Payment = () => {
                   price={data?.data?.totalPrice}
                   userEmail={data?.data?.userEmail}
                   firstName={data?.data?.firstName}
+                  id={data?.data?._id}
                 />
               </Elements>
             </div>

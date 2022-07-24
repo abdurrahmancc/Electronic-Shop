@@ -3,14 +3,19 @@ import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { async } from "@firebase/util";
 import axiosPrivet from "../../../Hooks/axiosPrivet";
 import { format } from "date-fns";
+import auth from "../../../Share/Firebase/Firebase";
+import Loading from "../../../Share/Loading/Loading";
+import { useAuthState } from "react-firebase-hooks/auth";
 
-const CheckoutForm = ({ price, userEmail, firstName }) => {
+const CheckoutForm = ({ id, price, userEmail, firstName }) => {
+  const [user, loading] = useAuthState(auth);
   const [fullDate] = useState(new Date());
   const formattedDate = format(fullDate, "PP");
   const timeDate = format(fullDate, "MMMM d, yyyy h:mm aa");
   const stripe = useStripe();
   const elements = useElements();
   const [cardError, setCardError] = useState("");
+  const [processing, setProcessing] = useState(false);
   const [clientSecret, setClientSecret] = useState("");
   const [success, setSuccess] = useState("");
   const [transactionId, setTransactionId] = useState("");
@@ -24,6 +29,9 @@ const CheckoutForm = ({ price, userEmail, firstName }) => {
     })();
   }, [price]);
 
+  if (loading) {
+    return <Loading />;
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -47,6 +55,7 @@ const CheckoutForm = ({ price, userEmail, firstName }) => {
       setCardError(" ");
     }
     setSuccess("");
+    setProcessing(true);
     const { paymentIntent, error: intentError } = await stripe.confirmCardPayment(clientSecret, {
       payment_method: {
         card: card,
@@ -61,11 +70,23 @@ const CheckoutForm = ({ price, userEmail, firstName }) => {
 
     if (intentError) {
       setCardError(intentError?.message);
+      setProcessing(false);
     } else {
       setCardError(" ");
       setTransactionId(paymentIntent?.id);
-      console.log(paymentIntent);
       setSuccess("Congrats! Your Payment is Success");
+      const payment = {
+        orderId: id,
+        transactionId: paymentIntent?.id,
+        paidDate: timeDate,
+        userName: user?.displayName,
+        totalPaid: price,
+        email: user?.email,
+      };
+
+      const { data } = await axiosPrivet.patch(`order/${id}`, payment);
+      console.log(data);
+      setProcessing(false);
     }
   };
   return (
@@ -90,7 +111,7 @@ const CheckoutForm = ({ price, userEmail, firstName }) => {
         <button
           className="btn btn-primary btn-sm text-neutral mt-5"
           type="submit"
-          disabled={!stripe || !clientSecret}
+          disabled={!stripe || !clientSecret || success}
         >
           Pay
         </button>
