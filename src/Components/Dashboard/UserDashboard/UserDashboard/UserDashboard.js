@@ -10,7 +10,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../Share/Firebase/Firebase";
 import Loading from "../../../Share/Loading/Loading";
 import "./UserDashboard.css";
-import { FaUserAlt } from "react-icons/fa";
+import { IoLocationOutline } from "react-icons/io5";
 import { BiUser } from "react-icons/bi";
 import Breadcrumb from "../../Breadcrumb/Breadcrumb";
 
@@ -40,7 +40,7 @@ const UserDashboard = () => {
           </div>
         </section>
         <section className="container mx-auto mt-5">
-          <div className="drawer drawer-mobile">
+          <div className="drawer h-[80vh] drawer-mobile">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col items-center ">
               {/* <!-- Page content here --> */}
@@ -93,6 +93,21 @@ const UserDashboard = () => {
                       <MdAddShoppingCart />
                     </span>{" "}
                     My Orders
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to={"/user-dashboard/my-address"}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-lg text-neutral bg-primary px-10 rounded-none"
+                        : "text-lg px-10 rounded-none"
+                    }
+                  >
+                    <span>
+                      <IoLocationOutline />
+                    </span>{" "}
+                    My Address
                   </NavLink>
                 </li>
               </ul>

@@ -35,7 +35,6 @@ const AddProduct = () => {
   } = useForm();
 
   const selectCategory = watch("category");
-  console.log(selectCategory);
 
   const onSubmit = async (data) => {
     let images;
@@ -225,7 +224,7 @@ const AddProduct = () => {
 
   return (
     <>
-      <div className="p-10 w-full">
+      <div className="p-10 w-full ">
         <div className="flex justify-between pb-4">
           <h4 className="uppercase text-[1.4vw]   font-bold">add product</h4>
           <div>

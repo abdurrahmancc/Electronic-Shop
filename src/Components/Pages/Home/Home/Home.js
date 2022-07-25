@@ -3,6 +3,7 @@ import Footer from "../../../Share/Footer/Footer";
 import Banner from "../../../Share/Navbar/Banner";
 import Navbar from "../../../Share/Navbar/Navbar";
 import TopNavbar from "../../../Share/Navbar/TopNavbar";
+import ScrollBtn from "../../../Share/ScrollBtn/ScrollBtn";
 import Computer from "../Computer/Computer";
 import BestSellers from "./BestSellers/BestSellers";
 import BlogAndHappyClients from "./BlogAndHappyClients/BlogAndHappyClients";
@@ -40,6 +41,7 @@ const Home = () => {
         <BlogAndHappyClients />
         <Newsletters />
       </main>
+      <ScrollBtn />
       <Footer />
     </>
   );

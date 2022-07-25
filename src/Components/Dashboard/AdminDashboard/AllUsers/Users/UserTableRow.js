@@ -23,7 +23,7 @@ const UserTableRow = ({ user, index, setDeleteModal, refetch, setInputRoleId }) 
         </td>
         <td>
           <div>
-            <div className="font-normal ">{user?.number}</div>
+            <div className="font-normal ">{user?.phoneNumber}</div>
             <div className="text-xs ">{user?.email}</div>
           </div>
         </td>

@@ -1,15 +1,15 @@
-::-webkit-scrollbar {
+.scrollbar::-webkit-scrollbar {
     width: 1px;
     border-radius: 10px;
   }
   
   /* Track */
-  ::-webkit-scrollbar-track {
+  .scrollbar::-webkit-scrollbar-track {
     /* background: #252a39;  */
   }
    
   /* Handle */
-  ::-webkit-scrollbar-thumb {
+  .scrollbar::-webkit-scrollbar-thumb {
     background: #666E7C; 
     border-radius: 10px;
 
@@ -19,3 +19,18 @@
   /* ::-webkit-scrollbar-thumb:hover {
     background: #555; 
   } */
+
+  .scrollbar {
+    overflow-y: scroll;
+    scrollbar-color: rgb(250, 250, 250) rgba(83, 83, 83, 0.856);
+    scrollbar-width: none;
+
+  }
+  .sideBarScrollbar {
+    overflow-y: scroll;
+    scrollbar-color: rgb(250, 250, 250) rgba(83, 83, 83, 0.856);
+    scrollbar-width: thin;
+
+  }
+
+  

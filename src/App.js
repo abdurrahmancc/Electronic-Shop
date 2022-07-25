@@ -29,10 +29,12 @@ import Categories from "./Components/Pages/Categories/Categories";
 import CategoryProducts1 from "./Components/Pages/Categories/CategoryProducts1";
 import CategoryProducts2 from "./Components/Pages/Categories/CategoryProducts2";
 import AddOthers from "./Components/Dashboard/AdminDashboard/Ecommerce/AddOthers/AddOthers";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import RequireAdmin from "./Components/Hooks/RequireAdmin";
 import RequireNotUser from "./Components/Hooks/RequireNotUser";
 import Payment from "./Components/Dashboard/UserDashboard/MyOrder/Payment";
-
+import MyAddress from "./Components/Dashboard/UserDashboard/MyAddress/MyAddress";
 export const ToggleSideBarContext = createContext("sideBar");
 export const ThemesApi = createContext("themes");
 
@@ -47,9 +49,9 @@ function App() {
     setThemes(theme);
   }, [theme]);
 
-  // useEffect(() => {
-  //   Aos.init();
-  // }, []);
+  useEffect(() => {
+    AOS.init();
+  }, []);
 
   const handleOpen = () => {
     if (toggleSideBar) {
@@ -88,6 +90,7 @@ function App() {
                 <Route path="/user-dashboard" element={<UserDashboard />}>
                   <Route index element={<MyAccount />} />
                   <Route path="my-account" element={<MyAccount />} />
+                  <Route path="my-address" element={<MyAddress />} />
                   <Route path="payment/:id" element={<Payment />} />
                   <Route path="my-order" element={<MyOrder />} />
                 </Route>

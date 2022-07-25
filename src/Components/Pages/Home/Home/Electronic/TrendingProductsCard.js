@@ -13,7 +13,7 @@ const TrendingProductsCard = ({ trendProducts }) => {
           products.map((product) => (
             <div
               key={product?._id}
-              className="card card-side w-full max-w-xs md:max-w-sm lg:max-w-xs shadow-xl lg:shadow  border border-gray-200  bg-base-100 "
+              className="card  card-side w-full max-w-xs md:max-w-sm lg:max-w-xs shadow-xl lg:shadow  border border-gray-200  bg-base-100 "
             >
               <figure>
                 <img

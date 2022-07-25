@@ -33,6 +33,7 @@ const MyOrderTable = ({ order, index, setMyOrderModal }) => {
         </td>
 
         <td>{order?.status ? order?.status : "pending"}</td>
+        <td title={order?._id}>{order?.transactionId && order?.transactionId.slice(0, 10)}...</td>
         <td>
           <label for="myOrderDetails" class="cursor-pointer">
             <BsInfoCircleFill

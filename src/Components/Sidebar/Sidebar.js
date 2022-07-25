@@ -43,7 +43,7 @@ const Sidebar = () => {
     },
   };
   return (
-    <div data-theme={theme === "dark" ? "darkDashboard" : "lightDashboard"} className="flex">
+    <div data-theme={theme === "dark" ? "darkDashboard" : "lightDashboard"} className="flex ">
       <motion.div
         animate={{
           width: isOpen ? "200px" : "40px",
@@ -54,7 +54,7 @@ const Sidebar = () => {
           },
         }}
         style={{ position: "fixed" }}
-        className={`sidebar top-0 overflow-y-scroll left-0 z-10 bg-base-100  h-screen ${
+        className={`sidebar scrollbar top-0 overflow-y-scroll left-0 z-10 bg-base-100  h-screen ${
           !isOpen && "left-[-50px] lg:left-0  hidden lg:block"
         }`}
       >
@@ -117,7 +117,7 @@ const Sidebar = () => {
           })}
         </section>
       </motion.div>
-      <div className={`w-full bg-base-300 min-h-screen`}>
+      <div className={`w-full bg-base-300 min-h-screen `}>
         <header className={` ease-in-out duration-500 ${!isOpen ? "lg:ml-10 " : "ml-[200px]"}`}>
           <SideNavbar
             toggle={toggle}
@@ -128,7 +128,7 @@ const Sidebar = () => {
           ></SideNavbar>
         </header>
         <main
-          className={`min-h-[calc(100vh-125px)] ease-in-out duration-500 ${
+          className={`min-h-[calc(100vh-125px)]  ease-in-out duration-500 ${
             !isOpen ? "lg:ml-10" : "ml-[200px]"
           }`}
         >

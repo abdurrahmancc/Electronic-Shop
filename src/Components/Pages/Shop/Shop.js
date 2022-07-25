@@ -16,6 +16,7 @@ import Footer from "../../Share/Footer/Footer";
 import Newsletters from "../Home/Home/Newsletters/Newsletters";
 import FreeOnlineMoney from "../Home/Home/FreeOnlineMoney";
 import Loading from "../../Share/Loading/Loading";
+import ScrollBtn from "../../Share/ScrollBtn/ScrollBtn";
 export const shopAllProducts = createContext("products");
 
 const Shop = () => {
@@ -242,6 +243,7 @@ const Shop = () => {
         </section>
       </main>
       <Newsletters />
+      <ScrollBtn />
       <Footer />
     </>
   );

@@ -27,7 +27,7 @@ const PaidOrderTableRow = ({ paidOrder, index, setPaidDeleteModal, setStatusModa
           </div>
         </td>
         <td>
-          <span className="font-normal capitalize">{paidOrder?.totalPaid}</span>
+          <span className="font-normal capitalize">$ {paidOrder?.totalPaid}</span>
         </td>
         <td className="flex items-center gap-2">
           <span className="font-normal capitalize">
@@ -46,13 +46,13 @@ const PaidOrderTableRow = ({ paidOrder, index, setPaidDeleteModal, setStatusModa
               <li>
                 <label
                   htmlFor="orderStatusModal"
-                  onClick={() => setStatusModal([paidOrder, "pending"])}
+                  onClick={() => setStatusModal([paidOrder, "processing"])}
                   className=""
                 >
                   <span>
                     <MdPending className="text-success" />
                   </span>
-                  <span>Pending</span>
+                  <span>Processing</span>
                 </label>
               </li>
               <li>
