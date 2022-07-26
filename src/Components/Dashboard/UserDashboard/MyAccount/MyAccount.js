@@ -26,16 +26,6 @@ const MyAccount = () => {
     axiosPrivet.get(`profileDetails/${user?.email}`)
   );
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    reset,
-    formState: { errors },
-  } = useForm();
-  const inputUrl = watch("inputImage");
-
-  console.log(inputUrl);
   const handleUserName = () => {
     setUpdateUserName(true);
     setUserName(data?.data?.displayName && data?.data?.displayName);
@@ -116,12 +106,12 @@ const MyAccount = () => {
       <div className="mx-10 myProfile mt-3 rounded">
         <div className="flex justify-between items-center w-full px-10 py-5 border-b">
           <h4 className="text-2xl font-bold">My Profile</h4>
-          <h4 className="flex justify-between items-center gap-2 cursor-pointer">
+          <div className="flex justify-between items-center gap-2 cursor-pointer">
             <span> Edit</span>
             <span>
               <FaEdit />
             </span>
-          </h4>
+          </div>
         </div>
         <div className="lg:py-10 p-10">
           <div className="grid lg:grid-cols-5 grid-cols-1">
@@ -154,7 +144,7 @@ const MyAccount = () => {
                 <h4>User ID:</h4>
                 <p className="text-lg">{data?.data?._id}</p>
               </div>
-              <div className="flex justify-between pr-10">
+              <div className="flex justify-between ">
                 <div className="leading-6">
                   <h4>Full name:</h4>
                   {updateUserName ? (
@@ -205,7 +195,7 @@ const MyAccount = () => {
                   {data?.data?.email ? data?.data?.email : "Update Your Email Address"}
                 </p>
               </div>
-              <div className="flex justify-between pr-10">
+              <div className="flex justify-between ">
                 <div className="leading-6">
                   <h4>Phone Number:</h4>
                   {updateUserNumber ? (

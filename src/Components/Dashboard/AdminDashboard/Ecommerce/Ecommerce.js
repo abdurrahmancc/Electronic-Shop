@@ -16,8 +16,8 @@ const Ecommerce = ({ route, isOpen }) => {
                 to={subItem.path}
                 key={i}
                 className={({ isActive }) =>
-                  `menus link hover:link hover:bg-[rgb(45,51,89)] font-normal hover:border-r-4 border-white z-50 flex text-  gap-3 py-2 no-underline hover:no-underline text-sm ${
-                    isActive ? "border-r-[4px] border-white bg-[rgb(45,51,89)] " : ""
+                  `menus link hover:link  font-normal hover:border-r-4 border-white z-50 flex text-  gap-3 py-2 no-underline hover:no-underline text-sm ${
+                    isActive ? "border-r-[4px] border-white text-white bg-[rgb(45,51,89)] " : ""
                   }`
                 }
               >

@@ -1,15 +1,10 @@
-import React, { Children } from "react";
+import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import "./Sidebar.css";
-import { FaAngleDown, FaBars, FaFile, FaHome, FaUser } from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
 import { Link, NavLink, Outlet } from "react-router-dom";
-import { MdMessage, MdStorefront } from "react-icons/md";
-import { BiAnalyse, BiSearch } from "react-icons/bi";
-import { AiFillHeart, AiTwotoneFileExclamation } from "react-icons/ai";
-import { BsCartCheck } from "react-icons/bs";
 import { useState } from "react";
 import SideNavbar from "./SideNavbar";
-import Ecommerce from "../Dashboard/AdminDashboard/Ecommerce/Ecommerce";
 import SidebarMenu from "./SidebarMenu";
 import DashboardFooter from "../Dashboard/DashboardFooter/DashboardFooter";
 import { routes } from "./SidebarRoutes";
@@ -93,7 +88,7 @@ const Sidebar = () => {
                 to={route.path}
                 key={index}
                 className={({ isActive }) =>
-                  `link  flex hover:text-white hover:font-bold  py-2 px-3 no-underline hover:no-underline text-lg ${
+                  `link  flex  hover:font-bold  py-2 px-3 no-underline hover:no-underline text-lg ${
                     isActive ? "border-r-[4px] border-white bg-[rgb(45,51,89)] " : ""
                   }`
                 }

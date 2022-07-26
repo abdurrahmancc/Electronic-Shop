@@ -53,9 +53,9 @@ const PendingOrder = () => {
           </div>
         </div>
         <PendingOrderTable />
-        <div className="flex justify-center w-full relative top-[-40px]">
+        {/* <div className="flex justify-center w-full relative top-[-40px]">
           <Pagination />
-        </div>
+        </div> */}
       </div>
     </div>
   );

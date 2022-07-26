@@ -5,9 +5,16 @@ import { CgLogOff } from "react-icons/cg";
 import DashboardThemes from "../Share/Navbar/DashboardThemes";
 import { FaBars } from "react-icons/fa";
 import { BiSearch, BiSearchAlt } from "react-icons/bi";
+import { signOut } from "firebase/auth";
+import auth from "../Share/Firebase/Firebase";
 
 const SideNavbar = ({ toggle, toggleSideBar, setToggleSideBar, setIsOpen, isOpen }) => {
   const [openSearch, setOpenSearch] = useState(false);
+
+  const handleSignOut = () => {
+    signOut(auth);
+    localStorage.removeItem("accessToken");
+  };
   return (
     <div className="navbar bg-base-200 px-10">
       <div className="navbar-start">
@@ -121,10 +128,10 @@ const SideNavbar = ({ toggle, toggleSideBar, setToggleSideBar, setIsOpen, isOpen
                 </a>
               </li>
               <li className="  border-t border-gray-500 ">
-                <a className="px-8 ">
+                <span onClick={handleSignOut} className="px-8 ">
                   <CgLogOff className="text-lg" />
                   Logout
-                </a>
+                </span>
               </li>
             </ul>
           </li>

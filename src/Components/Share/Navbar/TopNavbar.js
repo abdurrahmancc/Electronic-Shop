@@ -18,19 +18,27 @@ import { getShoppingId } from "../../LocalStorage/FakeDB";
 // import useAdmin from "../../Hooks/useAdmin";
 import Loading from "../Loading/Loading";
 import useNotUser from "../../Hooks/useNotUser";
+import useAddProduct from "../../Hooks/useAddProduct";
+import { useContext } from "react";
+import { CartQuantity } from "../../../App";
 
 const TopNavbar = () => {
   const [user, loading, error] = useAuthState(auth);
   const [cartQuantity, setCartQuantity] = useState(0);
+  const allCarts = useContext(CartQuantity);
+  const [cartsQuantity] = allCarts;
+
   const navigate = useNavigate();
   const storedCart = getShoppingId();
   const [isUser] = useNotUser(user);
-  // const [admin] = useAdmin(user);
 
   useEffect(() => {
-    const keys = Object.keys(storedCart);
-    setCartQuantity(keys.length);
-  }, [storedCart]);
+    // const keys = Object.keys(storedCart);
+    const getCarts = localStorage.getItem("shopping-cart");
+    const carts = JSON.parse(getCarts);
+    const keys = Object.keys(carts).length;
+    setCartQuantity(keys);
+  }, [storedCart, cartsQuantity]);
 
   const handleSignOut = () => {
     signOut(auth);

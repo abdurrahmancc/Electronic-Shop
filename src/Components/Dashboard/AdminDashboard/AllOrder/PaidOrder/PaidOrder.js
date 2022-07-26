@@ -67,9 +67,9 @@ const PaidOrder = () => {
           paidOrders={data?.data}
           setPaidDeleteModal={setPaidDeleteModal}
         />
-        <div className="flex justify-center w-full relative top-[-40px]">
+        {/* <div className="flex justify-center w-full relative top-[-40px]">
           <Pagination />
-        </div>
+        </div> */}
         {paidDeleteModal && <PaidOrderDeleteModal>{deleteModalInfo}</PaidOrderDeleteModal>}
       </div>
     </div>

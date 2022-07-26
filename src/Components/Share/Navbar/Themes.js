@@ -9,6 +9,7 @@ const Themes = () => {
 
   const getThemes = localStorage.getItem("themes");
   useEffect(() => {
+    localStorage.setItem("themesDashboard", "dark");
     const getStorageThemes = localStorage.getItem("themes");
     setThemes(getStorageThemes);
   }, [getThemes]);
