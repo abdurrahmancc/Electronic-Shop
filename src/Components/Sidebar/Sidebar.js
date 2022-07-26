@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import "./Sidebar.css";
 import { FaBars } from "react-icons/fa";
@@ -13,8 +13,14 @@ import "./Scrollbar.css";
 const Sidebar = () => {
   const [toggleSideBar, setToggleSideBar] = useState(false);
   const theme = localStorage.getItem("themesDashboard");
-
   const [isOpen, setIsOpen] = useState(true);
+
+  const getThemes = localStorage.getItem("themesDashboard");
+  useEffect(() => {
+    if (!getThemes) {
+      localStorage.setItem("themesDashboard", "dark");
+    }
+  }, [getThemes]);
 
   const toggle = () => {
     setIsOpen(!isOpen);

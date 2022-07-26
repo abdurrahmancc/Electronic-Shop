@@ -8,8 +8,11 @@ const Themes = () => {
   // console.log(themes);
 
   const getThemes = localStorage.getItem("themes");
+  const getDashboardThemes = localStorage.getItem("themesDashboard");
   useEffect(() => {
-    localStorage.setItem("themesDashboard", "dark");
+    if (!getDashboardThemes) {
+      localStorage.setItem("themesDashboard", "dark");
+    }
     const getStorageThemes = localStorage.getItem("themes");
     setThemes(getStorageThemes);
   }, [getThemes]);

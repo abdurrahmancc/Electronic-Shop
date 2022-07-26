@@ -15,9 +15,13 @@ const RequireAuth = () => {
     return <Loading />;
   }
 
-  if (!user || !token) {
+  const handleSignOut = () => {
     signOut(auth);
     localStorage.removeItem("accessToken");
+  };
+
+  if (!user || !token) {
+    handleSignOut();
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
   return <Outlet />;
