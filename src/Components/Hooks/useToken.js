@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import axiosPrivet from "./axiosPrivet";
 
 const useToken = (user) => {
+  const [tokenLoading, setTokenLoading] = useState(true);
   const [fullDate] = useState(new Date());
   const formattedDate = format(fullDate, "PP");
   const timeDate = format(fullDate, "MMMM d, yyyy h:mm aa");
@@ -26,15 +27,21 @@ const useToken = (user) => {
       if (email && displayName) {
         const { data } = await axiosPrivet.put(`user/${email}`, currentUser);
         if (data?.result.acknowledged || data?.token) {
-          console.log(data?.token);
+          // console.log(data?.token);
           localStorage.setItem("accessToken", data?.token);
           setToken(data?.token);
+          setTokenLoading(false);
+        } else {
+          setTokenLoading(false);
         }
+      }
+      if (!user) {
+        setTokenLoading(false);
       }
     })();
   }, [user, email, displayName, currentUser]);
 
-  return [token];
+  return [token, tokenLoading, setTokenLoading];
 };
 
 export default useToken;
