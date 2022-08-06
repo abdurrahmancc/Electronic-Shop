@@ -2,18 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { ToggleSideBarContext } from "../../../App";
 import logo from "../../../assets/logo.png";
-import NavAllCategory from "./NavAllCategory";
 import Themes from "./Themes";
 import { HiXCircle } from "react-icons/hi";
-import { TbDiscount2 } from "react-icons/tb";
-import { useAuthState } from "react-firebase-hooks/auth";
-import auth from "../Firebase/Firebase";
 import ShopCategories from "./ShopCategories";
 
 const Navbar = () => {
   const getToggleSiteBar = useContext(ToggleSideBarContext);
   const [themes, setThemes] = useState("");
-  const [user, loading, error] = useAuthState(auth);
   const { pathname } = useLocation();
 
   let categories;
@@ -24,7 +19,7 @@ const Navbar = () => {
     categories = true;
   }
 
-  const [categoryDown, setCategoryDown] = useState(categories);
+  const [categoryDown] = useState(categories);
 
   const getThemes = localStorage.getItem("themes");
   useEffect(() => {

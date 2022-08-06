@@ -60,12 +60,16 @@ const Login = () => {
             <span>Back</span>
           </span>
         </div>
+
+        {/* logo */}
         <div className="lg:pb-12">
           <Link to={"/"} className={"flex justify-center"}>
             {" "}
             <img className="w-4/12" src={logo} alt="" />
           </Link>
         </div>
+
+        {/* login form start */}
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-neutral">
           <div className="card-body text-accent">
             <h3 className="text-center text-lg font-bold text-accent">Login to your account</h3>
