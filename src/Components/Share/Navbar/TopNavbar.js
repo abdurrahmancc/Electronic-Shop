@@ -2,11 +2,11 @@ import React from "react";
 import logo from "../../../assets/logo.png";
 import Themes from "./Themes";
 import { FaUserAlt } from "react-icons/fa";
-import { MdAddShoppingCart, MdDarkMode, MdLocationOn } from "react-icons/md";
+import { MdDarkMode, MdLocationOn } from "react-icons/md";
 import { BiNotepad, BiHeart } from "react-icons/bi";
 import { AiFillSetting } from "react-icons/ai";
 import { FiLogIn, FiLogOut } from "react-icons/fi";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../Firebase/Firebase";
 import { signOut } from "firebase/auth";
@@ -15,15 +15,13 @@ import { BsSuitHeart } from "react-icons/bs";
 import { useState } from "react";
 import { useEffect } from "react";
 import { getShoppingId } from "../../LocalStorage/FakeDB";
-// import useAdmin from "../../Hooks/useAdmin";
 import Loading from "../Loading/Loading";
 import useNotUser from "../../Hooks/useNotUser";
-import useAddProduct from "../../Hooks/useAddProduct";
 import { useContext } from "react";
 import { CartQuantity } from "../../../App";
 
 const TopNavbar = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const [user, loading] = useAuthState(auth);
   const [cartQuantity, setCartQuantity] = useState(0);
   const allCarts = useContext(CartQuantity);
   const [cartsQuantity] = allCarts;
@@ -36,8 +34,10 @@ const TopNavbar = () => {
     // const keys = Object.keys(storedCart);
     const getCarts = localStorage.getItem("shopping-cart");
     const carts = JSON.parse(getCarts);
-    const keys = Object.keys(carts).length;
-    setCartQuantity(keys);
+    if (carts) {
+      const keys = Object.keys(carts).length;
+      setCartQuantity(keys);
+    }
   }, [storedCart, cartsQuantity]);
 
   const handleSignOut = () => {
@@ -171,7 +171,7 @@ const TopNavbar = () => {
                   </Link>
                 </li>
                 <li className="hover:text-primary">
-                  <a>
+                  <a href="#">
                     <span className="text-sm ">
                       <MdLocationOn />
                     </span>
