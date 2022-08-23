@@ -73,7 +73,7 @@ const Shop = () => {
           setAllProducts(data);
           setProducts(data);
           setReload(true);
-          // console.log(data);
+          console.log(data);
         }
       } catch (error) {
         console.log(error.message);
@@ -178,32 +178,29 @@ const Shop = () => {
                 <div className=" lg:col-span-9">
                   <div className="flex sm:justify-between justify-center px-5 bg-base-200">
                     <div className="max-w-xs w-full">
-                      <form onSubmit={handleSubmit(onSubmit)}>
-                        <label className={`relative   `}>
-                          <button
-                            type="submit"
-                            className="absolute inset-y-0 left-2 rounded pr-1  flex items-center pl-2"
-                          >
-                            <BiSearchAlt className="text-2xl text-gray-400" />
-                          </button>
-                          <button
-                            onClick={() => resetField("search")}
-                            className={`absolute inset-y-0 right-2 rounded pr-1  flex items-center pl-2 ${
-                              inputSearch ? "block" : "hidden"
-                            }`}
-                          >
-                            <IoIosClose className="text-2xl text-gray-400" />
-                          </button>
-                          <input
-                            value={inputSearch}
-                            // onChange={(e) => setInputSearch(e.target.value)}
-                            className="placeholder:italic w-full placeholder:text-slate-400 block bg-base-200   py-2 pl-12  pr-9 shadow-sm focus:outline-none focus:border-0 rounded-full h-12 focus:ring-0 sm:text-sm"
-                            placeholder="Search..."
-                            type="text"
-                            name="search"
-                            {...register("search")}
-                          />
-                        </label>
+                      <form className="" onSubmit={handleSubmit(onSubmit)}>
+                        <div class="form-control">
+                          <div class="relative">
+                            <input
+                              placeholder="Search..."
+                              type="text"
+                              name="search"
+                              {...register("search")}
+                              class="placeholder:italic w-full placeholder:text-slate-400 bg-base-200 block py-2 pl-12  pr-9 shadow-sm focus:outline-none input h-12 rounded-full focus:ring-0 sm:text-sm"
+                            />
+                            <button class=" absolute left-[5px] p-[10px] rounded top-[4px]">
+                              <BiSearchAlt className="text-2xl text-gray-400" />
+                            </button>
+                            <button
+                              onClick={() => resetField("search")}
+                              class={`absolute right-[5px] p-[10px] rounded top-[4px] ${
+                                inputSearch ? "block" : "hidden"
+                              }`}
+                            >
+                              <IoIosClose className="text-2xl text-gray-400" />
+                            </button>
+                          </div>
+                        </div>
                       </form>
                       {error && <p className="ml-4 mt-2">{error}</p>}
                     </div>

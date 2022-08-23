@@ -124,32 +124,30 @@ const Blog = () => {
                 <div className=" w-full">
                   <h4 className="text-lg pb-3 border-b border-gray-200 lg:mt-36">Search</h4>
                   <form className="pt-8" onSubmit={handleSubmit(onSubmit)}>
-                    <label className={`relative   `}>
-                      <button
-                        type="submit"
-                        className="absolute inset-y-0 left-2 rounded pr-1  flex items-center pl-2"
-                      >
-                        <BiSearchAlt className="text-2xl text-gray-400" />
-                      </button>
-                      <button
-                        onClick={() => resetField("search")}
-                        className={`absolute inset-y-0 right-2 rounded pr-1  flex items-center pl-2 ${
-                          inputSearch ? "block" : "hidden"
-                        }`}
-                      >
-                        <IoIosClose className="text-2xl text-gray-400" />
-                      </button>
-                      <input
-                        value={inputSearch}
-                        // onChange={(e) => setInputSearch(e.target.value)}
-                        className="placeholder:italic w-full placeholder:text-slate-400 block    py-2 pl-12  pr-9 shadow-sm focus:outline-none  rounded-sm border border-gray-300 h-10 focus:ring-0 sm:text-sm"
-                        placeholder="Search..."
-                        type="text"
-                        name="search"
-                        {...register("search")}
-                      />
-                    </label>
+                    <div class="form-control">
+                      <div class="relative">
+                        <input
+                          placeholder="Search..."
+                          type="text"
+                          name="search"
+                          {...register("search")}
+                          class="placeholder:italic w-full placeholder:text-slate-400 block py-2 pl-12  pr-9 shadow-sm focus:outline-none input rounded-sm border border-gray-300 focus:ring-0 sm:text-sm"
+                        />
+                        <button class=" absolute left-[5px] p-[10px] rounded top-[4px] bg-primary">
+                          <BiSearchAlt className="text-xl bg-primary text-white" />
+                        </button>
+                        <button
+                          onClick={() => resetField("search")}
+                          class={`absolute right-[5px] p-[10px] rounded top-[4px] ${
+                            inputSearch ? "block" : "hidden"
+                          }`}
+                        >
+                          <IoIosClose className="text-2xl text-gray-400" />
+                        </button>
+                      </div>
+                    </div>
                   </form>
+
                   {error && <p className="ml-4 mt-2">{error}</p>}
                 </div>
                 <div>

@@ -67,7 +67,7 @@ const ShopFilter = ({
             <div className="flex flex-col space-y-2 ">
               <div className="pt-5">
                 <MultiRangeSlider
-                  // baseClassName="multi-range-slider-black border-none"
+                  // baseClassName="multi-range-slider-black"
                   min={0}
                   max={900000}
                   step={5}
